@@ -1,0 +1,28 @@
+{
+  "name": "couponsbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dateformat": "^3.0.3",
+    "dotenv": "^7.0.0",
+    "fs-extra": "^8.1.0",
+    "ftp": "^0.3.10",
+    "node-telegram-bot-api": "^0.30.0"
+  },
+  "scripts": {
+    "start": "tsc && node bin/index.js",
+    "build": "tsc",
+    "dev": "nodemon --exec \"ts-node src/index.ts\" -V -w src -e ts"
+  },
+  "devDependencies": {
+    "@types/dateformat": "^3.0.0",
+    "@types/dotenv": "^6.1.1",
+    "@types/fs-extra": "^8.0.0",
+    "@types/ftp": "^0.3.31",
+    "@types/node-telegram-bot-api": "^0.31.0"
+  }
+}

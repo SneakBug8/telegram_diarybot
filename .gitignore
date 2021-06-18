@@ -1,0 +1,5 @@
+bin
+diary
+node_modules
+.env
+package-lock.json
