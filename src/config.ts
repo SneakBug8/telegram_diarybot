@@ -3,6 +3,21 @@ class ConfigClass
   public AllowedChats = [215850634];
   public DefaultChat = 215850634;
 
+  public ftphost()
+  {
+    return process.env.host;
+  }
+
+  public ftpuser()
+  {
+    return process.env.user;
+  }
+
+  public ftppassword()
+  {
+    return process.env.password;
+  }
+
   public basePath(): string
   {
     return __dirname;

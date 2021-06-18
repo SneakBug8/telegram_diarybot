@@ -4,8 +4,17 @@ import * as Client from "ftp";
 import * as fs from "fs-extra";
 import * as path from "path";
 import { Server } from ".";
+import { Config } from "./config";
 
-class PublishServiceClass {
+class PublishServiceClass
+{
+    public FormatFileBeforePublishing(text: string)
+    {
+        text = text.replace("\n", "\n\n");
+
+        return text;
+    }
+
     public PublishLast() {
         const c = new Client();
         c.on("ready", () => {
@@ -14,16 +23,28 @@ class PublishServiceClass {
 
             Server.SendMessage(`Uploaded ${filepath} to ${filename}.txt`);
 
-            c.put(filepath, filename + ".txt", (err) => {
+            const tempfilepath = path.resolve(Config.basePath(), "temp.md");
+            fs.copyFileSync(filepath, tempfilepath);
+            const text = fs.readFileSync(tempfilepath);
+            const newtext = this.FormatFileBeforePublishing(text.toString());
+            fs.writeFileSync(tempfilepath, newtext);
+
+            const fragments = path.dirname(filename);
+
+            c.mkdir(fragments, true, (err) => {
+                if (err) {throw err; }
+            });
+
+            c.put(tempfilepath, filename + ".txt", (err) => {
                 if (err) {throw err; }
                 c.end();
             });
         });
 
         c.connect({
-            host: "lextorg.myjino.ru",
-            user: "lextorg_telegram",
-            password: "alphaomega"
+            host: Config.ftphost(),
+            user: Config.ftpuser(),
+            password: Config.ftppassword(),
         });
     }
 
@@ -45,9 +66,9 @@ class PublishServiceClass {
         });
 
         c.connect({
-            host: "lextorg.myjino.ru",
-            user: "lextorg_telegram",
-            password: "alphaomega"
+            host: Config.ftphost(),
+            user: Config.ftpuser(),
+            password: Config.ftppassword(),
         });
     }
 }

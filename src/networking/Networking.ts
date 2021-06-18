@@ -78,6 +78,15 @@ export async function ProcessNetworking(message: MessageWrapper)
 
     return;
   }
+  if (message.checkRegex(/\/list/)) {
+    let res = "";
+    for (const contact of contacts) {
+      res += contact + "\n";
+    }
+
+    message.reply(res);
+    return;
+  }
   if (message.checkRegex(/\/remove/)) {
     const name = message.captureRegex(/\/remove (.+)/);
 
