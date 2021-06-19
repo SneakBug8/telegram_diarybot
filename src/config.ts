@@ -1,7 +1,11 @@
 class ConfigClass
 {
+  // ChatIds that don't require auth
   public AllowedChats = [215850634];
+  // Chat where bot will send notifications
   public DefaultChat = 215850634;
+
+  public Password = "1122";
 
   public ftphost()
   {

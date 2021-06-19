@@ -1,7 +1,5 @@
 import { Config } from "./config";
 
-const password = "1122";
-
 class AuthServiceClass {
     public chatId: number | undefined;
 
@@ -11,7 +9,7 @@ class AuthServiceClass {
             return true;
         }
 
-        if (pswd === password) {
+        if (pswd === Config.Password) {
             this.chatId = chatId;
             return true;
         }

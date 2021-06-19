@@ -10,6 +10,8 @@ import { PublishService } from "./PublishService";
 import { ProcessNotes } from "./notes/Notes";
 import { InitNetworking, ProcessNetworking } from "./networking/Networking";
 import { Config } from "./config";
+import { ProcessTimer } from "./timer/timer";
+import { ProcessEval } from "./eval/eval";
 
 function sleep(ms: number)
 {
@@ -69,18 +71,28 @@ class App
                 return;
             }
 
+            const m3 = await ProcessTimer(message);
+            if (m3 !== false) {
+                return;
+            }
+
             const m1 = await ProcessNotes(message);
             if (m1 !== false) {
                 return;
             }
 
+            const m4 = await ProcessEval(message);
+            if (m4 !== false) {
+                return;
+            }
+
             if (message.checkRegex(/^\/.*$/)) {
-                message.deleteAfterTime(1);
+                return message.deleteAfterTime(1);
             }
-            else {
-                const r = await Logger.Log(msg.text);
-                message.reply(r || "✔").then((newmsg) => newmsg.deleteAfterTime(1));
-            }
+
+            // Make sure logging all text is last so that commands are properly executed
+            const r = await Logger.Log(msg.text);
+            message.reply(r || "✔").then((newmsg) => newmsg.deleteAfterTime(1));
         });
     }
 

@@ -3,7 +3,9 @@
 Small telegram bot to help me make some operations during a day, such as:
 - Creating notes
 - Publishing them to personal wiki
-- Maintaining networking
+- Maintaining networking via contacts list and notifications
+- Run multiple timers
+- Calculate everything possible with JS
 
 All major config is included in `.env` and `src/config.ts`. FTP upload always uses basedir. You can make separate user with correct base folder for uploading to the right folder.
 
@@ -32,6 +34,12 @@ Default behaviour for the bot upon receiving message is to save it a note (optio
 
   - `/publish` - send file to remote FTP server
   - `/load` - download file from remote FTP server
+
+  - `/timer start` - start timer
+  - `/timer stop` - stop latest timer
+  - `/timer clear` - stop all timers
+
+  - `/eval [code]` - eval arbitrary JS code. Can be used as a simple calculator
 
   - `/add [name]` - add contact to your networking list
   - `/remove [name]` - remove contact from your networking list
