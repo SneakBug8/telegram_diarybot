@@ -10,7 +10,7 @@ class PublishServiceClass
 {
     public FormatFileBeforePublishing(text: string)
     {
-        text = text.replace("\n", "\n\n");
+        text = text.replace(new RegExp("\n"), "\n\n");
 
         return text;
     }
