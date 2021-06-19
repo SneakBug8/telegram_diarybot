@@ -52,7 +52,7 @@ async function NetworkingSend()
   let i = 0;
 
   while (i < howmanyperday) {
-    const randomind = Math.round(Math.random() * contacts.length);
+    const randomind = Math.floor(Math.random() * contacts.length);
 
     if (previds.includes(randomind) && previds.length !== contacts.length) { continue; }
 
