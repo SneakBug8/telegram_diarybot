@@ -15,14 +15,17 @@ class PublishServiceClass
         return text;
     }
 
-    public PublishLast() {
+    public PublishLast()
+    {
         const c = new Client();
-        c.on("ready", () => {
+        c.on("ready", () =>
+        {
             const filename = Logger.getFilename();
             const filepath = Logger.resolveFile(filename);
 
             Server.SendMessage(`Uploaded ${filepath} to ${filename}.txt`);
 
+            // Make temporary file with better formating for upload
             const tempfilepath = path.resolve(Config.basePath(), "temp.md");
             fs.copyFileSync(filepath, tempfilepath);
             const text = fs.readFileSync(tempfilepath);
@@ -31,12 +34,15 @@ class PublishServiceClass
 
             const fragments = path.dirname(filename);
 
-            c.mkdir(fragments, true, (err) => {
-                if (err) {throw err; }
+            // Ensure remote has needed folder for upload
+            c.mkdir(fragments, true, (err) =>
+            {
+                if (err) { throw err; }
             });
 
-            c.put(tempfilepath, filename + ".txt", (err) => {
-                if (err) {throw err; }
+            c.put(tempfilepath, filename + ".txt", (err) =>
+            {
+                if (err) { throw err; }
                 c.end();
             });
         });
@@ -48,9 +54,11 @@ class PublishServiceClass
         });
     }
 
-    public DownloadLast() {
+    public DownloadLast()
+    {
         const c = new Client();
-        c.on("ready", async () => {
+        c.on("ready", async () =>
+        {
             const filename = Logger.getFilename();
             const filepath = Logger.resolveFile(filename);
 
@@ -58,8 +66,9 @@ class PublishServiceClass
 
             await fs.ensureFile(filepath);
 
-            c.get(filename + ".txt", (err, stream) => {
-                if (err) {throw err; }
+            c.get(filename + ".txt", (err, stream) =>
+            {
+                if (err) { throw err; }
                 stream.once("close", () => { c.end(); });
                 stream.pipe(fs.createWriteStream(filepath));
             });
