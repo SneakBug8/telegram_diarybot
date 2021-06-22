@@ -181,7 +181,7 @@ export async function ProcessNetworking(message: MessageWrapper)
   if (message.checkRegex(/\/list/)) {
     let res = "";
 
-    const sorted = data.contacts.sort((x, y) => x.totalsent - y.totalsent);
+    const sorted = data.contacts.sort((x, y) => (y.totalsent - x.totalsent) + (y.done - x.done));
 
     for (const contact of sorted) {
       res += `${contact.name} (${contact.done}/${contact.totalsent}, ${contact.done * 100 / contact.totalsent}%)\n`;
