@@ -85,7 +85,7 @@ async function NetworkingSend()
 
     previds.push(randomind);
 
-    res += active[randomind] + "\n";
+    res += formatName(active[randomind]) + "\n";
     data.lastname = active[randomind].name;
     RaiseSentForStat(active[randomind].name);
 
@@ -95,6 +95,11 @@ async function NetworkingSend()
   Server.SendMessage(res);
   data.totalsent++;
   NetworkingSave();
+}
+
+function formatName(contact: NetworkingStat)
+{
+  return `${contact.name} (${contact.done}/${contact.totalsent}, ${contact.done * 100 / contact.totalsent}%)\n`;
 }
 
 function RaiseSentForStat(name: string)
@@ -184,7 +189,7 @@ export async function ProcessNetworking(message: MessageWrapper)
     const sorted = data.contacts.sort((x, y) => (y.totalsent - x.totalsent) + (y.done - x.done));
 
     for (const contact of sorted) {
-      res += `${contact.name} (${contact.done}/${contact.totalsent}, ${contact.done * 100 / contact.totalsent}%)\n`;
+      res += formatName(contact);
     }
 
     message.reply(res);
