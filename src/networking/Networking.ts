@@ -132,6 +132,11 @@ function RaiseDoneForStat(name: string)
   data.contacts.push(stat);
 }
 
+function FullStatistics()
+{
+  return `Current statistics: ${data.done} / ${data.totalsent}(${Math.round(data.done * 100 / data.totalsent)}%)`;
+}
+
 export async function ProcessNetworking(message: MessageWrapper)
 {
   if (message.checkRegex(/\/add/)) {
@@ -165,7 +170,7 @@ export async function ProcessNetworking(message: MessageWrapper)
     NetworkingSave();
 
     message.reply(`Marked interaction with ${name[1]} as done. `
-      + `Current statistics: ${data.done} / ${data.totalsent} (${Math.round(data.done * 100 / data.totalsent)}%)`);
+      + FullStatistics());
 
     return;
   }
@@ -179,7 +184,7 @@ export async function ProcessNetworking(message: MessageWrapper)
     NetworkingSave();
 
     message.reply(`Marked interaction with ${data.lastname} (last one) as done. `
-      + `Current statistics: ${data.done} / ${data.totalsent}(${data.done * 100 / data.totalsent}%)`);
+      + FullStatistics());
 
     return;
   }
