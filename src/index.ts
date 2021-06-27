@@ -66,33 +66,46 @@ class App
                 return;
             }
 
-            const m2 = await ProcessNetworking(message);
-            if (m2 !== false) {
-                return;
+            if (process.env.networkingenabled === "yes") {
+                const m2 = await ProcessNetworking(message);
+                if (m2 !== false) {
+                    return;
+                }
             }
 
-            const m3 = await ProcessTimer(message);
-            if (m3 !== false) {
-                return;
+            if (process.env.timersenabled === "yes") {
+                const m3 = await ProcessTimer(message);
+                if (m3 !== false) {
+                    return;
+                }
             }
 
-            const m1 = await ProcessNotes(message);
-            if (m1 !== false) {
-                return;
+            if (process.env.notesenabled === "yes") {
+                const m1 = await ProcessNotes(message);
+                if (m1 !== false) {
+                    return;
+                }
             }
 
-            const m4 = await ProcessEval(message);
-            if (m4 !== false) {
-                return;
+            if (process.env.evalenabled === "yes") {
+                const m4 = await ProcessEval(message);
+                if (m4 !== false) {
+                    return;
+                }
             }
 
             if (message.checkRegex(/^\/.*$/)) {
                 return message.deleteAfterTime(1);
             }
 
-            // Make sure logging all text is last so that commands are properly executed
-            const r = await Logger.Log(msg.text);
-            message.reply(r || "✔").then((newmsg) => newmsg.deleteAfterTime(1));
+            if (process.env.notesenabled === "yes") {
+                // Make sure logging all text is last so that commands are properly executed
+                const r = await Logger.Log(msg.text);
+                message.reply(r || "✔").then((newmsg) => newmsg.deleteAfterTime(1));
+            }
+            else {
+                message.reply("Unknown command");
+            }
         });
     }
 
