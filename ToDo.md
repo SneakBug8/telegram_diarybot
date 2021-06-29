@@ -1,0 +1,3 @@
+- Telegram Keyboard
+- Learning module
+- Switch to SQLite?
