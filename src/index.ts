@@ -12,6 +12,7 @@ import { InitNetworking, ProcessNetworking } from "./networking/Networking";
 import { Config } from "./config";
 import { ProcessTimer } from "./timer/timer";
 import { ProcessEval } from "./eval/eval";
+import { InitLearning, ProcessLearning } from "./learning/Learning";
 
 function sleep(ms: number)
 {
@@ -30,6 +31,7 @@ class App
         this.bot = BotAPI;
 
         InitNetworking();
+        InitLearning();
 
         this.bot.on("text", async (msg) =>
         {
@@ -92,6 +94,11 @@ class App
                 if (m4 !== false) {
                     return;
                 }
+            }
+
+            const m5 = await ProcessLearning(message);
+            if (m5 !== false) {
+                return;
             }
 
             if (message.checkRegex(/^\/.*$/)) {

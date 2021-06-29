@@ -10,7 +10,7 @@ let data = new NetworkingData();
 
 const datafilepath = path.resolve(Config.dataPath(), "networking.json");
 const howmanyperday = 1;
-const whattimeofaday = 16;
+const whattimeofaday = 12;
 
 export async function InitNetworking()
 {
