@@ -20,6 +20,8 @@ Don't forget to rename `.env example` to `.env` and fill required variables. You
 
 Default behaviour for the bot upon receiving message is to save it a note (optionally, create a file with current date and time). Other commands are:
 
+  - `/id` - show chat id of current chat. Use that to configure allowed chatid's in `.env` file.
+
   - `/ping` - check whether bot is online
   - `/path` - show current filepath
   - `/reset` - reset current filepath

@@ -1,11 +1,11 @@
 class ConfigClass
 {
   // ChatIds that don't require auth
-  public AllowedChats = [215850634];
+  public AllowedChats = JSON.parse(process.env.allowedchats || "") as number[];
   // Chat where bot will send notifications
-  public DefaultChat = 215850634;
+  public DefaultChat = Number.parseInt(process.env.defaultchat || "", 10) as number;
 
-  public Password = "1122";
+  public Password = process.env.password;
 
   public ftphost()
   {

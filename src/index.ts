@@ -39,6 +39,10 @@ class App
             const time = message.getPrintableTime();
             console.log(`[${time}] ${msg.text}`);
 
+            if (message.checkRegex(/\/id/)) {
+                message.reply(`Current chat id: ${message.message.chat.id}`);
+            }
+
             if (message.checkRegex(/\/auth/)) {
                 AuthService.ResetAuth();
             }

@@ -2,6 +2,7 @@
 
 ## 29.06
 - Learning module
+- Allowed chat ids, default chat id && password from config to .env
 
 ## 23.06
 
