@@ -6,6 +6,7 @@ Small telegram bot to help me make some operations during a day, such as:
 - Maintaining networking via contacts list and notifications
 - Run multiple timers
 - Calculate everything possible with JS
+- Monitor what you are doing and for what time
 
 All major config is included in `.env` and `src/config.ts`. FTP upload always uses basedir. You can make separate user with correct base folder for uploading to the right folder.
 
@@ -46,3 +47,9 @@ Default behaviour for the bot upon receiving message is to save it a note (optio
   - `/done [name]` - mark interaction with [name] as done for the statistics. If used without name - uses last person suggested for interaction.
   - `/list` - list all your contacts. List is sorted by total numbers this person has been suggested
   - `/force` - run networking script right now
+
+  - `/learning start []` - start learning/doing smth
+  - `/learning stop` or `/learning end` - stop learning/doing
+  - `/learning now` - what is recorded now
+  - `/learning stats` - statistics over what've you done in hours
+  - `/learning list` - all notifications for you to do smth based on day&hour. Can be edited only directly in `leaning.json` file

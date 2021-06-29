@@ -1,4 +1,9 @@
-# 23.06
+# Changelog
+
+## 29.06
+- Learning module
+
+## 23.06
 
 - Now networking monitors statistics for total sent/done interactions both globally and for each person.
 - Old data formats should be automatically adapted to new one, but make sure to back up data before updating.
