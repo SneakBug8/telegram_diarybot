@@ -40,7 +40,7 @@ class App
             console.log(`[${time}] ${msg.text}`);
 
             if (message.checkRegex(/\/id/)) {
-                message.reply(`Current chat id: ${message.message.chat.id}`);
+                message.reply(`Current chat id: ${message.message.chat.id}`); return;
             }
 
             if (message.checkRegex(/\/auth/)) {
