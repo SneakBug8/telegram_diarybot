@@ -99,7 +99,15 @@ async function NetworkingSend()
 
 function formatName(contact: NetworkingStat)
 {
-  return `${contact.name} (${contact.done}/${contact.totalsent}, ${contact.done * 100 / contact.totalsent}%)\n`;
+  if (!contact.done) {
+    return `${contact.name} (${contact.done}/${contact.totalsent}, 0%)\n`;
+  }
+  else if (!contact.totalsent) {
+    return `${contact.name} (${contact.done}/${contact.totalsent}, 100%)\n`;
+  }
+  else {
+    return `${contact.name} (${contact.done}/${contact.totalsent}, ${contact.done * 100 / contact.totalsent}%)\n`;
+  }
 }
 
 function RaiseSentForStat(name: string)
