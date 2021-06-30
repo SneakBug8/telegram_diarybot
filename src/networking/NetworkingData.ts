@@ -4,6 +4,7 @@ export class NetworkingData
   public done = 0;
   public contacts = new Array<NetworkingStat>();
   public lastname: string = "";
+  public lastSend: number = 0;
 }
 
 export class NetworkingStat

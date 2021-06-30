@@ -54,23 +54,20 @@ export async function NetworkingSave()
   fs.writeFileSync(datafilepath, tcontacts);
 }
 
-let lastSend = -1;
-
 async function NetworkingCycle()
 {
   const now = new Date(Date.now());
 
-  if (now.getHours() === whattimeofaday && now.getMinutes() <= 30 && lastSend !== now.getDay()) {
+  if (now.getHours() === whattimeofaday && now.getMinutes() <= 30 && data.lastSend !== now.getDay()) {
     console.log(now + " sending time");
     NetworkingSend();
-    lastSend = now.getDay();
   }
 }
 
 async function NetworkingSend()
 {
   const now = new Date(Date.now());
-  lastSend = now.getDay();
+  data.lastSend = now.getDay();
 
   let res = `Ваш нетворкинг на сегодня:\n`;
 
