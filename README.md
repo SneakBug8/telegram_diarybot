@@ -44,11 +44,11 @@ Default behaviour for the bot upon receiving message is to save it a note (optio
 
   - `/eval [code]` - eval arbitrary JS code. Can be used as a simple calculator
 
-  - `/add [name]` - add contact to your networking list
-  - `/remove [name]` - disable contact from futher suggestions for networking
-  - `/done [name]` - mark interaction with [name] as done for the statistics. If used without name - uses last person suggested for interaction.
-  - `/list` - list all your contacts. List is sorted by total numbers this person has been suggested
-  - `/force` - run networking script right now
+  - `/networking add [name]` - add contact to your networking list
+  - `/networking remove [name]` - disable contact from futher suggestions for networking
+  - `/networking done [name]` - mark interaction with [name] as done for the statistics. If used without name - uses last person suggested for interaction.
+  - `/networking list` - list all your contacts. List is sorted by total numbers this person has been suggested
+  - `/networking force` - run networking script right now
 
   - `/learning start []` - start learning/doing smth
   - `/learning stop` or `/learning end` - stop learning/doing

@@ -147,8 +147,8 @@ function FullStatistics()
 
 export async function ProcessNetworking(message: MessageWrapper)
 {
-  if (message.checkRegex(/\/add/)) {
-    const name = message.captureRegex(/\/add (.+)/);
+  if (message.checkRegex(/\/networking add/)) {
+    const name = message.captureRegex(/\/networking add (.+)/);
 
     if (!name) { return; }
 
@@ -161,8 +161,8 @@ export async function ProcessNetworking(message: MessageWrapper)
 
     return;
   }
-  if (message.checkRegex(/\/done (.+)/)) {
-    const name = message.captureRegex(/\/done (.+)/);
+  if (message.checkRegex(/\/networking done (.+)/)) {
+    const name = message.captureRegex(/\/networking done (.+)/);
     if (!name) { return; }
 
     const suitable = data.contacts.filter((x) => x.name.includes(name[1]));
@@ -182,7 +182,7 @@ export async function ProcessNetworking(message: MessageWrapper)
 
     return;
   }
-  if (message.checkRegex(/\/done/)) {
+  if (message.checkRegex(/\/networking done/)) {
     data.done++;
 
     if (data.lastname) {
@@ -196,7 +196,7 @@ export async function ProcessNetworking(message: MessageWrapper)
 
     return;
   }
-  if (message.checkRegex(/\/list/)) {
+  if (message.checkRegex(/\/networking list/)) {
     let res = "";
 
     const sorted = data.contacts.sort((x, y) => (y.totalsent - x.totalsent) + (y.done - x.done));
@@ -208,8 +208,8 @@ export async function ProcessNetworking(message: MessageWrapper)
     message.reply(res);
     return;
   }
-  if (message.checkRegex(/\/remove (.+)/)) {
-    const name = message.captureRegex(/\/remove (.+)/);
+  if (message.checkRegex(/\/networking remove (.+)/)) {
+    const name = message.captureRegex(/\/networking remove (.+)/);
 
     if (!name) { return; }
 
@@ -229,7 +229,7 @@ export async function ProcessNetworking(message: MessageWrapper)
 
     return;
   }
-  if (message.checkRegex(/\/force/)) {
+  if (message.checkRegex(/\/networking force/)) {
     NetworkingSend();
 
     return;
