@@ -32,6 +32,9 @@ export class MessageWrapper
     {
         const res = [];
         for (const message of texts) {
+            if (!message.length) {
+                continue;
+            }
             const msg = await BotAPI.sendMessage(this.message.chat.id, message);
             res.push(new MessageWrapper(msg));
         }

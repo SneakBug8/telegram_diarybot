@@ -6,9 +6,9 @@ import * as path from "path";
 import * as fs from "fs";
 import { Config } from "../config";
 import { MapToObject } from "../util/MapToObject";
+import { Slots } from "./Slots";
 
-let data = new NotesData();
-let slotind = 0;
+export let NotesRepo = new NotesData();
 
 const datafilepath = path.resolve(Config.dataPath(), "notes.json");
 
@@ -17,9 +17,9 @@ export async function InitNotes()
   if (fs.existsSync(datafilepath)) {
     const file = fs.readFileSync(datafilepath);
 
-    data = JSON.parse(file.toString()) as NotesData;
-    data.Slots = new Map(data.Slots) as any;
-    console.log(`Read ${data.Slots.size} slots.`);
+    NotesRepo = JSON.parse(file.toString()) as NotesData;
+    NotesRepo.Slots = new Map(NotesRepo.Slots) as any;
+    console.log(`Read ${NotesRepo.Slots.size} slots.`);
   }
   else {
     console.log(`Created new datafile for notes.`);
@@ -30,22 +30,8 @@ export async function InitNotes()
 export async function NotesDataSave()
 {
   const tempdata = new NotesData();
-  tempdata.Slots = MapToObject.Convert(data.Slots) as any;
+  tempdata.Slots = MapToObject.Convert(NotesRepo.Slots) as any;
   fs.writeFileSync(datafilepath, JSON.stringify(tempdata));
-}
-
-function syncFilenames()
-{
-  const filename = data.Slots.get(slotind);
-  if (filename && filename !== Logger.getFilename()) {
-    Logger.SetFilename(filename);
-    return filename;
-  }
-  if (!data.Slots.get(slotind)) {
-    data.Slots.set(slotind, Logger.getFilename());
-    NotesDataSave();
-    return Logger.getFilename();
-  }
 }
 
 export async function ProcessNotes(message: MessageWrapper)
@@ -54,7 +40,10 @@ export async function ProcessNotes(message: MessageWrapper)
     const slot = message.captureRegex(/\/slot ([0-9]+)/);
     if (!slot) { return; }
 
-    /*slotind = Number.parseInt(slot[1], 10);
+    const slotind = Number.parseInt(slot[1], 10);
+    Slots.changeSlot(slotind);
+
+    /*
     const filename = data.Slots.get(slotind);
     if (data.Slots.has(slotind) && filename) {
       Logger.SetFilename(filename);
@@ -64,29 +53,36 @@ export async function ProcessNotes(message: MessageWrapper)
     }
     NotesDataSave();*/
 
-    return message.reply(`Using slot ${slotind} with file ${syncFilenames()}`);
+    return message.reply(`Using slot ${Slots.getSlot()} with file ${Slots.getFilename()}`);
   }
   if (message.checkRegex(/\/slots/)) {
     let res = "";
-    for (const slot of data.Slots) {
+    for (const slot of NotesRepo.Slots) {
       res += `${slot[0]} - ${slot[1]}\n`;
     }
     return message.reply(res);
   }
+  if (message.checkRegex(/\/slot reset ([0-9]+)/)) {
+    const slot = message.captureRegex(/\/slot reset ([0-9]+)/);
+    if (!slot) { return; }
+
+    const slotind = Number.parseInt(slot[1], 10);
+    NotesRepo.Slots.delete(slotind);
+    return message.reply(`Removed slot #${slotind}`);
+  }
   if (message.checkRegex(/\/slot reset/)) {
-    data.Slots.set(slotind, "");
-    NotesDataSave();
+    Slots.setFilename("");
   }
   if (message.checkRegex(/\/slots reset/)) {
-    data.Slots = new Map();
+    NotesRepo.Slots = new Map();
     NotesDataSave();
   }
   if (message.checkRegex(/\/slot/)) {
-        return message.reply(`Current slot ${slotind} with file ${syncFilenames()}`);
+    return message.reply(`Current slot ${Slots.getSlot()} with file ${Slots.getFilename()}`);
   }
 
   if (message.checkRegex(/\/path/)) {
-    return message.reply(`Current path: ${syncFilenames()}`)
+    return message.reply(`Current path: ${Slots.getFilename()}`)
       .then((newmsg) => newmsg.deleteAfterTime(1));
   }
 
@@ -110,8 +106,7 @@ export async function ProcessNotes(message: MessageWrapper)
   }
 
   if (message.checkRegex(/\/reset/)) {
-    Logger.ResetFile();
-    data.Slots.set(slotind, "");
+    Slots.setFilename("");
 
     return message.reply("File path reset.")
       .then((newmsg) => newmsg.deleteAfterTime(1));
@@ -129,8 +124,7 @@ export async function ProcessNotes(message: MessageWrapper)
       return;
     }
 
-    data.Slots.set(slotind, capture[1]);
-    NotesDataSave();
+    Slots.setFilename(capture[1]);
 
     return message.reply(Logger.SetFilename(capture[1]))
       .then((newmsg) => newmsg.deleteAfterTime(1));
@@ -140,8 +134,15 @@ export async function ProcessNotes(message: MessageWrapper)
   if (message.checkRegex(/^\/log$/) || message.checkRegex(/^\/read$/)) {
     // const today = dateFormat(Date.now(), "yyyy-mm-dd");
 
+    const res = await Logger.GetLogs();
+    if (res.length > 2048) {
+      return message
+        .reply(`File is too long. Use /logs instead.`)
+        .then((newmsg) => newmsg.deleteAfterTime(5));
+    }
+
     return message
-      .reply(await Logger.GetLogs())
+      .reply(res)
       .then((newmsg) => newmsg.deleteAfterTime(5));
   }
 
@@ -151,7 +152,7 @@ export async function ProcessNotes(message: MessageWrapper)
     const logs = await Logger.GetLogs();
     return message
       .deleteAfterTime(1)
-      .replyMany(logs.split("---"))
+      .replyMany(properSplit(logs))
       .then((messages) =>
       {
         for (const newmsg of messages) {
@@ -184,7 +185,7 @@ export async function ProcessNotes(message: MessageWrapper)
 
     const logs = await Logger.GetLogs(datematches[1]);
     return message.deleteAfterTime(1)
-      .replyMany(logs.split("---"))
+      .replyMany(properSplit(logs))
       .then((msgs) =>
       {
         for (const newmsg of msgs) {
@@ -212,9 +213,37 @@ export async function ProcessNotes(message: MessageWrapper)
   return false;
 }
 
+function properSplit(note: string)
+{
+  const bigparts = note.split("\n\n");
+  const res = new Array<string>();
+
+  for (const part of bigparts) {
+    const sentences = part.split(". ");
+    let k = "";
+    let i = 0;
+
+    for (const s of sentences) {
+      if (i + s.length > 2048) {
+        res.push(k);
+        k = "";
+        i = 0;
+      }
+
+      k += s;
+      i += s.length;
+    }
+
+    if (k.length) {
+      res.push(k);
+    }
+  }
+
+  return res;
+}
+
 export async function LogNote(message: MessageWrapper)
 {
-  syncFilenames();
   /*const filename = data.Slots.get(slotind);
   if (filename && filename !== Logger.getFilename()) {
     Logger.SetFilename(filename);
@@ -227,6 +256,4 @@ export async function LogNote(message: MessageWrapper)
   // Make sure logging all text is last so that commands are properly executed
   const r = await Logger.Log(message.message.text + "");
   message.reply(r || "✔").then((newmsg) => newmsg.deleteAfterTime(1));
-
-
 }

@@ -4,38 +4,25 @@ import * as path from "path";
 import * as dateFormat from "dateformat";
 import { Server } from "..";
 import { Config } from "../config";
+import { Slots } from "./Slots";
 
 export const foldername: string = "diary";
 
 class LoggerService
 {
-    private _lastMsg: number = 0;
-    private _filename: string = "";
-
     public getFilename()
     {
-        if (this._filename /*&& Date.now() - this._lastMsg < 1000 * 60 * 5 */) {
-            return this._filename;
-        }
-
-        return this.generateFilename();
+        return Slots.getFilename();
     }
 
     public generateFilename()
     {
-        this._filename = dateFormat(Date.now(), "yyyy/yyyymmddHHMM");
-        return this._filename;
-    }
-
-    public resetFilename()
-    {
-        this._filename = "";
+        return dateFormat(Date.now(), "yyyy/yyyymmddHHMM");
     }
 
     public async Log(message: string, checkdate = true)
     {
         const filename = this.getFilename();
-        this._lastMsg = Date.now();
 
         const filepath = this.resolveFile(filename);
 
@@ -46,20 +33,21 @@ class LoggerService
 
             if (!message.includes("# ")) {
                 await fs.appendFile(filepath,
-                    `# Telegram ${filename}\n`);
+                    `# Telegram ${filename}`);
             }
 
             newfile = true;
         }
 
-        fs.appendFile(filepath, "\n" + await this.ParseMessage(message));
+        fs.appendFile(filepath, "\n\n" + await this.ParseMessage(message));
 
         if (newfile) {
             return "Created new file " + filename;
         }
     }
 
-    public async ParseMessage(message: string): Promise<string> {
+    public async ParseMessage(message: string): Promise<string>
+    {
         message = message.replace("\\n", "\r\n");
         return message;
     }
@@ -135,13 +123,13 @@ class LoggerService
     {
         const filepath = this.resolveFile(filename);
         const exists = fs.pathExistsSync(filepath);
-        this._filename = filename;
+        Slots.setFilename(filename);
         return `File set to ${filename}. File exists: ${exists}`;
     }
 
     public ResetFile()
     {
-        this._filename = "";
+        Slots.setFilename("");
     }
 }
 

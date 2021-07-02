@@ -40,6 +40,7 @@ Default behaviour for the bot upon receiving message is to save it a note (optio
   - `/slot [num]` - use file slot with number
   - `/slots` - log all recorded slots
   - `/slot reset` - reset file in current slot
+  - `/slot reset [num]` - reset numbered slot
   - `/slots reset` - reset all slots
 
   - `/publish` - send file to remote FTP server
