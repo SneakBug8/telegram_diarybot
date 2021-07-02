@@ -28,12 +28,19 @@ Default behaviour for the bot upon receiving message is to save it a note (optio
   - `/space` - insert big separator (horizontal line)
   - `/files` - list list of files by folders
   - `/file [name]` - set current filename (open or create a file)
-  - `/log` - read current file
+  - `/log` or `/read` - read current file
   - `/logs` - read current file splitted by separators.
   - `/get [name]` - read another file
   - `/logs [name]` - read another file splitted by separators.
   - `/delete` - delete current file
   - `/delete [name]` - delete another file
+
+  File slots allow use to remember last used files with short numbers and switch between them with one short command. For example, you can use slot #1 for todays notes - reseting it once a day and slot #2 for English vocabulary, which you will use for a long time.
+
+  - `/slot [num]` - use file slot with number
+  - `/slots` - log all recorded slots
+  - `/slot reset` - reset file in current slot
+  - `/slots reset` - reset all slots
 
   - `/publish` - send file to remote FTP server
   - `/load` - download file from remote FTP server

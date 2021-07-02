@@ -2,12 +2,12 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 import TelegramBot = require("node-telegram-bot-api");
-import { Logger } from "./logger";
+import { Logger } from "./notes/logger";
 import { BotAPI } from "./api/bot";
 import { MessageWrapper } from "./MessageWrapper";
 import { AuthService } from "./AuthService";
 import { PublishService } from "./PublishService";
-import { ProcessNotes } from "./notes/Notes";
+import { InitNotes, LogNote, ProcessNotes } from "./notes/Notes";
 import { InitNetworking, ProcessNetworking } from "./networking/Networking";
 import { Config } from "./config";
 import { ProcessTimer } from "./timer/timer";
@@ -30,8 +30,11 @@ class App
     {
         this.bot = BotAPI;
 
+        InitNotes();
         InitNetworking();
         InitLearning();
+
+        console.log(Config.projectPath());
 
         this.bot.on("text", async (msg) =>
         {
@@ -110,9 +113,7 @@ class App
             }
 
             if (process.env.notesenabled === "yes") {
-                // Make sure logging all text is last so that commands are properly executed
-                const r = await Logger.Log(msg.text);
-                message.reply(r || "✔").then((newmsg) => newmsg.deleteAfterTime(1));
+                await LogNote(message);
             }
             else {
                 message.reply("Unknown command");

@@ -9,17 +9,17 @@ class ConfigClass
 
   public ftphost()
   {
-    return process.env.host;
+    return process.env.ftphost;
   }
 
   public ftpuser()
   {
-    return process.env.user;
+    return process.env.ftpuser;
   }
 
   public ftppassword()
   {
-    return process.env.password;
+    return process.env.ftppassword;
   }
 
   public basePath(): string

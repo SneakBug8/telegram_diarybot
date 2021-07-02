@@ -1,4 +1,4 @@
-import { foldername, Logger } from "./logger";
+import { foldername, Logger } from "./notes/logger";
 
 import * as Client from "ftp";
 import * as fs from "fs-extra";
@@ -62,16 +62,30 @@ class PublishServiceClass
             const filename = Logger.getFilename();
             const filepath = Logger.resolveFile(filename);
 
-            Server.SendMessage(`Downloaded ${filename}.txt to ${filepath}`);
-
             await fs.ensureFile(filepath);
 
-            c.get(filename + ".txt", (err, stream) =>
+            c.size(filename + ".txt", (err, size) =>
             {
-                if (err) { throw err; }
-                stream.once("close", () => { c.end(); });
-                stream.pipe(fs.createWriteStream(filepath));
+                if (!size) {
+                    Server.SendMessage(`No file ${filename}.txt on remote server.`);
+                    return;
+                }
+
+                c.get(filename + ".txt", (err2, stream) =>
+                {
+                    if (err2) { throw err; }
+                    stream.once("close", () => { c.end(); });
+                    stream.pipe(fs.createWriteStream(filepath));
+
+                    Server.SendMessage(`Downloaded ${filename}.txt to ${filepath}`);
+                });
             });
+        });
+
+        console.log({
+            host: Config.ftphost(),
+            user: Config.ftpuser(),
+            password: Config.ftppassword(),
         });
 
         c.connect({

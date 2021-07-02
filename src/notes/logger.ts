@@ -2,7 +2,8 @@ import * as fs from "fs-extra";
 import * as path from "path";
 
 import * as dateFormat from "dateformat";
-import { Server } from ".";
+import { Server } from "..";
+import { Config } from "../config";
 
 export const foldername: string = "diary";
 
@@ -17,6 +18,11 @@ class LoggerService
             return this._filename;
         }
 
+        return this.generateFilename();
+    }
+
+    public generateFilename()
+    {
         this._filename = dateFormat(Date.now(), "yyyy/yyyymmddHHMM");
         return this._filename;
     }
@@ -46,7 +52,7 @@ class LoggerService
             newfile = true;
         }
 
-        fs.appendFile(filepath, await this.ParseMessage(message) + "\n");
+        fs.appendFile(filepath, "\n" + await this.ParseMessage(message));
 
         if (newfile) {
             return "Created new file " + filename;
@@ -99,7 +105,7 @@ class LoggerService
 
     public async listFiles(directory?: string)
     {
-        const f = path.resolve(__dirname, `../${foldername}`, directory || "");
+        const f = path.resolve(Config.projectPath(), `${foldername}`, directory || "");
         const files = await fs.readdir(f);
 
         let res = "";
@@ -107,7 +113,7 @@ class LoggerService
             const newpath = path.resolve(f, file);
 
             if (file.includes(".")) {
-                const filename = path.relative(path.resolve(__dirname, `../${foldername}`), newpath);
+                const filename = path.relative(path.resolve(Config.projectPath(), `${foldername}`), newpath);
                 res += filename.replace(".md", "") + "\n";
             }
             else {
@@ -122,7 +128,7 @@ class LoggerService
 
     public resolveFile(filename: string)
     {
-        return path.resolve(__dirname, `../${foldername}`, filename + ".md");
+        return path.resolve(Config.projectPath(), `${foldername}`, filename + ".md");
     }
 
     public SetFilename(filename: string)
