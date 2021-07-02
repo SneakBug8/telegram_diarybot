@@ -13,6 +13,7 @@ import { Config } from "./config";
 import { ProcessTimer } from "./timer/timer";
 import { ProcessEval } from "./eval/eval";
 import { InitLearning, ProcessLearning } from "./learning/Learning";
+import { ImageGenProcess } from "./imagegen/ImageGen";
 
 function sleep(ms: number)
 {
@@ -103,9 +104,18 @@ class App
                 }
             }
 
-            const m5 = await ProcessLearning(message);
-            if (m5 !== false) {
-                return;
+            if (process.env.imagegen === "yes") {
+                const m6 = await ImageGenProcess(message);
+                if (m6 !== false) {
+                    return;
+                }
+            }
+
+            if (process.env.learning === "yes") {
+                const m5 = await ProcessLearning(message);
+                if (m5 !== false) {
+                    return;
+                }
             }
 
             if (message.checkRegex(/^\/.*$/)) {
