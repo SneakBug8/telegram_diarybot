@@ -5,12 +5,27 @@ import * as path from "path";
 import { Config } from "../config";
 import { Server } from "..";
 import { NetworkingData, NetworkingStat } from "./NetworkingData";
+import TelegramBot = require("node-telegram-bot-api");
 
 let data = new NetworkingData();
 
 const datafilepath = path.resolve(Config.dataPath(), "networking.json");
 const howmanyperday = 1;
 const whattimeofaday = 12;
+
+function getKeyboard(): TelegramBot.KeyboardButton[][]
+{
+  return [
+    [{ text: "/networking done" }, { text: "/networking list" }],
+    [{ text: "/networking add" }, { text: "/networking remove" }],
+    [{ text: "/exit" }],
+  ];
+}
+
+function reply(msg: MessageWrapper, text: string)
+{
+  msg.reply(text, getKeyboard());
+}
 
 export async function InitNetworking()
 {
@@ -154,7 +169,7 @@ export async function ProcessNetworking(message: MessageWrapper)
     data.contacts.push(stat);
     NetworkingSave();
 
-    message.reply(`Added ${name[1]} to your networking contacts.`);
+    reply(message, `Added ${name[1]} to your networking contacts.`);
 
     return;
   }
@@ -165,7 +180,7 @@ export async function ProcessNetworking(message: MessageWrapper)
     const suitable = data.contacts.filter((x) => x.name.includes(name[1]));
 
     if (suitable.length > 1) {
-      return message.reply(`More than one suitable entry: ` + suitable.join(", "));
+      return reply(message, `More than one suitable entry: ` + suitable.join(", "));
     }
 
     data.done++;
@@ -174,7 +189,7 @@ export async function ProcessNetworking(message: MessageWrapper)
 
     NetworkingSave();
 
-    message.reply(`Marked interaction with ${name[1]} as done. `
+    reply(message, `Marked interaction with ${name[1]} as done. `
       + FullStatistics());
 
     return;
@@ -188,7 +203,7 @@ export async function ProcessNetworking(message: MessageWrapper)
 
     NetworkingSave();
 
-    message.reply(`Marked interaction with ${data.lastname} (last one) as done. `
+    reply(message, `Marked interaction with ${data.lastname} (last one) as done. `
       + FullStatistics());
 
     return;
@@ -202,7 +217,7 @@ export async function ProcessNetworking(message: MessageWrapper)
       res += formatName(contact);
     }
 
-    message.reply(res);
+    reply(message, res);
     return;
   }
   if (message.checkRegex(/\/networking remove (.+)/)) {
@@ -213,7 +228,7 @@ export async function ProcessNetworking(message: MessageWrapper)
     const suitable = data.contacts.filter((x) => x.name.includes(name[1]));
 
     if (suitable.length > 1) {
-      return message.reply(`More than one suitable entry: ` + suitable.join(", "));
+      return reply(message, `More than one suitable entry: ` + suitable.join(", "));
     }
 
     const sel = data.contacts.filter((x) => !x.name.includes(name[1]));
@@ -221,13 +236,18 @@ export async function ProcessNetworking(message: MessageWrapper)
       s.active = false;
     }
 
-    message.reply(`Deactivated ${name[1]} in your networking contacts.`);
+    reply(message, `Deactivated ${name[1]} in your networking contacts.`);
     NetworkingSave();
 
     return;
   }
   if (message.checkRegex(/\/networking force/)) {
     NetworkingSend();
+
+    return;
+  }
+  if (message.checkRegex(/\/networking/)) {
+    reply(message, `Networking module.`);
 
     return;
   }

@@ -1,6 +1,7 @@
 import TelegramBot = require("node-telegram-bot-api");
 import { BotAPI } from "./api/bot";
 import dateFormat = require("dateformat");
+import { defaultKeyboard } from ".";
 
 export class MessageWrapper
 {
@@ -22,9 +23,14 @@ export class MessageWrapper
         return this;
     }
 
-    public async reply(text: string)
+    public async reply(text: string, keyboard: TelegramBot.KeyboardButton[][] | null = null)
     {
-        const msg = await BotAPI.sendMessage(this.message.chat.id, text || "None.");
+        const msg = await BotAPI.sendMessage(this.message.chat.id, text || "None.", {
+            parse_mode: "Markdown",
+            reply_markup: {
+                keyboard: keyboard || defaultKeyboard(),
+            },
+        });
         return new MessageWrapper(msg);
     }
 

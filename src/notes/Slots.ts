@@ -13,6 +13,9 @@ class SlotClass
 
   public changeSlot(ind: number)
   {
+    if (ind < 0) {
+      ind = NotesRepo.Slots.size - 1;
+    }
     this.slotInd = ind;
   }
 

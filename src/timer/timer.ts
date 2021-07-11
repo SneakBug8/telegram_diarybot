@@ -1,41 +1,55 @@
+import TelegramBot = require("node-telegram-bot-api");
 import { MessageWrapper } from "../MessageWrapper";
 
 const timers = new Array<Date>();
+
+function getKeyboard(): TelegramBot.KeyboardButton[][]
+{
+  return [
+    [{ text: "/timer startt" }, { text: "/timer stop" }, { text: "/timer clear" }],
+    [{ text: "/exit" }],
+  ];
+}
+
+function reply(msg: MessageWrapper, text: string)
+{
+  msg.reply(text, getKeyboard());
+}
 
 export async function ProcessTimer(message: MessageWrapper)
 {
   if (message.checkRegex(/\/timer start/) || message.checkRegex(/\/timer add/)) {
     timers.push(new Date(Date.now()));
 
-    return message.reply(`Created timer ${timers.length}.`);
+    return reply(message, `Created timer ${timers.length}.`);
   }
   if (message.checkRegex(/\/timer stop/)) {
     if (!timers.length) {
-      return message.reply("No timers running");
+      return reply(message, "No timers running");
     }
     const timern = timers.length;
     const timer = timers.pop() as Date;
 
-    return message.reply(`Stopped timer ${timern}.` +
+    return reply(message, `Stopped timer ${timern}.` +
       `Elapsed time - ${parseTime(Date.now() - timer.valueOf())}`);
   }
   if (message.checkRegex(/\/timer clear/)) {
     if (!timers.length) {
-      return message.reply("No timers running");
+      return reply(message, "No timers running");
     }
 
     while (timers.length) {
       const timern = timers.length;
       const timer = timers.pop() as Date;
 
-      message.reply(`Stopped timer ${timern}. ` +
+      reply(message, `Stopped timer ${timern}. ` +
         `Elapsed time - ${parseTime(Date.now() - timer.valueOf())}`);
     }
     return;
   }
 
   if (message.checkRegex(/\/timer/)) {
-    return message.reply(`Unrecognized timer command.`);
+    return reply(message, `Timer module.`);
   }
   return false;
 }

@@ -23,8 +23,6 @@ class PublishServiceClass
             const filename = Logger.getFilename();
             const filepath = Logger.resolveFile(filename);
 
-            Server.SendMessage(`Uploaded ${filepath} to ${filename}.txt`);
-
             // Make temporary file with better formating for upload
             const tempfilepath = path.resolve(Config.basePath(), "temp.md");
             fs.copyFileSync(filepath, tempfilepath);
@@ -43,6 +41,9 @@ class PublishServiceClass
             c.put(tempfilepath, filename + ".txt", (err) =>
             {
                 if (err) { throw err; }
+
+                Server.SendMessage(`Uploaded ${filepath} to ${filename}.txt`)
+                    .then((x) => x.deleteAfterTime(1));
                 c.end();
             });
         });
@@ -67,7 +68,8 @@ class PublishServiceClass
             c.size(filename + ".txt", (err, size) =>
             {
                 if (!size) {
-                    Server.SendMessage(`No file ${filename}.txt on remote server.`);
+                    Server.SendMessage(`No file ${filename}.txt on remote server.`)
+                        .then((x) => x.deleteAfterTime(1));
                     return;
                 }
 
@@ -77,7 +79,8 @@ class PublishServiceClass
                     stream.once("close", () => { c.end(); });
                     stream.pipe(fs.createWriteStream(filepath));
 
-                    Server.SendMessage(`Downloaded ${filename}.txt to ${filepath}`);
+                    Server.SendMessage(`Downloaded ${filename}.txt to ${filepath}`)
+                        .then((x) => x.deleteAfterTime(1));
                 });
             });
         });

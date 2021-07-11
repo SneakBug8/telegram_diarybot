@@ -6,11 +6,26 @@ import { Config } from "../config";
 import { Server } from "..";
 import { LearningData, LearningRecord, LearningTimeEntry } from "./LearningData";
 import dateFormat = require("dateformat");
+import TelegramBot = require("node-telegram-bot-api");
 
 let data = new LearningData();
 const datafilepath = path.resolve(Config.dataPath(), "learning.json");
 
 let lastHourChecked = -1;
+
+function getKeyboard(): TelegramBot.KeyboardButton[][]
+{
+  return [
+    [{ text: "/learning start" }, { text: "/learning list" }, { text: "/learning stats" }],
+    [{ text: "/learning force" }, { text: "/learning now" }, { text: "/learning end" }],
+    [{ text: "/exit" }],
+  ];
+}
+
+function reply(msg: MessageWrapper, text: string)
+{
+  msg.reply(text, getKeyboard());
+}
 
 export async function InitLearning()
 {
@@ -47,7 +62,7 @@ async function LearningCycle()
 
   if (lastHourChecked !== now.getHours()) {
     for (const entry of data.Timetable) {
-      if (entry.time === now.getHours() && entry.day === now.getDay() + 1) {
+      if (entry.time === now.getHours() && entry.day === now.getDay() % 7) {
         console.log(now + " sending time");
         LearningSend(entry);
       }
@@ -97,13 +112,13 @@ let tempRecord = new LearningRecord();
 
 export async function ProcessLearning(message: MessageWrapper)
 {
-  if (message.checkRegex(/\/learning start (.+)/)) {
+  if (message.checkRegex(/\/learning start(.*)/)) {
     const subject = message.captureRegex(/\/learning start (.+)/);
 
-    if (!subject) { return; }
+    if (!subject) { return reply(message, `Specify which activity to start.`); }
 
     if (tempRecord.from !== 0) {
-      message.reply(`Already doing ${subject[1]}.`);
+      reply(message, `Already doing ${subject[1]}.`);
       return;
     }
 
@@ -111,7 +126,7 @@ export async function ProcessLearning(message: MessageWrapper)
     tempRecord.subject = subject[1];
     tempRecord.from = Date.now();
 
-    message.reply(`Started doing ${subject[1]}.`);
+    reply(message, `Started doing ${subject[1]}.`);
 
     return;
   }
@@ -119,7 +134,7 @@ export async function ProcessLearning(message: MessageWrapper)
     const to = Date.now();
     const time = new Date(to - tempRecord.from);
 
-    message.reply(`${tempRecord.subject}: ${dateFormat(time, "HH:MM", true)}`);
+    reply(message, `${tempRecord.subject}: ${dateFormat(time, "HH:MM", true)}`);
     return;
   }
   if (message.checkRegex(/\/learning end/) || message.checkRegex(/\/learning stop/)) {
@@ -127,7 +142,7 @@ export async function ProcessLearning(message: MessageWrapper)
     data.Records.push(tempRecord);
     LearningSave();
 
-    message.reply(`Ended doing ${tempRecord.subject}.`);
+    reply(message, `Ended doing ${tempRecord.subject}.`);
     tempRecord.from = 0;
     return;
   }
@@ -140,7 +155,7 @@ export async function ProcessLearning(message: MessageWrapper)
       res += `${entry.subject}: ${getWeekDays()[entry.day - 1]}, ${entry.time}h`;
     }
 
-    message.reply(res);
+    reply(message, res);
     return;
   }
   if (message.checkRegex(/\/learning stats/)) {
@@ -157,11 +172,16 @@ export async function ProcessLearning(message: MessageWrapper)
       res += `${entry[0]}: ${dateFormat(entry[1], "HH:MM")}`;
     }
 
-    message.reply(res);
+    reply(message, res);
     return;
   }
   if (message.checkRegex(/\/learning force/)) {
     LearningCycle();
+
+    return;
+  }
+  if (message.checkRegex(/\/learning/)) {
+    reply(message, `Learning module.`);
 
     return;
   }

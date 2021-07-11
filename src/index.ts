@@ -23,6 +23,23 @@ function sleep(ms: number)
     });
 }
 
+let waitingCallback: ((message: MessageWrapper) => any) | null = null;
+
+export function setWaitingForValue(callback: (message: MessageWrapper) => any)
+{
+    waitingCallback = callback;
+}
+
+export function defaultKeyboard(): TelegramBot.KeyboardButton[][]
+{
+    return [
+        [{ text: "/slots" }, { text: "/slot prev" }, { text: "/slot next" }],
+        [{ text: "/path" }, { text: "/logs" }, { text: "/reset" }],
+        [{ text: "/publish" }, { text: "/load" }],
+        [{ text: "/networking" }, { text: "/learning" }, { text: "/timer" }],
+    ];
+}
+
 class App
 {
     private bot: TelegramBot;
@@ -74,6 +91,17 @@ class App
 
             if (!msg.text) {
                 return;
+            }
+
+            if (waitingCallback) {
+                await waitingCallback.call(this, message);
+                waitingCallback = null;
+
+                return true;
+            }
+
+            if (message.checkRegex(/\/exit/)) {
+                return message.reply("Main module.");
             }
 
             if (process.env.networkingenabled === "yes") {
@@ -131,10 +159,15 @@ class App
         });
     }
 
-    public async SendMessage(text: string)
+    public async SendMessage(text: string, keyboard: TelegramBot.KeyboardButton[][] | null = null)
     {
         console.log(text);
-        const msg = await BotAPI.sendMessage(Config.DefaultChat, text);
+        const msg = await BotAPI.sendMessage(Config.DefaultChat, text, {
+            parse_mode: "Markdown",
+            reply_markup: {
+                keyboard: keyboard || defaultKeyboard(),
+            }
+        });
         return new MessageWrapper(msg);
     }
 }

@@ -7,10 +7,38 @@ import * as fs from "fs";
 import { Config } from "../config";
 import { MapToObject } from "../util/MapToObject";
 import { Slots } from "./Slots";
+import TelegramBot = require("node-telegram-bot-api");
+import { setWaitingForValue } from "..";
 
 export let NotesRepo = new NotesData();
 
 const datafilepath = path.resolve(Config.dataPath(), "notes.json");
+
+function yesNoKeyboard(): TelegramBot.KeyboardButton[][]
+{
+  return [
+    [{ text: "yes" }, { text: "no" }],
+  ];
+}
+
+function waitingForPublishAnswer(msg: MessageWrapper)
+{
+  if (msg.message.text === "yes") {
+    PublishService.PublishLast();
+  }
+  else {
+    msg.reply("Publishing aborted.");
+  }
+}
+function waitingForLoadAnswer(msg: MessageWrapper)
+{
+  if (msg.message.text === "yes") {
+    PublishService.DownloadLast();
+  }
+  else {
+    msg.reply("Loading aborted.");
+  }
+}
 
 export async function InitNotes()
 {
@@ -60,7 +88,20 @@ export async function ProcessNotes(message: MessageWrapper)
     for (const slot of NotesRepo.Slots) {
       res += `${slot[0]} - ${slot[1]}\n`;
     }
-    return message.reply(res);
+
+    res += `---\nUsing slot ${Slots.getSlot()} with file ${Slots.getFilename()}`;
+
+    return message.reply(res).then((x) => x.deleteAfterTime(1));
+  }
+  if (message.checkRegex(/\/slot next/)) {
+    const slotind = Slots.getSlot() + 1;
+    Slots.changeSlot(slotind);
+    return message.reply(`Using slot ${Slots.getSlot()} with file ${Slots.getFilename()}`);
+  }
+  if (message.checkRegex(/\/slot prev[ious]*/)) {
+    const slotind = Slots.getSlot() - 1;
+    Slots.changeSlot(slotind);
+    return message.reply(`Using slot ${Slots.getSlot()} with file ${Slots.getFilename()}`);
   }
   if (message.checkRegex(/\/slot reset ([0-9]+)/)) {
     const slot = message.captureRegex(/\/slot reset ([0-9]+)/);
@@ -68,17 +109,20 @@ export async function ProcessNotes(message: MessageWrapper)
 
     const slotind = Number.parseInt(slot[1], 10);
     NotesRepo.Slots.delete(slotind);
-    return message.reply(`Removed slot #${slotind}`);
+    return message.reply(`Removed slot #${slotind}`).then((x) => x.deleteAfterTime(1));
   }
   if (message.checkRegex(/\/slot reset/)) {
     Slots.setFilename("");
+    return message.reply(`Removed slot #${Slots.getSlot()}`).then((x) => x.deleteAfterTime(1));
   }
   if (message.checkRegex(/\/slots reset/)) {
     NotesRepo.Slots = new Map();
     NotesDataSave();
+    return message.reply(`Cleared slots`).then((x) => x.deleteAfterTime(1));
   }
   if (message.checkRegex(/\/slot/)) {
-    return message.reply(`Current slot ${Slots.getSlot()} with file ${Slots.getFilename()}`);
+    return message.reply(`Current slot ${Slots.getSlot()} with file ${Slots.getFilename()}`)
+      .then((x) => x.deleteAfterTime(1));
   }
 
   if (message.checkRegex(/\/path/)) {
@@ -87,11 +131,13 @@ export async function ProcessNotes(message: MessageWrapper)
   }
 
   if (message.checkRegex(/\/publish/)) {
-    return PublishService.PublishLast();
+    message.reply("Are you sure you want to publish current note to remote server?", yesNoKeyboard());
+    return setWaitingForValue(waitingForPublishAnswer);
   }
 
   if (message.checkRegex(/\/load/)) {
-    return PublishService.DownloadLast();
+    message.reply("Are you sure you want to load current note from remote server?", yesNoKeyboard());
+    return setWaitingForValue(waitingForLoadAnswer);
   }
 
   if (message.checkRegex(/\/space/)) {
@@ -138,7 +184,7 @@ export async function ProcessNotes(message: MessageWrapper)
     if (res.length > 2048) {
       return message
         .reply(`File is too long. Use /logs instead.`)
-        .then((newmsg) => newmsg.deleteAfterTime(5));
+        .then((newmsg) => newmsg.deleteAfterTime(1));
     }
 
     return message
@@ -172,7 +218,7 @@ export async function ProcessNotes(message: MessageWrapper)
     return message
       .deleteAfterTime(1)
       .reply(await Logger.GetLogs(filematch[1]))
-      .then((newmsg) => newmsg.deleteAfterTime(15));
+      .then((newmsg) => newmsg.deleteAfterTime(5));
   }
 
   const logsregexp = new RegExp("\/logs (.+)");
@@ -189,13 +235,13 @@ export async function ProcessNotes(message: MessageWrapper)
       .then((msgs) =>
       {
         for (const newmsg of msgs) {
-          newmsg.deleteAfterTime(15);
+          newmsg.deleteAfterTime(5);
         }
       });
   }
 
   if (message.checkRegex(/\/delete/)) {
-    message.reply(await Logger.DeleteFile());
+    message.reply(await Logger.DeleteFile()).then((newmsg) => newmsg.deleteAfterTime(1));
   }
 
   if (message.checkRegex(/\/delete (.+)/)) {
@@ -225,7 +271,7 @@ function properSplit(note: string)
 
     for (const s of sentences) {
       if (i + s.length > 2048) {
-        res.push(k);
+        res.push(k + ". ");
         k = "";
         i = 0;
       }
