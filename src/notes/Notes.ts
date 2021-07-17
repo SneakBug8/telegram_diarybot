@@ -264,25 +264,25 @@ function properSplit(note: string)
   const bigparts = note.split("\n\n");
   const res = new Array<string>();
 
+  let k = "";
   for (const part of bigparts) {
     const sentences = part.split(". ");
-    let k = "";
-    let i = 0;
 
     for (const s of sentences) {
-      if (i + s.length > 2048) {
-        res.push(k + ". ");
+      console.log(s);
+
+      if (k.length + s.length > 2048) {
+        res.push(k);
         k = "";
-        i = 0;
       }
 
-      k += s;
-      i += s.length;
+      k += s + ". ";
     }
+    k += "\n\n";
+  }
 
-    if (k.length) {
-      res.push(k);
-    }
+  if (k.length) {
+    res.push(k);
   }
 
   return res;
