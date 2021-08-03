@@ -14,6 +14,9 @@ import { ProcessTimer } from "./timer/timer";
 import { ProcessEval } from "./eval/eval";
 import { InitLearning, ProcessLearning } from "./learning/Learning";
 import { ImageGenProcess } from "./imagegen/ImageGen";
+import { InitNotifier, ProcessNotifier } from "./notifier/Notifier";
+import { InitProjects, ProcessProjects } from "./projects/Projects";
+
 
 function sleep(ms: number)
 {
@@ -51,6 +54,8 @@ class App
         InitNotes();
         InitNetworking();
         InitLearning();
+        InitNotifier();
+        InitProjects();
 
         console.log(Config.projectPath());
 
@@ -116,6 +121,16 @@ class App
                 if (m3 !== false) {
                     return;
                 }
+            }
+
+            const m7 = await ProcessNotifier(message);
+            if (m7 !== false) {
+                return;
+            }
+
+            const m8 = await ProcessProjects(message);
+            if (m8 !== false) {
+                return;
             }
 
             if (process.env.notesenabled === "yes") {
