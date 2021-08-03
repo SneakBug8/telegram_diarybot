@@ -8,7 +8,7 @@ import { Config } from "../config";
 import { MapToObject } from "../util/MapToObject";
 import { Slots } from "./Slots";
 import TelegramBot = require("node-telegram-bot-api");
-import { setWaitingForValue } from "..";
+import { setWaitingForValue, setWaitingForValuePure } from "..";
 
 export let NotesRepo = new NotesData();
 
@@ -132,12 +132,12 @@ export async function ProcessNotes(message: MessageWrapper)
 
   if (message.checkRegex(/\/publish/)) {
     message.reply("Are you sure you want to publish current note to remote server?", yesNoKeyboard());
-    return setWaitingForValue(waitingForPublishAnswer);
+    return setWaitingForValuePure(waitingForPublishAnswer);
   }
 
   if (message.checkRegex(/\/load/)) {
     message.reply("Are you sure you want to load current note from remote server?", yesNoKeyboard());
-    return setWaitingForValue(waitingForLoadAnswer);
+    return setWaitingForValuePure(waitingForLoadAnswer);
   }
 
   if (message.checkRegex(/\/space/)) {

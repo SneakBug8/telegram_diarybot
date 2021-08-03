@@ -3,7 +3,7 @@ import * as fs from "fs";
 import * as path from "path";
 
 import { Config } from "../config";
-import { Server } from "..";
+import { Server, setWaitingForValue } from "..";
 import dateFormat = require("dateformat");
 import TelegramBot = require("node-telegram-bot-api");
 import { ProjectRecord, ProjectsData, Project } from "./ProjectsData";
@@ -17,7 +17,9 @@ const whattimeofaday = 12;
 function getKeyboard(): TelegramBot.KeyboardButton[][]
 {
   return [
-    [{ text: "/projects done" }, { text: "/projects list" }, { text: "/projects stats" }],
+    [{ text: "/projects done" }, { text: "/projects add" },],
+    [{ text: "/projects list" }, { text: "/projects stats" }],
+
     [{ text: "/exit" }],
   ];
 }
@@ -90,24 +92,28 @@ function getWeekDays()
 
 export async function ProcessProjects(message: MessageWrapper)
 {
-  if (message.checkRegex(/\/projects done (.+)/)) {
-    const subject = message.captureRegex(/\/projects done (.+)/);
+  if (message.checkRegex(/\/projects done/)) {
+    setWaitingForValue(
+      `Write the name of the project to be marked.`,
+      (msg) =>
+    {
+      const subject = msg.message.text;
 
-    if (!subject) { return reply(message, `Specify which project to mark.`); }
+      if (!subject) { return reply(message, `Specify which project to mark.`); }
 
-    const proj = data.Projects.find((x) => x.subject === subject[1]);
+      const proj = data.Projects.find((x) => x.subject === subject[1]);
 
-    if (!proj) { return reply(message, `No such project.`); }
+      if (!proj) { return reply(message, `No such project.`); }
 
-    const record = new ProjectRecord();
-    record.subject = subject[1];
-    record.datetime = new Date().toString();
+      const record = new ProjectRecord();
+      record.subject = subject[1];
+      record.datetime = new Date().toString();
 
-    data.Records.push(record);
-    ProjectsSave();
+      data.Records.push(record);
+      ProjectsSave();
 
-    reply(message, `Marked project ${subject[1]} worked on.`);
-    return;
+      reply(message, `Marked project ${subject[1]} worked on.`);
+    });
   }
   if (message.checkRegex(/\/projects list/)) {
     let res = "";
@@ -121,23 +127,27 @@ export async function ProcessProjects(message: MessageWrapper)
     reply(message, res);
     return;
   }
-  if (message.checkRegex(/\/projects add (.+)/)) {
-    const subject = message.captureRegex(/\/projects add (.+)/);
+  if (message.checkRegex(/\/projects add/)) {
+    setWaitingForValue(`Write the name of the project to add.`,
+      (msg) =>
+    {
+      const subject = msg.message.text;
 
-    if (!subject) { return reply(message, `Specify which project to add.`); }
+      if (!subject) { return reply(message, `Specify which project to add.`); }
 
-    for (let i = 0; i < 7; i++) {
-      const proj = new Project();
-      proj.day = i;
-      proj.time = whattimeofaday;
-      proj.subject = subject[1];
-      data.Projects.push(proj);
-    }
+      for (let i = 0; i < 7; i++) {
+        const proj = new Project();
+        proj.day = i;
+        proj.time = whattimeofaday;
+        proj.subject = subject[1];
+        data.Projects.push(proj);
+      }
 
-    ProjectsSave();
+      ProjectsSave();
 
-    reply(message, `Added project ${subject[1]}.`);
-    return;
+      reply(message, `Added project ${subject[1]}.`);
+      return;
+    });
   }
   if (message.checkRegex(/\/projects/)) {
     reply(message, `Projects module.`);

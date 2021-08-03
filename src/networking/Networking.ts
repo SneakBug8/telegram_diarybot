@@ -165,8 +165,8 @@ function FullStatistics()
 export async function ProcessNetworking(message: MessageWrapper)
 {
   if (message.checkRegex(/\/networking add/)) {
-    reply(message, `Please, write name who to add.`);
-    setWaitingForValue((msg) =>
+    setWaitingForValue(`Please, write name who to add.`,
+      (msg) =>
     {
       const name = msg.message.text;
 
@@ -229,9 +229,8 @@ export async function ProcessNetworking(message: MessageWrapper)
     return;
   }
   if (message.checkRegex(/\/networking remove (.+)/)) {
-    reply(message, `Please, write name who to remove.`);
-
-    setWaitingForValue((msg) =>
+    setWaitingForValue(`Please, write name who to remove.`,
+      (msg) =>
     {
       const name = msg.message.text;
 
@@ -255,10 +254,12 @@ export async function ProcessNetworking(message: MessageWrapper)
     return;
   }
   if (message.checkRegex(/\/networking policy set/)) {
-    reply(message, `Please, write current networking policy`);
-    setWaitingForValue((msg) =>
+    setWaitingForValue(`Please, write current networking policy`,
+      (msg) =>
     {
       data.policy = msg.message.text + "";
+      reply(msg, `Networking policy set`);
+
       NetworkingSave();
     });
     return;

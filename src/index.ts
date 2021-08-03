@@ -17,7 +17,6 @@ import { ImageGenProcess } from "./imagegen/ImageGen";
 import { InitNotifier, ProcessNotifier } from "./notifier/Notifier";
 import { InitProjects, ProcessProjects } from "./projects/Projects";
 
-
 function sleep(ms: number)
 {
     return new Promise((resolve) =>
@@ -28,7 +27,13 @@ function sleep(ms: number)
 
 let waitingCallback: ((message: MessageWrapper) => any) | null = null;
 
-export function setWaitingForValue(callback: (message: MessageWrapper) => any)
+export function setWaitingForValue(message: string, callback: (message: MessageWrapper) => any)
+{
+    Server.SendMessage(message, [[{ text: "/exit" }]]);
+    waitingCallback = callback;
+}
+
+export function setWaitingForValuePure(callback: (message: MessageWrapper) => any)
 {
     waitingCallback = callback;
 }
@@ -37,9 +42,9 @@ export function defaultKeyboard(): TelegramBot.KeyboardButton[][]
 {
     return [
         [{ text: "/slots" }, { text: "/slot prev" }, { text: "/slot next" }],
-        [{ text: "/path" }, { text: "/logs" }, { text: "/reset" }],
-        [{ text: "/publish" }, { text: "/load" }],
-        [{ text: "/networking" }, { text: "/learning" }, { text: "/timer" }],
+        [{ text: "/logs" }, { text: "/reset" }, { text: "/networking" }],
+        [{ text: "/publish" }, { text: "/load" }, { text: "/timer" }],
+        [{ text: "/projects" }, { text: "/learning" }, { text: "/notify" }],
     ];
 }
 
@@ -99,6 +104,10 @@ class App
             }
 
             if (waitingCallback) {
+                if (message.message.text === "/exit") {
+                    waitingCallback = null; return;
+                }
+
                 await waitingCallback.call(this, message);
                 waitingCallback = null;
 
@@ -190,3 +199,4 @@ class App
 export const Server = new App();
 
 console.log("Bot started");
+Server.SendMessage("Bot restarted");

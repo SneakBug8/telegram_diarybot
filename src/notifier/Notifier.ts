@@ -118,9 +118,9 @@ export function ParseDate(date: string)
 export async function ProcessNotifier(message: MessageWrapper)
 {
   if (message.checkRegex(/\/notify add/)) {
-    reply(message, `Please, write when to notify and about what, separated by ";".
-    Пример: через 9 дней; Аннушка разлила масло`);
-    setWaitingForValue((msg) =>
+    setWaitingForValue(`Please, write when to notify and about what, separated by ";".
+    Пример: через 9 дней; Аннушка разлила масло`,
+      (msg) =>
     {
       const name = msg.captureRegex(/(.+); (.+)/);
 
