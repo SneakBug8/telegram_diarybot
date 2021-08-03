@@ -66,13 +66,16 @@ async function ProjectsCycle()
     }
   }
 
-  let msg = `Ваши текущие проекты:`;
+  if (triggeredentries.length) {
 
-  for (const en of triggeredentries) {
-    msg += "\n" + en.subject;
+    let msg = `Ваши текущие проекты:`;
+
+    for (const en of triggeredentries) {
+      msg += "\n" + en.subject;
+    }
+
+    Server.SendMessage(msg);
   }
-
-  Server.SendMessage(msg);
 
   lastHourChecked = now.getHours();
 }

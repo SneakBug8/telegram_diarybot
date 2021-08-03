@@ -153,5 +153,10 @@ export async function ProcessNotifier(message: MessageWrapper)
     reply(message, res);
     return;
   }
+  if (message.checkRegex(/\/notify/)) {
+    reply(message, `Notifier module.`);
+
+    return;
+  }
   return false;
 }
