@@ -3,7 +3,7 @@ import * as fs from "fs";
 import * as path from "path";
 
 import { Config } from "../config";
-import { Server } from "..";
+import { Server, setWaitingForValue } from "..";
 import { NetworkingData, NetworkingStat } from "./NetworkingData";
 import TelegramBot = require("node-telegram-bot-api");
 
@@ -18,6 +18,7 @@ function getKeyboard(): TelegramBot.KeyboardButton[][]
   return [
     [{ text: "/networking done" }, { text: "/networking list" }],
     [{ text: "/networking add" }, { text: "/networking remove" }],
+    [{ text: "/networking policy set" }],
     [{ text: "/exit" }],
   ];
 }
@@ -104,6 +105,10 @@ async function NetworkingSend()
     i++;
   }
 
+  if (data.policy) {
+    res += `---\n${data.policy}`;
+  }
+
   Server.SendMessage(res);
   data.totalsent++;
   NetworkingSave();
@@ -160,17 +165,20 @@ function FullStatistics()
 export async function ProcessNetworking(message: MessageWrapper)
 {
   if (message.checkRegex(/\/networking add/)) {
-    const name = message.captureRegex(/\/networking add (.+)/);
+    reply(message, `Please, write name who to add.`);
+    setWaitingForValue((msg) =>
+    {
+      const name = msg.message.text;
 
-    if (!name) { return; }
+      if (!name) { return; }
 
-    const stat = new NetworkingStat();
-    stat.name = name[1];
-    data.contacts.push(stat);
-    NetworkingSave();
+      const stat = new NetworkingStat();
+      stat.name = name[1];
+      data.contacts.push(stat);
+      NetworkingSave();
 
-    reply(message, `Added ${name[1]} to your networking contacts.`);
-
+      reply(message, `Added ${name[1]} to your networking contacts.`);
+    });
     return;
   }
   if (message.checkRegex(/\/networking done (.+)/)) {
@@ -221,24 +229,38 @@ export async function ProcessNetworking(message: MessageWrapper)
     return;
   }
   if (message.checkRegex(/\/networking remove (.+)/)) {
-    const name = message.captureRegex(/\/networking remove (.+)/);
+    reply(message, `Please, write name who to remove.`);
 
-    if (!name) { return; }
+    setWaitingForValue((msg) =>
+    {
+      const name = msg.message.text;
 
-    const suitable = data.contacts.filter((x) => x.name.includes(name[1]));
+      if (!name) { return; }
 
-    if (suitable.length > 1) {
-      return reply(message, `More than one suitable entry: ` + suitable.join(", "));
-    }
+      const suitable = data.contacts.filter((x) => x.name.includes(name[1]));
 
-    const sel = data.contacts.filter((x) => !x.name.includes(name[1]));
-    for (const s of sel) {
-      s.active = false;
-    }
+      if (suitable.length > 1) {
+        return reply(message, `More than one suitable entry: ` + suitable.join(", "));
+      }
 
-    reply(message, `Deactivated ${name[1]} in your networking contacts.`);
-    NetworkingSave();
+      const sel = data.contacts.filter((x) => !x.name.includes(name[1]));
+      for (const s of sel) {
+        s.active = false;
+      }
 
+      reply(message, `Deactivated ${name[1]} in your networking contacts.`);
+      NetworkingSave();
+    });
+
+    return;
+  }
+  if (message.checkRegex(/\/networking policy set/)) {
+    reply(message, `Please, write current networking policy`);
+    setWaitingForValue((msg) =>
+    {
+      data.policy = msg.message.text + "";
+      NetworkingSave();
+    });
     return;
   }
   if (message.checkRegex(/\/networking force/)) {

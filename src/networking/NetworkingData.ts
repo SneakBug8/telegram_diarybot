@@ -5,6 +5,7 @@ export class NetworkingData
   public contacts = new Array<NetworkingStat>();
   public lastname: string = "";
   public lastSend: number = 0;
+  public policy: string = "";
 }
 
 export class NetworkingStat
