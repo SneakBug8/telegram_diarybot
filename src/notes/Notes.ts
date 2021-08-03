@@ -261,24 +261,24 @@ export async function ProcessNotes(message: MessageWrapper)
 
 function properSplit(note: string)
 {
-  const bigparts = note.split("\n\n");
+  const bigparts = note.split(new RegExp("(\n\n)|([.] )"));
   const res = new Array<string>();
 
   let k = "";
-  for (const part of bigparts) {
-    const sentences = part.split(". ");
+  for (const s of bigparts) {
+    //const sentences = part.split(". ");
 
-    for (const s of sentences) {
-      console.log(s);
+    //for (const s of sentences) {
+    if (!s) { continue; }
 
-      if (k.length + s.length > 2048) {
-        res.push(k);
-        k = "";
-      }
-
-      k += s + ". ";
+    if (k.length + s.length > 2048) {
+      res.push(k);
+      k = "";
     }
-    k += "\n\n";
+
+    k += s;
+    // }
+    // k += "\n\n";
   }
 
   if (k.length) {
