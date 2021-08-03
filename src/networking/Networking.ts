@@ -173,11 +173,11 @@ export async function ProcessNetworking(message: MessageWrapper)
       if (!name) { return; }
 
       const stat = new NetworkingStat();
-      stat.name = name[1];
+      stat.name = name;
       data.contacts.push(stat);
       NetworkingSave();
 
-      reply(message, `Added ${name[1]} to your networking contacts.`);
+      reply(message, `Added ${name} to your networking contacts.`);
     });
     return;
   }
@@ -236,18 +236,18 @@ export async function ProcessNetworking(message: MessageWrapper)
 
       if (!name) { return; }
 
-      const suitable = data.contacts.filter((x) => x.name.includes(name[1]));
+      const suitable = data.contacts.filter((x) => x.name.includes(name));
 
       if (suitable.length > 1) {
         return reply(message, `More than one suitable entry: ` + suitable.join(", "));
       }
 
-      const sel = data.contacts.filter((x) => !x.name.includes(name[1]));
+      const sel = data.contacts.filter((x) => !x.name.includes(name));
       for (const s of sel) {
         s.active = false;
       }
 
-      reply(message, `Deactivated ${name[1]} in your networking contacts.`);
+      reply(message, `Deactivated ${name} in your networking contacts.`);
       NetworkingSave();
     });
 

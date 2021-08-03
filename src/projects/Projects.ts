@@ -12,14 +12,13 @@ let data = new ProjectsData();
 const datafilepath = path.resolve(Config.dataPath(), "projects.json");
 
 let lastHourChecked = -1;
-const whattimeofaday = 12;
+const whattimeofaday = 18;
 
 function getKeyboard(): TelegramBot.KeyboardButton[][]
 {
   return [
-    [{ text: "/projects done" }, { text: "/projects add" },],
+    [{ text: "/projects done" }, { text: "/projects add" }, { text: "/projects delete" }],
     [{ text: "/projects list" }, { text: "/projects stats" }],
-
     [{ text: "/exit" }],
   ];
 }
@@ -96,32 +95,33 @@ export async function ProcessProjects(message: MessageWrapper)
     setWaitingForValue(
       `Write the name of the project to be marked.`,
       (msg) =>
-    {
-      const subject = msg.message.text;
+      {
+        const subject = msg.message.text;
 
-      if (!subject) { return reply(message, `Specify which project to mark.`); }
+        if (!subject) { return reply(message, `Specify which project to mark.`); }
 
-      const proj = data.Projects.find((x) => x.subject === subject[1]);
+        const proj = data.Projects.find((x) => x.subject === subject);
 
-      if (!proj) { return reply(message, `No such project.`); }
+        if (!proj) { return reply(message, `No such project.`); }
 
-      const record = new ProjectRecord();
-      record.subject = subject[1];
-      record.datetime = new Date().toString();
+        const record = new ProjectRecord();
+        record.subject = subject;
+        record.datetime = new Date().toString();
 
-      data.Records.push(record);
-      ProjectsSave();
+        data.Records.push(record);
+        ProjectsSave();
 
-      reply(message, `Marked project ${subject[1]} worked on.`);
-    });
+        reply(message, `Marked project ${subject} worked on.`);
+      });
+    return;
   }
   if (message.checkRegex(/\/projects list/)) {
     let res = "";
 
-    const sorted = data.Projects.sort((x, y) => (y.day - x.day) * 24 + (y.time - x.time));
+    const sorted = data.Projects.sort((x, y) => (x.day - y.day) * 24 + (x.time - y.time));
 
     for (const entry of sorted) {
-      res += `${entry.subject}: ${getWeekDays()[entry.day - 1]}, ${entry.time}h`;
+      res += `\n${entry.subject}: ${getWeekDays()[entry.day]}, ${entry.time}h`;
     }
 
     reply(message, res);
@@ -130,24 +130,45 @@ export async function ProcessProjects(message: MessageWrapper)
   if (message.checkRegex(/\/projects add/)) {
     setWaitingForValue(`Write the name of the project to add.`,
       (msg) =>
-    {
-      const subject = msg.message.text;
+      {
+        const subject = msg.message.text;
 
-      if (!subject) { return reply(message, `Specify which project to add.`); }
+        if (!subject) { return reply(message, `Specify which project to add.`); }
 
-      for (let i = 0; i < 7; i++) {
-        const proj = new Project();
-        proj.day = i;
-        proj.time = whattimeofaday;
-        proj.subject = subject[1];
-        data.Projects.push(proj);
-      }
+        for (let i = 0; i < 7; i++) {
+          const proj = new Project();
+          proj.day = i;
+          proj.time = whattimeofaday;
+          proj.subject = subject;
+          data.Projects.push(proj);
+        }
 
-      ProjectsSave();
+        ProjectsSave();
 
-      reply(message, `Added project ${subject[1]}.`);
-      return;
-    });
+        reply(message, `Added project ${subject}.`);
+        return;
+      });
+    return;
+  }
+  if (message.checkRegex(/\/projects delete/)) {
+    setWaitingForValue(`Write the name of the project to remove.`,
+      (msg) =>
+      {
+        const subject = msg.message.text;
+
+        if (!subject) { return reply(message, `Specify which project to add.`); }
+
+        const projs = data.Projects.filter((x) => x.subject !== subject);
+
+        data.Projects = projs;
+
+        ProjectsSave();
+
+        reply(message, `Removed all occurences of project ${subject}.`);
+        return;
+      });
+
+    return;
   }
   if (message.checkRegex(/\/projects/)) {
     reply(message, `Projects module.`);
