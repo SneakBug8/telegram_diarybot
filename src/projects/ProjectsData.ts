@@ -7,7 +7,7 @@ export class ProjectRecord
 export class ProjectsData
 {
   public Projects = new Array<Project>();
-  public Records = new Array<ProjectRecord>();
+  public TotalDays = 0;
 }
 
 export class Project
@@ -15,4 +15,7 @@ export class Project
   public subject = "";
   public time = 0;
   public day = 0;
+
+  public suggestedTimes = 0;
+  public doneTimes = 0;
 }

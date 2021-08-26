@@ -9,7 +9,10 @@ import TelegramBot = require("node-telegram-bot-api");
 import { ProjectRecord, ProjectsData, Project } from "./ProjectsData";
 
 let data = new ProjectsData();
+let Records = new Array<ProjectRecord>();
+
 const datafilepath = path.resolve(Config.dataPath(), "projects.json");
+const recordsfilepath = path.resolve(Config.dataPath(), "projectrecords.json");
 
 let lastHourChecked = -1;
 const whattimeofaday = 18;
@@ -35,10 +38,22 @@ export async function InitProjects()
 
     data = JSON.parse(file.toString()) as ProjectsData;
 
-    console.log(`Read ${data.Projects.length} time entries and ${data.Records.length} existing entries.`);
+    console.log(`Read ${data.Projects.length} time entries.`);
   }
   else {
     console.log(`Created new datafile for projects.`);
+    ProjectsSave();
+  }
+
+  if (fs.existsSync(recordsfilepath)) {
+    const file = fs.readFileSync(recordsfilepath);
+
+    Records = JSON.parse(file.toString()) as ProjectRecord[];
+
+    console.log(`Read ${Records.length} entries.`);
+  }
+  else {
+    console.log(`Created new datafile for project records.`);
     ProjectsSave();
   }
 
@@ -71,8 +86,15 @@ async function ProjectsCycle()
     let msg = `Ваши текущие проекты:`;
 
     for (const en of triggeredentries) {
-      msg += "\n" + en.subject;
+      const y = Records.filter((x) => x.subject === en.subject);
+      msg += "\n" + en.subject + `(${y.length * 100 / y.length}%,` +
+        `last: ${y[Records.length - 1].datetime})`;
+
+      en.suggestedTimes++;
     }
+
+    data.TotalDays++;
+    ProjectsSave();
 
     Server.SendMessage(msg);
   }
@@ -103,15 +125,17 @@ export async function ProcessProjects(message: MessageWrapper)
 
         if (!subject) { return reply(message, `Specify which project to mark.`); }
 
-        const proj = data.Projects.find((x) => x.subject === subject);
+        const proj = data.Projects.find((x) => x.subject.includes(subject));
 
         if (!proj) { return reply(message, `No such project.`); }
+
+        proj.doneTimes++;
 
         const record = new ProjectRecord();
         record.subject = subject;
         record.datetime = new Date().toString();
 
-        data.Records.push(record);
+        Records.push(record);
         ProjectsSave();
 
         reply(message, `Marked project ${subject} worked on.`);
@@ -124,7 +148,31 @@ export async function ProcessProjects(message: MessageWrapper)
     const sorted = data.Projects.sort((x, y) => (x.day - y.day) * 24 + (x.time - y.time));
 
     for (const entry of sorted) {
-      res += `\n${entry.subject}: ${getWeekDays()[entry.day]}, ${entry.time}h`;
+      const y = Records.filter((x) => x.subject === entry.subject);
+      res += `\n${entry.subject} (${y.length * 100 / Records.length}%`;
+      if (y.length) {
+        res += `, last: ${y[y.length - 1].datetime}`;
+      }
+      res += `): ${getWeekDays()[entry.day]}, ${entry.time}h`;
+    }
+
+    reply(message, res);
+    return;
+  }
+  if (message.checkRegex(/\/projects stats/)) {
+    let res = "";
+
+    const sorted = data.Projects.sort((x, y) => (x.day - y.day) * 24 + (x.time - y.time));
+    const subjects = new Array<string>();
+
+    for (const entry of sorted) {
+      if (subjects.includes(entry.subject)) {
+        continue;
+      }
+
+      const y = Records.filter((x) => x.subject === entry.subject);
+      res += `\n${entry.subject} (${y.length}/${data.TotalDays}, ${y.length * 100 / Records.length}%`;
+      subjects.push(entry.subject);
     }
 
     reply(message, res);
@@ -161,7 +209,7 @@ export async function ProcessProjects(message: MessageWrapper)
 
         if (!subject) { return reply(message, `Specify which project to add.`); }
 
-        const projs = data.Projects.filter((x) => x.subject !== subject);
+        const projs = data.Projects.filter((x) => !x.subject.includes(subject));
 
         data.Projects = projs;
 

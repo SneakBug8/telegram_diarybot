@@ -16,8 +16,8 @@ const whattimeofaday = 12;
 function getKeyboard(): TelegramBot.KeyboardButton[][]
 {
   return [
-    [{ text: "/networking done" }, { text: "/networking list" }],
-    [{ text: "/networking add" }, { text: "/networking remove" }],
+    [{ text: "/networking done" }, { text: "/networking init" }, { text: "/networking list" }],
+    [{ text: "/networking add" }, { text: "/networking remove" }, { text: "/networking stats" }],
     [{ text: "/networking policy set" }],
     [{ text: "/exit" }],
   ];
@@ -110,21 +110,20 @@ async function NetworkingSend()
   }
 
   Server.SendMessage(res);
-  data.totalsent++;
   NetworkingSave();
 }
 
 function formatName(contact: NetworkingStat)
 {
-  if (!contact.done) {
-    return `${contact.name} (${contact.done}/${contact.totalsent}, 0%)\n`;
-  }
-  else if (!contact.totalsent) {
-    return `${contact.name} (${contact.done}/${contact.totalsent}, 100%)\n`;
+  let res = `${contact.name}`;
+  if (contact.active) {
+    res += ` (${contact.done}/${contact.initiated}/${contact.totalsent})`;
   }
   else {
-    return `${contact.name} (${contact.done}/${contact.totalsent}, ${contact.done * 100 / contact.totalsent}%)\n`;
+    res += ` (disabled, ${contact.done}/${contact.initiated}/${contact.totalsent})`;
   }
+  res += `\n`;
+  return res;
 }
 
 function RaiseSentForStat(name: string)
@@ -137,6 +136,7 @@ function RaiseSentForStat(name: string)
   }
 
   stat.totalsent++;
+  data.totalsent++;
 
   data.contacts = data.contacts.filter((x) => !x.name.includes(name));
   data.contacts.push(stat);
@@ -152,6 +152,23 @@ function RaiseDoneForStat(name: string)
   }
 
   stat.done++;
+  data.done++;
+
+  data.contacts = data.contacts.filter((x) => !x.name.includes(name));
+  data.contacts.push(stat);
+}
+
+function RaiseInitForStat(name: string)
+{
+  let stat = data.contacts.find((x) => x.name.includes(name));
+
+  if (!stat) {
+    stat = new NetworkingStat();
+    stat.name = name;
+  }
+
+  stat.initiated++;
+  data.initiated++;
 
   data.contacts = data.contacts.filter((x) => !x.name.includes(name));
   data.contacts.push(stat);
@@ -167,18 +184,26 @@ export async function ProcessNetworking(message: MessageWrapper)
   if (message.checkRegex(/\/networking add/)) {
     setWaitingForValue(`Please, write name who to add.`,
       (msg) =>
-    {
-      const name = msg.message.text;
+      {
+        const name = msg.message.text;
 
-      if (!name) { return; }
+        if (!name) { return; }
 
-      const stat = new NetworkingStat();
-      stat.name = name;
-      data.contacts.push(stat);
-      NetworkingSave();
+        const existing = data.contacts.filter((x) => x.name === name);
+        if (existing.length) {
+          existing[0].active = true;
+          reply(message, `Reactivated ${name}.`);
+          NetworkingSave();
+          return;
+        }
 
-      reply(message, `Added ${name} to your networking contacts.`);
-    });
+        const stat = new NetworkingStat();
+        stat.name = name;
+        data.contacts.push(stat);
+        NetworkingSave();
+
+        reply(message, `Added ${name} to your networking contacts.`);
+      });
     return;
   }
   if (message.checkRegex(/\/networking done (.+)/)) {
@@ -191,8 +216,6 @@ export async function ProcessNetworking(message: MessageWrapper)
       return reply(message, `More than one suitable entry: ` + suitable.join(", "));
     }
 
-    data.done++;
-
     RaiseDoneForStat(name[1]);
 
     NetworkingSave();
@@ -202,9 +225,19 @@ export async function ProcessNetworking(message: MessageWrapper)
 
     return;
   }
-  if (message.checkRegex(/\/networking done/)) {
-    data.done++;
+  if (message.checkRegex(/\/networking init/)) {
+    if (data.lastname) {
+      RaiseInitForStat(data.lastname);
+    }
 
+    NetworkingSave();
+
+    reply(message, `Marked interaction with ${data.lastname} (last one) as initiated. `
+      + FullStatistics());
+
+    return;
+  }
+  if (message.checkRegex(/\/networking done/)) {
     if (data.lastname) {
       RaiseDoneForStat(data.lastname);
     }
@@ -219,7 +252,7 @@ export async function ProcessNetworking(message: MessageWrapper)
   if (message.checkRegex(/\/networking list/)) {
     let res = "";
 
-    const sorted = data.contacts.sort((x, y) => (y.totalsent - x.totalsent) + (y.done - x.done));
+    const sorted = data.contacts.sort((x, y) => (y.totalsent - x.totalsent) * 100 + (y.done - x.done));
 
     for (const contact of sorted) {
       res += formatName(contact);
@@ -231,46 +264,47 @@ export async function ProcessNetworking(message: MessageWrapper)
   if (message.checkRegex(/\/networking remove (.+)/)) {
     setWaitingForValue(`Please, write name who to remove.`,
       (msg) =>
-    {
-      const name = msg.message.text;
+      {
+        const name = msg.message.text;
 
-      if (!name) { return; }
+        if (!name) { return; }
 
-      const suitable = data.contacts.filter((x) => x.name.includes(name));
+        const suitable = data.contacts.filter((x) => x.name.includes(name));
 
-      if (suitable.length > 1) {
-        return reply(message, `More than one suitable entry: ` + suitable.join(", "));
-      }
+        if (suitable.length > 1) {
+          return reply(message, `More than one suitable entry: ` + suitable.join(", "));
+        }
 
-      const sel = data.contacts.filter((x) => !x.name.includes(name));
-      for (const s of sel) {
-        s.active = false;
-      }
+        suitable[0].active = false;
 
-      reply(message, `Deactivated ${name} in your networking contacts.`);
-      NetworkingSave();
-    });
+        const sel = data.contacts.filter((x) => !x.name.includes(name));
+        sel.push(suitable[0]);
+
+        data.contacts = sel;
+        reply(message, `Deactivated ${name} in your networking contacts.`);
+        NetworkingSave();
+      });
 
     return;
   }
-  if (message.checkRegex(/\/networking policy set/)) {
+  if (message.checkRegex(/^\/networking policy set/)) {
     setWaitingForValue(`Please, write current networking policy`,
       (msg) =>
-    {
-      data.policy = msg.message.text + "";
-      reply(msg, `Networking policy set`);
+      {
+        data.policy = msg.message.text + "";
+        reply(msg, `Networking policy set`);
 
-      NetworkingSave();
-    });
+        NetworkingSave();
+      });
     return;
   }
-  if (message.checkRegex(/\/networking force/)) {
+  if (message.checkRegex(/^\/networking force/)) {
     NetworkingSend();
 
     return;
   }
-  if (message.checkRegex(/\/networking/)) {
-    reply(message, `Networking module.`);
+  if (message.checkRegex(/^\/networking/) || message.checkRegex(/^\/networking stats/)) {
+    reply(message, `Networking module.\n` + FullStatistics());
 
     return;
   }

@@ -113,6 +113,10 @@ export async function ProcessNotes(message: MessageWrapper)
   }
   if (message.checkRegex(/\/slot reset/)) {
     Slots.setFilename("");
+    if (Slots.getSlot() === NotesRepo.Slots.size - 1) {
+      NotesRepo.Slots.delete(Slots.getSlot());
+    }
+
     return message.reply(`Removed slot #${Slots.getSlot()}`).then((x) => x.deleteAfterTime(1));
   }
   if (message.checkRegex(/\/slots reset/)) {
@@ -300,6 +304,10 @@ export async function LogNote(message: MessageWrapper)
   }*/
 
   // Make sure logging all text is last so that commands are properly executed
+  NotesRepo.TotalWritten += (message.message.text) ? length : 0;
+
   const r = await Logger.Log(message.message.text + "");
   message.reply(r || "✔").then((newmsg) => newmsg.deleteAfterTime(1));
+
+  NotesDataSave();
 }

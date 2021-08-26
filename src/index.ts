@@ -16,6 +16,7 @@ import { InitLearning, ProcessLearning } from "./learning/Learning";
 import { ImageGenProcess } from "./imagegen/ImageGen";
 import { InitNotifier, ProcessNotifier } from "./notifier/Notifier";
 import { InitProjects, ProcessProjects } from "./projects/Projects";
+import { InitInvestment, ProcessInvestments } from "./investment/Investment";
 
 function sleep(ms: number)
 {
@@ -43,8 +44,16 @@ export function defaultKeyboard(): TelegramBot.KeyboardButton[][]
     return [
         [{ text: "/slots" }, { text: "/slot prev" }, { text: "/slot next" }],
         [{ text: "/logs" }, { text: "/reset" }, { text: "/networking" }],
-        [{ text: "/publish" }, { text: "/load" }, { text: "/timer" }],
-        [{ text: "/projects" }, { text: "/learning" }, { text: "/notify" }],
+        [{ text: "/publish" }, { text: "/load" }, { text: "/investment" }],
+        [{ text: "/projects" }, { text: "/learning" }, { text: "/extra" }],
+    ];
+}
+
+export function extraKeyboard(): TelegramBot.KeyboardButton[][]
+{
+    return [
+        [{ text: "/notify" }, { text: "/timer" }],
+        [{ text: "/exit" }, ],
     ];
 }
 
@@ -61,6 +70,7 @@ class App
         InitLearning();
         InitNotifier();
         InitProjects();
+        InitInvestment();
 
         console.log(Config.projectPath());
 
@@ -118,6 +128,10 @@ class App
                 return message.reply("Main module.");
             }
 
+            if (message.checkRegex(/\/extra/)) {
+                return Server.SendMessage("Extra modules", extraKeyboard());
+            }
+
             if (process.env.networkingenabled === "yes") {
                 const m2 = await ProcessNetworking(message);
                 if (m2 !== false) {
@@ -125,47 +139,20 @@ class App
                 }
             }
 
-            if (process.env.timersenabled === "yes") {
-                const m3 = await ProcessTimer(message);
-                if (m3 !== false) {
-                    return;
-                }
-            }
+            const listeners = [
+                ProcessInvestments,
+                ProcessNotes,
+                ProcessLearning,
+                ProcessProjects,
+                ProcessNotifier,
+                ProcessTimer,
+                ProcessEval,
+                ImageGenProcess
+            ];
 
-            const m7 = await ProcessNotifier(message);
-            if (m7 !== false) {
-                return;
-            }
-
-            const m8 = await ProcessProjects(message);
-            if (m8 !== false) {
-                return;
-            }
-
-            if (process.env.notesenabled === "yes") {
-                const m1 = await ProcessNotes(message);
-                if (m1 !== false) {
-                    return;
-                }
-            }
-
-            if (process.env.evalenabled === "yes") {
-                const m4 = await ProcessEval(message);
-                if (m4 !== false) {
-                    return;
-                }
-            }
-
-            if (process.env.imagegen === "yes") {
-                const m6 = await ImageGenProcess(message);
-                if (m6 !== false) {
-                    return;
-                }
-            }
-
-            if (process.env.learning === "yes") {
-                const m5 = await ProcessLearning(message);
-                if (m5 !== false) {
+            for (const listener of listeners) {
+                const r = await listener(message);
+                if (r !== false) {
                     return;
                 }
             }

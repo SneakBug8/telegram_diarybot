@@ -152,7 +152,7 @@ export async function ProcessLearning(message: MessageWrapper)
     const sorted = data.Timetable.sort((x, y) => (y.day - x.day) * 1000 + (y.time - x.time));
 
     for (const entry of sorted) {
-      res += `${entry.subject}: ${getWeekDays()[entry.day - 1]}, ${entry.time}h`;
+      res += `${entry.subject}: ${getWeekDays()[entry.day - 1]}, ${entry.time}h\n`;
     }
 
     reply(message, res);
