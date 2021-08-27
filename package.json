@@ -7,6 +7,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "archiver": "^5.3.0",
     "canvas": "^2.8.0",
     "dateformat": "^3.0.3",
     "dotenv": "^7.0.0",
@@ -20,6 +21,7 @@
     "dev": "nodemon --exec \"ts-node src/index.ts\" -V -w src -e ts"
   },
   "devDependencies": {
+    "@types/archiver": "^5.1.1",
     "@types/dateformat": "^3.0.0",
     "@types/dotenv": "^6.1.1",
     "@types/fs-extra": "^8.0.0",

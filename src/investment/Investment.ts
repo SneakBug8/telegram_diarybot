@@ -75,8 +75,7 @@ async function InvestmentSend()
   data.days++;
 
   if (data.delta >= 0) {
-    await Server.SendMessage(`Не забудь инвестировать! Необходимо довложить: ${data.delta}` +
-      `Цель: ${ data.investperday } в день, ${ data.targetpercentage } % годовых. Ты уже скопил: ${data.balance}`);
+    await Server.SendMessage(`Не забудь инвестировать!` + FullStatistics());
   }
 
   InvestmentSave();
@@ -84,8 +83,13 @@ async function InvestmentSend()
 
 function FullStatistics()
 {
-  return `Необходимо довложить: ${data.delta}. ` +
-  `Цель: ${ data.investperday } в день, ${ data.targetpercentage }% годовых. Ты уже скопил: ${data.balance - data.delta}`;
+  let res = "";
+
+  if (data.delta <= 0) {
+    res += `Необходимо довложить: ${data.delta}. `;
+  }
+  return res +
+    `Цель: ${data.investperday} в день, ${data.targetpercentage}% годовых. Ты уже скопил: ${data.balance - data.delta}`;
 }
 
 export async function ProcessInvestments(message: MessageWrapper)

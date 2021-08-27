@@ -17,14 +17,7 @@ import { ImageGenProcess } from "./imagegen/ImageGen";
 import { InitNotifier, ProcessNotifier } from "./notifier/Notifier";
 import { InitProjects, ProcessProjects } from "./projects/Projects";
 import { InitInvestment, ProcessInvestments } from "./investment/Investment";
-
-function sleep(ms: number)
-{
-    return new Promise((resolve) =>
-    {
-        setTimeout(resolve, ms);
-    });
-}
+import { InitBackup, ProcessBackup } from "./backup/BackupService";
 
 let waitingCallback: ((message: MessageWrapper) => any) | null = null;
 
@@ -71,6 +64,7 @@ class App
         InitNotifier();
         InitProjects();
         InitInvestment();
+        InitBackup();
 
         console.log(Config.projectPath());
 
@@ -144,6 +138,7 @@ class App
                 ProcessNotes,
                 ProcessLearning,
                 ProcessProjects,
+                ProcessBackup,
                 ProcessNotifier,
                 ProcessTimer,
                 ProcessEval,

@@ -40,15 +40,11 @@ export async function InitNetworking()
     data.contacts = data.contacts || [];
 
     let edited = false;
-    for (let i = 0; i < data.contacts.length; i++) {
-      if (typeof data.contacts[i] === "string") {
-        const name = data.contacts[i] as any as string;
-        data.contacts[i] = new NetworkingStat();
-        data.contacts[i].name = name;
 
-        edited = true;
-      }
-    }
+    /*data.done = 0; data.initiated = 0; data.totalsent = 0;
+    for (const contact of data.contacts) {
+      data.done += contact.done; data.initiated += contact.initiated; data.totalsent += contact.totalsent;
+    }*/
 
     if (edited) {
       NetworkingSave();
@@ -113,19 +109,6 @@ async function NetworkingSend()
   NetworkingSave();
 }
 
-function formatName(contact: NetworkingStat)
-{
-  let res = `${contact.name}`;
-  if (contact.active) {
-    res += ` (${contact.done}/${contact.initiated}/${contact.totalsent})`;
-  }
-  else {
-    res += ` (disabled, ${contact.done}/${contact.initiated}/${contact.totalsent})`;
-  }
-  res += `\n`;
-  return res;
-}
-
 function RaiseSentForStat(name: string)
 {
   let stat = data.contacts.find((x) => x.name.includes(name));
@@ -174,9 +157,24 @@ function RaiseInitForStat(name: string)
   data.contacts.push(stat);
 }
 
+function formatName(contact: NetworkingStat)
+{
+  let res = `${contact.name}`;
+  if (contact.active) {
+    res += ` (d${contact.done} / i${contact.initiated} / t${contact.totalsent})`;
+  }
+  else {
+    res += ` (disabled, d${contact.done} / i${contact.initiated} / t${contact.totalsent})`;
+  }
+  res += `\n`;
+  return res;
+}
+
 function FullStatistics()
 {
-  return `Current statistics: ${data.done} / ${data.totalsent}(${Math.round(data.done * 100 / data.totalsent)}%)`;
+  return `Current statistics: `
+    + `d${data.done} / i${data.initiated} / t${data.totalsent} `
+    + `(d${ Math.round(data.done * 100 / data.totalsent)}% / i${ Math.round(data.initiated * 100 / data.totalsent) }%)`;
 }
 
 export async function ProcessNetworking(message: MessageWrapper)
@@ -252,7 +250,19 @@ export async function ProcessNetworking(message: MessageWrapper)
   if (message.checkRegex(/\/networking list/)) {
     let res = "";
 
-    const sorted = data.contacts.sort((x, y) => (y.totalsent - x.totalsent) * 100 + (y.done - x.done));
+    const sorted = data.contacts.sort((x, y) =>
+    {
+      if (y.active !== x.active) {
+        return (y.active) ? 1 : -1;
+      }
+      if (y.totalsent !== x.totalsent) {
+        return y.totalsent - x.totalsent;
+      }
+      if (y.initiated !== x.initiated) {
+        return y.initiated - x.initiated;
+      }
+      return y.done - x.done;
+    });
 
     for (const contact of sorted) {
       res += formatName(contact);
