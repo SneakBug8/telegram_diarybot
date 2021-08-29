@@ -45,8 +45,8 @@ export function defaultKeyboard(): TelegramBot.KeyboardButton[][]
 export function extraKeyboard(): TelegramBot.KeyboardButton[][]
 {
     return [
-        [{ text: "/notify" }, { text: "/timer" }],
-        [{ text: "/exit" }, ],
+        [{ text: "/notify" }, { text: "/timer" }, { text: "/networking policy set" }],
+        [{ text: "/exit" },],
     ];
 }
 
@@ -74,11 +74,11 @@ class App
             const time = message.getPrintableTime();
             console.log(`[${time}] ${msg.text}`);
 
-            if (message.checkRegex(/\/id/)) {
+            if (message.checkRegex(/^\/id/)) {
                 message.reply(`Current chat id: ${message.message.chat.id}`); return;
             }
 
-            if (message.checkRegex(/\/auth/)) {
+            if (message.checkRegex(/^\/auth/)) {
                 AuthService.ResetAuth();
             }
 
@@ -112,8 +112,9 @@ class App
                     waitingCallback = null; return;
                 }
 
-                await waitingCallback.call(this, message);
+                const callback = waitingCallback;
                 waitingCallback = null;
+                await callback.call(this, message);
 
                 return true;
             }

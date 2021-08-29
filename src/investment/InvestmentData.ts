@@ -6,4 +6,5 @@ export class InvestmentData
   public investperday = 0;
   public targetpercentage = 0;
   public days = 0;
+  public profit = 0;
 }

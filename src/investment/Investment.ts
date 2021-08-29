@@ -10,8 +10,7 @@ import TelegramBot = require("node-telegram-bot-api");
 let data = new InvestmentData();
 
 const datafilepath = path.resolve(Config.dataPath(), "investment.json");
-const howmanyperday = 1;
-const whattimeofaday = 12;
+const whattimeofaday = 18;
 
 function getKeyboard(): TelegramBot.KeyboardButton[][]
 {
@@ -38,6 +37,7 @@ export async function InitInvestment()
     data.delta = data.delta || 0;
     data.investperday = data.investperday || 0;
     data.targetpercentage = data.targetpercentage || 0;
+    data.profit = data.profit || 0;
 
     console.log(`Read investment data.`);
   }
@@ -71,11 +71,15 @@ async function InvestmentSend()
   data.lastSend = now.getDay();
 
   data.delta += data.investperday;
-  data.balance *= Math.pow(data.targetpercentage, 1 / 365) / 100 + 1;
+
+  data.profit += data.balance * data.targetpercentage / 100 / 365;
+  data.balance *= 1 + (data.targetpercentage / 100 / 365);
   data.days++;
 
   if (data.delta >= 0) {
-    await Server.SendMessage(`Не забудь инвестировать!` + FullStatistics());
+    await Server.SendMessage(`Время инвестировать!\n` + FullStatistics());
+  } else {
+    await Server.SendMessage(`Текущая статистика по инвестициям.\n` + FullStatistics());
   }
 
   InvestmentSave();
@@ -85,11 +89,15 @@ function FullStatistics()
 {
   let res = "";
 
-  if (data.delta <= 0) {
-    res += `Необходимо довложить: ${data.delta}. `;
+  if (data.delta >= 0) {
+    res += `Необходимо довложить: ${data.delta}\n`;
+  }
+  else {
+    res += `Необходимо вложить через ${-data.delta / data.investperday} дней\n`;
   }
   return res +
-    `Цель: ${data.investperday} в день, ${data.targetpercentage}% годовых. Ты уже скопил: ${data.balance - data.delta}`;
+    `Цель: ${data.investperday} в день, ${data.targetpercentage}% годовых\n` +
+    `Ты уже скопил: ${ data.balance }. Прибыль: ${data.profit}.`;
 }
 
 export async function ProcessInvestments(message: MessageWrapper)
@@ -104,6 +112,7 @@ export async function ProcessInvestments(message: MessageWrapper)
         if (!amttext || !amt) { return; }
 
         data.delta -= amt;
+        data.balance += amt;
         InvestmentSave();
 
         reply(message, `Invested ${amt}.`);

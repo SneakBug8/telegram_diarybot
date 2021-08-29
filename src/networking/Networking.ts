@@ -18,7 +18,7 @@ function getKeyboard(): TelegramBot.KeyboardButton[][]
   return [
     [{ text: "/networking done" }, { text: "/networking init" }, { text: "/networking list" }],
     [{ text: "/networking add" }, { text: "/networking remove" }, { text: "/networking stats" }],
-    [{ text: "/networking policy set" }],
+    [{ text: "/networking done (...)" }, { text: "/networking init (...)" }, { text: "/networking send (...)" }],
     [{ text: "/exit" }],
   ];
 }
@@ -109,52 +109,54 @@ async function NetworkingSend()
   NetworkingSave();
 }
 
+function findStat(name: string)
+{
+  const stats = data.contacts.filter((x) => x.name.toLowerCase().includes(name));
+
+  if (!stats.length) {
+    return `Noone named ${name} in the contacts list`;
+  }
+  if (stats.length > 1) {
+    return `More than one suitable entry for ${name}.`;
+  }
+
+  return stats[0];
+}
+
 function RaiseSentForStat(name: string)
 {
-  let stat = data.contacts.find((x) => x.name.includes(name));
-
-  if (!stat) {
-    stat = new NetworkingStat();
-    stat.name = name;
-  }
+  const stat = findStat(name);
+  if (typeof stat === "string") { return stat; }
 
   stat.totalsent++;
   data.totalsent++;
 
-  data.contacts = data.contacts.filter((x) => !x.name.includes(name));
-  data.contacts.push(stat);
+  // data.contacts = data.contacts.filter((x) => !x.name.includes(name));
+  // data.contacts.push(stat);
 }
 
 function RaiseDoneForStat(name: string)
 {
-  let stat = data.contacts.find((x) => x.name.includes(name));
-
-  if (!stat) {
-    stat = new NetworkingStat();
-    stat.name = name;
-  }
+  const stat = findStat(name);
+  if (typeof stat === "string") { return stat; }
 
   stat.done++;
   data.done++;
 
-  data.contacts = data.contacts.filter((x) => !x.name.includes(name));
-  data.contacts.push(stat);
+  // data.contacts = data.contacts.filter((x) => !x.name.includes(name));
+  // data.contacts.push(stat);
 }
 
 function RaiseInitForStat(name: string)
 {
-  let stat = data.contacts.find((x) => x.name.includes(name));
-
-  if (!stat) {
-    stat = new NetworkingStat();
-    stat.name = name;
-  }
+  const stat = findStat(name);
+  if (typeof stat === "string") { return stat; }
 
   stat.initiated++;
   data.initiated++;
 
-  data.contacts = data.contacts.filter((x) => !x.name.includes(name));
-  data.contacts.push(stat);
+  // data.contacts = data.contacts.filter((x) => !x.name.includes(name));
+  // data.contacts.push(stat);
 }
 
 function formatName(contact: NetworkingStat)
@@ -174,7 +176,7 @@ function FullStatistics()
 {
   return `Current statistics: `
     + `d${data.done} / i${data.initiated} / t${data.totalsent} `
-    + `(d${ Math.round(data.done * 100 / data.totalsent)}% / i${ Math.round(data.initiated * 100 / data.totalsent) }%)`;
+    + `(d${Math.round(data.done * 100 / data.totalsent)}% / i${Math.round(data.initiated * 100 / data.totalsent)}%)`;
 }
 
 export async function ProcessNetworking(message: MessageWrapper)
@@ -187,7 +189,7 @@ export async function ProcessNetworking(message: MessageWrapper)
 
         if (!name) { return; }
 
-        const existing = data.contacts.filter((x) => x.name === name);
+        const existing = data.contacts.filter((x) => x.name.toLowerCase() === name);
         if (existing.length) {
           existing[0].active = true;
           reply(message, `Reactivated ${name}.`);
@@ -204,28 +206,14 @@ export async function ProcessNetworking(message: MessageWrapper)
       });
     return;
   }
-  if (message.checkRegex(/\/networking done (.+)/)) {
-    const name = message.captureRegex(/\/networking done (.+)/);
-    if (!name) { return; }
-
-    const suitable = data.contacts.filter((x) => x.name.includes(name[1]));
-
-    if (suitable.length > 1) {
-      return reply(message, `More than one suitable entry: ` + suitable.join(", "));
+  if (message.checkRegex(/\/networking init$/)) {
+    if (!data.lastname) {
+      return reply(message, `No last user to mark initiated.`);
     }
 
-    RaiseDoneForStat(name[1]);
-
-    NetworkingSave();
-
-    reply(message, `Marked interaction with ${name[1]} as done. `
-      + FullStatistics());
-
-    return;
-  }
-  if (message.checkRegex(/\/networking init/)) {
-    if (data.lastname) {
-      RaiseInitForStat(data.lastname);
+    const res = RaiseInitForStat(data.lastname);
+    if (typeof res === "string") {
+      return reply(message, res);
     }
 
     NetworkingSave();
@@ -235,9 +223,14 @@ export async function ProcessNetworking(message: MessageWrapper)
 
     return;
   }
-  if (message.checkRegex(/\/networking done/)) {
-    if (data.lastname) {
-      RaiseDoneForStat(data.lastname);
+  if (message.checkRegex(/\/networking done$/)) {
+    if (!data.lastname) {
+      return reply(message, `No last user to mark done.`);
+    }
+
+    const res = RaiseDoneForStat(data.lastname);
+    if (typeof res === "string") {
+      return reply(message, res);
     }
 
     NetworkingSave();
@@ -271,7 +264,61 @@ export async function ProcessNetworking(message: MessageWrapper)
     reply(message, res);
     return;
   }
-  if (message.checkRegex(/\/networking remove (.+)/)) {
+  if (message.checkRegex(/^\/networking done \(...\)/)) {
+    setWaitingForValue(`Please, write name who to mark as done.`,
+      (msg) =>
+      {
+        const name = msg.message.text;
+
+        if (!name) { return; }
+
+        const res = RaiseDoneForStat(name);
+        if (typeof res === "string") {
+          return reply(message, res);
+        }
+
+        NetworkingSave();
+        reply(message, `Marked interaction with ${name} as done.\n` + FullStatistics());
+      });
+    return;
+  }
+  if (message.checkRegex(/^\/networking init \(...\)/)) {
+    setWaitingForValue(`Please, write name who to mark as initiated.`,
+      (msg) =>
+      {
+        const name = msg.message.text;
+
+        if (!name) { return; }
+
+        const res = RaiseInitForStat(name);
+        if (typeof res === "string") {
+          return reply(message, res);
+        }
+
+        NetworkingSave();
+        reply(message, `Marked interaction with ${name} as initiated.\n` + FullStatistics());
+      });
+    return;
+  }
+  if (message.checkRegex(/^\/networking send \(...\)/)) {
+    setWaitingForValue(`Please, write name who to mark as sent.`,
+      (msg) =>
+      {
+        const name = msg.message.text;
+
+        if (!name) { return; }
+
+        const res = RaiseSentForStat(name);
+        if (typeof res === "string") {
+          return reply(message, res);
+        }
+
+        NetworkingSave();
+        reply(message, `Created non-regular interaction with ${name}.\n` + FullStatistics());
+      });
+    return;
+  }
+  if (message.checkRegex(/^\/networking remove/)) {
     setWaitingForValue(`Please, write name who to remove.`,
       (msg) =>
       {
@@ -279,7 +326,7 @@ export async function ProcessNetworking(message: MessageWrapper)
 
         if (!name) { return; }
 
-        const suitable = data.contacts.filter((x) => x.name.includes(name));
+        const suitable = data.contacts.filter((x) => x.name.toLowerCase().includes(name));
 
         if (suitable.length > 1) {
           return reply(message, `More than one suitable entry: ` + suitable.join(", "));

@@ -14,7 +14,7 @@ export class Project
 {
   public subject = "";
   public time = 0;
-  public day = 0;
+  public days: number[] = [];
 
   public suggestedTimes = 0;
   public doneTimes = 0;

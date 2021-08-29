@@ -304,7 +304,7 @@ export async function LogNote(message: MessageWrapper)
   }*/
 
   // Make sure logging all text is last so that commands are properly executed
-  NotesRepo.TotalWritten += (message.message.text) ? length : 0;
+  NotesRepo.TotalWritten += (message.message.text) ? message.message.text.length : 0;
 
   const r = await Logger.Log(message.message.text + "");
   message.reply(r || "✔").then((newmsg) => newmsg.deleteAfterTime(1));
