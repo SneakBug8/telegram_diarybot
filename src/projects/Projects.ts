@@ -61,7 +61,7 @@ async function ProjectsCycle()
   if (lastHourChecked !== now.getHours()) {
     for (const entry of data.Projects) {
       // console.log(`hours: ${entry.time}, now: ${now.getHours()}, days: ${entry.days}, now: ${now.getDay() % 7}`);
-      if (entry.time === now.getHours() && entry.days.find((x) => x === now.getDay() % 7)) {
+      if (entry.time === now.getHours() && entry.days.find((x) => x === now.getDay() - 1)) {
         triggeredentries.push(entry);
       }
     }
@@ -69,7 +69,7 @@ async function ProjectsCycle()
 
   if (triggeredentries.length) {
 
-    let msg = `Ваши текущие проекты:`;
+    let msg = `Ваши текущие проекты ${getWeekDays()[now.getDay() % 7]}:`;
 
     for (const en of triggeredentries) {
       msg += "\n" + en.subject + `(${en.doneTimes}/${en.suggestedTimes}%)`;
@@ -145,7 +145,7 @@ export async function ProcessProjects(message: MessageWrapper)
 
         if (!subject) { return reply(message, `Specify which project to mark.`); }
 
-        const proj = data.Projects.find((x) => x.subject.toLowerCase().includes(subject));
+        const proj = data.Projects.find((x) => x.subject.toLowerCase().includes(subject.toLowerCase()));
 
         if (!proj) { return reply(message, `No such project.`); }
 

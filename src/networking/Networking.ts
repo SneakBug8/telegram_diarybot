@@ -111,7 +111,7 @@ async function NetworkingSend()
 
 function findStat(name: string)
 {
-  const stats = data.contacts.filter((x) => x.name.toLowerCase().includes(name));
+  const stats = data.contacts.filter((x) => x.name.toLowerCase().includes(name.toLowerCase()));
 
   if (!stats.length) {
     return `Noone named ${name} in the contacts list`;
@@ -326,10 +326,13 @@ export async function ProcessNetworking(message: MessageWrapper)
 
         if (!name) { return; }
 
-        const suitable = data.contacts.filter((x) => x.name.toLowerCase().includes(name));
+        const suitable = data.contacts.filter((x) => x.name.toLowerCase().includes(name.toLowerCase()));
 
         if (suitable.length > 1) {
           return reply(message, `More than one suitable entry: ` + suitable.join(", "));
+        }
+        else if (suitable.length < 1) {
+          return reply(message, `No suitable entries.`);
         }
 
         suitable[0].active = false;

@@ -93,11 +93,11 @@ function FullStatistics()
     res += `Необходимо довложить: ${data.delta}\n`;
   }
   else {
-    res += `Необходимо вложить через ${-data.delta / data.investperday} дней\n`;
+    res += `Необходимо вложить через ${Math.round(-data.delta / data.investperday)} дней\n`;
   }
   return res +
     `Цель: ${data.investperday} в день, ${data.targetpercentage}% годовых\n` +
-    `Ты уже скопил: ${ data.balance }. Прибыль: ${data.profit}.`;
+    `Ты уже скопил: ${Math.round(data.balance)}. Прибыль: ${data.profit.toFixed(2)}.`;
 }
 
 export async function ProcessInvestments(message: MessageWrapper)

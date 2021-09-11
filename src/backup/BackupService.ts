@@ -45,7 +45,7 @@ async function BackupCycle()
 {
   const now = new Date(Date.now());
 
-  if (Math.abs(data.lastSend - now.getDay()) > daysbetweenbackups) {
+  if (Math.abs(data.lastSend - now.getDate()) > daysbetweenbackups) {
     console.log(now + " backup time");
     CreateBackup();
   }
