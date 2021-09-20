@@ -38,6 +38,7 @@ export async function InitNetworking()
     data.totalsent = data.totalsent || 0;
     data.lastname = data.lastname || "";
     data.contacts = data.contacts || [];
+    data.totaldays = data.totaldays || data.totalsent || 0;
 
     let edited = false;
 
@@ -172,11 +173,18 @@ function formatName(contact: NetworkingStat)
   return res;
 }
 
-function FullStatistics()
+function ShortStatistics()
 {
   return `Current statistics: `
     + `d${data.done} / i${data.initiated} / t${data.totalsent} `
     + `(d${Math.round(data.done * 100 / data.totalsent)}% / i${Math.round(data.initiated * 100 / data.totalsent)}%)`;
+}
+
+function FullStatistics()
+{
+  return ShortStatistics() +
+    `\nAverage contacts per day: ${data.initiated / data.totaldays}` +
+    `\nAverage answers per day: ${data.done / data.totaldays}`;
 }
 
 export async function ProcessNetworking(message: MessageWrapper)
@@ -219,7 +227,7 @@ export async function ProcessNetworking(message: MessageWrapper)
     NetworkingSave();
 
     reply(message, `Marked interaction with ${data.lastname} (last one) as initiated. `
-      + FullStatistics());
+      + ShortStatistics());
 
     return;
   }
@@ -236,7 +244,7 @@ export async function ProcessNetworking(message: MessageWrapper)
     NetworkingSave();
 
     reply(message, `Marked interaction with ${data.lastname} (last one) as done. `
-      + FullStatistics());
+      + ShortStatistics());
 
     return;
   }
@@ -261,6 +269,11 @@ export async function ProcessNetworking(message: MessageWrapper)
       res += formatName(contact);
     }
 
+    const active = data.contacts.filter((x) => x.active);
+
+    res += `---\n`;
+    res += `Average cycle ${active.length / howmanyperday} days.`;
+
     reply(message, res);
     return;
   }
@@ -278,7 +291,7 @@ export async function ProcessNetworking(message: MessageWrapper)
         }
 
         NetworkingSave();
-        reply(message, `Marked interaction with ${name} as done.\n` + FullStatistics());
+        reply(message, `Marked interaction with ${name} as done.\n` + ShortStatistics());
       });
     return;
   }
@@ -296,7 +309,7 @@ export async function ProcessNetworking(message: MessageWrapper)
         }
 
         NetworkingSave();
-        reply(message, `Marked interaction with ${name} as initiated.\n` + FullStatistics());
+        reply(message, `Marked interaction with ${name} as initiated.\n` + ShortStatistics());
       });
     return;
   }
@@ -314,7 +327,7 @@ export async function ProcessNetworking(message: MessageWrapper)
         }
 
         NetworkingSave();
-        reply(message, `Created non-regular interaction with ${name}.\n` + FullStatistics());
+        reply(message, `Created non-regular interaction with ${name}.\n` + ShortStatistics());
       });
     return;
   }
@@ -363,9 +376,13 @@ export async function ProcessNetworking(message: MessageWrapper)
 
     return;
   }
-  if (message.checkRegex(/^\/networking/) || message.checkRegex(/^\/networking stats/)) {
-    reply(message, `Networking module.\n` + FullStatistics());
+  if (message.checkRegex(/^\/networking stats/)) {
+    reply(message, FullStatistics());
 
+    return;
+  }
+  if (message.checkRegex(/^\/networking/)) {
+    reply(message, `Networking module.\n` + ShortStatistics());
     return;
   }
   return false;

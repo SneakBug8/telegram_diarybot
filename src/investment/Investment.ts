@@ -6,6 +6,7 @@ import { Config } from "../config";
 import { Server, setWaitingForValue } from "..";
 import { InvestmentData } from "./InvestmentData";
 import TelegramBot = require("node-telegram-bot-api");
+import { shortNum } from "../util/EqualString";
 
 let data = new InvestmentData();
 
@@ -38,6 +39,7 @@ export async function InitInvestment()
     data.investperday = data.investperday || 0;
     data.targetpercentage = data.targetpercentage || 0;
     data.profit = data.profit || 0;
+    data.lastdaychange = data.lastdaychange || 0;
 
     console.log(`Read investment data.`);
   }
@@ -72,20 +74,23 @@ async function InvestmentSend()
 
   data.delta += data.investperday;
 
+  const prevprofit = data.profit;
+
   data.profit += data.balance * data.targetpercentage / 100 / 365;
   data.balance *= 1 + (data.targetpercentage / 100 / 365);
   data.days++;
+  data.lastdaychange = data.profit - prevprofit;
 
   if (data.delta >= 0) {
-    await Server.SendMessage(`Время инвестировать!\n` + FullStatistics());
+    await Server.SendMessage(`Время инвестировать!\n` + ShortStatistics());
   } else {
-    await Server.SendMessage(`Текущая статистика по инвестициям.\n` + FullStatistics());
+    await Server.SendMessage(`Текущая статистика по инвестициям.\n` + ShortStatistics());
   }
 
   InvestmentSave();
 }
 
-function FullStatistics()
+function ShortStatistics()
 {
   let res = "";
 
@@ -97,7 +102,14 @@ function FullStatistics()
   }
   return res +
     `Цель: ${data.investperday} в день, ${data.targetpercentage}% годовых\n` +
-    `Ты уже скопил: ${Math.round(data.balance)}. Прибыль: ${data.profit.toFixed(2)}.`;
+    `Ты уже скопил: ${Math.round(data.balance)}. Прибыль: ${data.profit.toFixed(2)}` +
+    ` (${data.lastdaychange.toFixed(2)}).`;
+}
+
+function FullStatistics()
+{
+  return ShortStatistics() +
+    `\nAverage profit per day: ${shortNum(data.profit / data.days)}`;
 }
 
 export async function ProcessInvestments(message: MessageWrapper)
@@ -151,9 +163,13 @@ export async function ProcessInvestments(message: MessageWrapper)
       });
     return;
   }
-  if (message.checkRegex(/\/investment/) || message.checkRegex(/\/investment stats/)) {
-    console.log("investments");
+  if (message.checkRegex(/\/investment stats/)) {
     reply(message, FullStatistics());
+
+    return;
+  }
+  if (message.checkRegex(/\/investment/)) {
+    reply(message, ShortStatistics());
 
     return;
   }

@@ -7,6 +7,7 @@ import { Server, setWaitingForValue } from "..";
 import dateFormat = require("dateformat");
 import TelegramBot = require("node-telegram-bot-api");
 import { ProjectRecord, ProjectsData, Project } from "./ProjectsData";
+import { StringIncludes } from "../util/EqualString";
 
 let data = new ProjectsData();
 const datafilepath = path.resolve(Config.dataPath(), "projects.json");
@@ -163,7 +164,7 @@ export async function ProcessProjects(message: MessageWrapper)
     const sorted = data.Projects.sort(projectsSort);
 
     for (const entry of sorted) {
-      res += `\n${entry.subject} -  ${entry.time}h, ${getProjectDaysFormatted(entry)}.`;
+      res += `\n${entry.subject} - ${entry.time}h, ${getProjectDaysFormatted(entry)}.`;
     }
 
     reply(message, res);
@@ -181,7 +182,8 @@ export async function ProcessProjects(message: MessageWrapper)
       }
 
       res += `\n${entry.subject}` +
-        ` (${entry.doneTimes} / ${entry.suggestedTimes}, ${entry.doneTimes * 100 / entry.suggestedTimes}%)`;
+        ` (${entry.doneTimes} / ${entry.suggestedTimes}, ` +
+        `${ (entry.doneTimes * 100 / entry.suggestedTimes).toFixed(2) }%)`;
       subjects.push(entry.subject);
     }
 
@@ -237,7 +239,7 @@ export async function ProcessProjects(message: MessageWrapper)
 
         if (!subject) { return reply(message, `Specify which project to add day to.`); }
 
-        const proj = data.Projects.find((x) => x.subject.includes(subject));
+        const proj = data.Projects.find((x) => x.subject.includes(subject.toLowerCase()));
 
         if (!proj) { return reply(message, `No such project.`); }
 
@@ -274,7 +276,7 @@ export async function ProcessProjects(message: MessageWrapper)
 
         if (!subject) { return reply(message, `Specify which project to remove day from.`); }
 
-        const proj = data.Projects.find((x) => x.subject.includes(subject));
+        const proj = data.Projects.find((x) => StringIncludes(x.subject, subject));
 
         if (!proj) { return reply(message, `No such project.`); }
 
@@ -288,7 +290,7 @@ export async function ProcessProjects(message: MessageWrapper)
               return reply(m, "Project days must be in range [0,6].");
             }
 
-            if (!existingday) {
+            if (existingday === undefined) {
               return reply(m, "Project doesn't have this day in schedule.");
             }
 
@@ -310,7 +312,7 @@ export async function ProcessProjects(message: MessageWrapper)
 
         if (!subject) { return reply(message, `Specify which project to remove day from.`); }
 
-        const proj = data.Projects.find((x) => x.subject.includes(subject));
+        const proj = data.Projects.find((x) => StringIncludes(x.subject, subject));
 
         if (!proj) { return reply(message, `No such project.`); }
 

@@ -7,6 +7,7 @@ export class NetworkingData
   public lastname: string = "";
   public lastSend: number = 0;
   public policy: string = "";
+  public totaldays = 0;
 }
 
 export class NetworkingStat
