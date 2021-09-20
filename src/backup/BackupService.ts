@@ -32,7 +32,7 @@ export async function InitBackup()
     BackupSave();
   }
 
-  setInterval(BackupCycle, 75 * 60 * 1000);
+  setInterval(BackupCycle, 90 * 60 * 1000);
 }
 
 export async function BackupSave()
@@ -54,7 +54,7 @@ async function BackupCycle()
 async function CreateBackup()
 {
   const now = new Date(Date.now());
-  data.lastSend = now.getDay();
+  data.lastSend = now.getDate();
 
   await MakeBackupArchive();
 
