@@ -6,6 +6,7 @@ import { Config } from "../config";
 import { Server, setWaitingForValue } from "..";
 import { NetworkingData, NetworkingStat } from "./NetworkingData";
 import TelegramBot = require("node-telegram-bot-api");
+import { shortNum } from "../util/EqualString";
 
 let data = new NetworkingData();
 
@@ -183,8 +184,8 @@ function ShortStatistics()
 function FullStatistics()
 {
   return ShortStatistics() +
-    `\nAverage contacts per day: ${data.initiated / data.totaldays}` +
-    `\nAverage answers per day: ${data.done / data.totaldays}`;
+    `\nAverage contacts per day: ${shortNum(data.initiated / data.totaldays)}` +
+    `\nAverage answers per day: ${shortNum(data.done / data.totaldays)}`;
 }
 
 export async function ProcessNetworking(message: MessageWrapper)

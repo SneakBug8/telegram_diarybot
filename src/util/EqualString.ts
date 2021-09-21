@@ -4,5 +4,5 @@ export function StringIncludes(where: string, what: string) {
 
 export function shortNum(num: number)
 {
-  return num.toFixed(2);
+  return (num || 0).toFixed(2);
 }

@@ -7,6 +7,7 @@ import { Server, setWaitingForValue } from "..";
 import { InvestmentData } from "./InvestmentData";
 import TelegramBot = require("node-telegram-bot-api");
 import { shortNum } from "../util/EqualString";
+import axios from "axios";
 
 let data = new InvestmentData();
 
@@ -82,17 +83,17 @@ async function InvestmentSend()
   data.lastdaychange = data.profit - prevprofit;
 
   if (data.delta >= 0) {
-    await Server.SendMessage(`Время инвестировать!\n` + ShortStatistics());
+    await Server.SendMessage(`Время инвестировать!\n` + await ShortStatistics());
   } else {
-    await Server.SendMessage(`Текущая статистика по инвестициям.\n` + ShortStatistics());
+    await Server.SendMessage(`Текущая статистика по инвестициям.\n` + await ShortStatistics());
   }
 
   InvestmentSave();
 }
 
-function ShortStatistics()
+async function ShortStatistics()
 {
-  let res = "";
+  let res = "Инвестиции\n";
 
   if (data.delta >= 0) {
     res += `Необходимо довложить: ${data.delta}\n`;
@@ -101,14 +102,15 @@ function ShortStatistics()
     res += `Необходимо вложить через ${Math.round(-data.delta / data.investperday)} дней\n`;
   }
   return res +
-    `Цель: ${data.investperday} в день, ${data.targetpercentage}% годовых\n` +
     `Ты уже скопил: ${Math.round(data.balance)}. Прибыль: ${data.profit.toFixed(2)}` +
     ` (${data.lastdaychange.toFixed(2)}).`;
 }
 
-function FullStatistics()
+async function FullStatistics()
 {
-  return ShortStatistics() +
+  return await ShortStatistics() +
+    `\n---` +
+    `\nЦель: ${data.investperday} в день, ${data.targetpercentage}% годовых` +
     `\nAverage profit per day: ${shortNum(data.profit / data.days)}`;
 }
 
@@ -164,12 +166,12 @@ export async function ProcessInvestments(message: MessageWrapper)
     return;
   }
   if (message.checkRegex(/\/investment stats/)) {
-    reply(message, FullStatistics());
+    reply(message, await FullStatistics());
 
     return;
   }
   if (message.checkRegex(/\/investment/)) {
-    reply(message, ShortStatistics());
+    reply(message, await ShortStatistics());
 
     return;
   }

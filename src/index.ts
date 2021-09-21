@@ -18,6 +18,7 @@ import { InitNotifier, ProcessNotifier } from "./notifier/Notifier";
 import { InitProjects, ProcessProjects } from "./projects/Projects";
 import { InitInvestment, ProcessInvestments } from "./investment/Investment";
 import { InitBackup, ProcessBackup } from "./backup/BackupService";
+import { InitCrypto, ProcessCrypto } from "./investment/CryptoController";
 
 let waitingCallback: ((message: MessageWrapper) => any) | null = null;
 
@@ -35,10 +36,10 @@ export function setWaitingForValuePure(callback: (message: MessageWrapper) => an
 export function defaultKeyboard(): TelegramBot.KeyboardButton[][]
 {
     return [
-        [{ text: "/slots" }, { text: "/slot prev" }, { text: "/slot next" }],
-        [{ text: "/logs" }, { text: "/reset" }, { text: "/networking" }],
-        [{ text: "/publish" }, { text: "/load" }, { text: "/investment" }],
-        [{ text: "/projects" }, { text: "/learning" }, { text: "/extra" }],
+        [{ text: "/slots" }, { text: "/slot prev" }, { text: "/slot next" }, { text: "/reset" }],
+        [{ text: "/logs" }, { text: "/publish" }, { text: "/load" }, { text: "/networking" }],
+        [{ text: "/crypto" }, { text: "/investment" }, { text: "/projects" }],
+        [{ text: "/learning" }, { text: "/extra" }],
     ];
 }
 
@@ -65,6 +66,7 @@ class App
         InitProjects();
         InitInvestment();
         InitBackup();
+        InitCrypto();
 
         console.log(Config.projectPath());
 
@@ -136,6 +138,7 @@ class App
 
             const listeners = [
                 ProcessInvestments,
+                ProcessCrypto,
                 ProcessNotes,
                 ProcessLearning,
                 ProcessProjects,
