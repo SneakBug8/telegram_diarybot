@@ -20,6 +20,25 @@ class LoggerService
         return dateFormat(Date.now(), "yyyy/yyyymmddHHMM");
     }
 
+    public async getTitle(filename: string)
+    {
+        const filepath = this.resolveFile(filename);
+
+        if (!await fs.pathExists(filepath)) {
+            return "No such logfile";
+        }
+
+        const logs = await fs.readFile(filepath);
+
+        if (new RegExp("#(.+)\n").test(logs.toString())) {
+            const titlematch = new RegExp("# *(.+)\n").exec(logs.toString());
+            return (titlematch && titlematch.length) ? titlematch[1] : filename;
+        }
+        else {
+            return filename;
+        }
+    }
+
     public async Log(message: string, checkdate = true)
     {
         const filename = this.getFilename();

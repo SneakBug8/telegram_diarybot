@@ -30,6 +30,11 @@ class SlotClass
     return NotesRepo.Slots.get(this.slotInd) as string;
   }
 
+  public async getTitle()
+  {
+    return await Logger.getTitle(this.getFilename());
+  }
+
   public setFilename(filename: string)
   {
     NotesRepo.Slots.set(this.slotInd, filename);

@@ -7,6 +7,7 @@ import { Server, setWaitingForValue } from "..";
 import { NetworkingData, NetworkingStat } from "./NetworkingData";
 import TelegramBot = require("node-telegram-bot-api");
 import { shortNum } from "../util/EqualString";
+import { NetworkingChange } from "./NetworkingChange";
 
 let data = new NetworkingData();
 
@@ -14,13 +15,15 @@ const datafilepath = path.resolve(Config.dataPath(), "networking.json");
 const howmanyperday = 1;
 const whattimeofaday = 12;
 
+const changesHistory = new Array<NetworkingChange>();
+
 function getKeyboard(): TelegramBot.KeyboardButton[][]
 {
   return [
     [{ text: "/networking done" }, { text: "/networking init" }, { text: "/networking list" }],
     [{ text: "/networking add" }, { text: "/networking remove" }, { text: "/networking stats" }],
     [{ text: "/networking done (...)" }, { text: "/networking init (...)" }, { text: "/networking send (...)" }],
-    [{ text: "/exit" }],
+    [{ text: "/networking force" }, { text: "/networking undo" }, { text: "/exit" }],
   ];
 }
 
@@ -82,6 +85,7 @@ async function NetworkingSend()
 {
   const now = new Date(Date.now());
   data.lastSend = now.getDay();
+  data.totaldays++;
 
   let res = `Ваш нетворкинг на сегодня:\n`;
 
@@ -133,6 +137,10 @@ function RaiseSentForStat(name: string)
   stat.totalsent++;
   data.totalsent++;
 
+  changesHistory.push(new NetworkingChange(stat.name, "Sent"));
+
+  return stat;
+
   // data.contacts = data.contacts.filter((x) => !x.name.includes(name));
   // data.contacts.push(stat);
 }
@@ -145,6 +153,10 @@ function RaiseDoneForStat(name: string)
   stat.done++;
   data.done++;
 
+  changesHistory.push(new NetworkingChange(stat.name, "Done"));
+
+  return stat;
+
   // data.contacts = data.contacts.filter((x) => !x.name.includes(name));
   // data.contacts.push(stat);
 }
@@ -154,11 +166,43 @@ function RaiseInitForStat(name: string)
   const stat = findStat(name);
   if (typeof stat === "string") { return stat; }
 
+  changesHistory.push(new NetworkingChange(stat.name, "Init"));
+
   stat.initiated++;
   data.initiated++;
 
+  return stat;
+
   // data.contacts = data.contacts.filter((x) => !x.name.includes(name));
   // data.contacts.push(stat);
+}
+
+function undo()
+{
+  const lastchange = changesHistory.pop();
+
+  if (!lastchange) { return "No changes history"; }
+
+  const stat = findStat(lastchange.name);
+  if (typeof stat === "string") { return stat; }
+
+  if (lastchange.type === "Sent") {
+    stat.totalsent--;
+    data.totalsent--;
+    return `Undone sending ${stat.name}`;
+  }
+  else if (lastchange.type === "Init") {
+    stat.initiated--;
+    data.initiated--;
+    return `Undone initiating ${stat.name}`;
+  }
+  else if (lastchange.type === "Done") {
+    stat.done--;
+    data.done--;
+    return `Undone doing ${stat.name}`;
+  }
+
+  return `Unexpected error`;
 }
 
 function formatName(contact: NetworkingStat)
@@ -292,7 +336,7 @@ export async function ProcessNetworking(message: MessageWrapper)
         }
 
         NetworkingSave();
-        reply(message, `Marked interaction with ${name} as done.\n` + ShortStatistics());
+        reply(message, `Marked interaction with ${res.name} as done.\n` + ShortStatistics());
       });
     return;
   }
@@ -310,7 +354,7 @@ export async function ProcessNetworking(message: MessageWrapper)
         }
 
         NetworkingSave();
-        reply(message, `Marked interaction with ${name} as initiated.\n` + ShortStatistics());
+        reply(message, `Marked interaction with ${res.name} as initiated.\n` + ShortStatistics());
       });
     return;
   }
@@ -328,7 +372,7 @@ export async function ProcessNetworking(message: MessageWrapper)
         }
 
         NetworkingSave();
-        reply(message, `Created non-regular interaction with ${name}.\n` + ShortStatistics());
+        reply(message, `Created non-regular interaction with ${res.name}.\n` + ShortStatistics());
       });
     return;
   }
@@ -370,6 +414,11 @@ export async function ProcessNetworking(message: MessageWrapper)
 
         NetworkingSave();
       });
+    return;
+  }
+  if (message.checkRegex(/^\/networking undo/)) {
+    reply(message, undo());
+
     return;
   }
   if (message.checkRegex(/^\/networking force/)) {

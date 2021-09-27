@@ -5,7 +5,7 @@ import * as level from "level";
 import { Config } from "../config";
 import { CryptoPair } from "./CryptoData";
 import { Sleep } from "../util/Sleep";
-import { CryptoNotification } from "./NotificationsData";
+import { CryptoNotification } from "./CryptoNotificationData";
 import { Crypto } from "./Crypto";
 
 const db = level(Config.dataPath() + "/cryptonotifications", { valueEncoding: "json" });

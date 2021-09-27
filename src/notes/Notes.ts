@@ -86,22 +86,22 @@ export async function ProcessNotes(message: MessageWrapper)
   if (message.checkRegex(/\/slots/)) {
     let res = "";
     for (const slot of NotesRepo.Slots) {
-      res += `${slot[0]} - ${slot[1]}\n`;
+      res += `${slot[0]} - ${await Logger.getTitle(slot[1])} (${slot[1]})\n`;
     }
 
-    res += `---\nUsing slot ${Slots.getSlot()} with file ${Slots.getFilename()}`;
+    res += `---\nUsing slot ${Slots.getSlot()} with file ${await Slots.getTitle()} (${Slots.getFilename()})`;
 
     return message.reply(res).then((x) => x.deleteAfterTime(1));
   }
   if (message.checkRegex(/\/slot next/)) {
     const slotind = Slots.getSlot() + 1;
     Slots.changeSlot(slotind);
-    return message.reply(`Using slot ${Slots.getSlot()} with file ${Slots.getFilename()}`);
+    return message.reply(`Using slot ${Slots.getSlot()} with file ${await Slots.getTitle()} (${Slots.getFilename()})`);
   }
   if (message.checkRegex(/\/slot prev[ious]*/)) {
     const slotind = Slots.getSlot() - 1;
     Slots.changeSlot(slotind);
-    return message.reply(`Using slot ${Slots.getSlot()} with file ${Slots.getFilename()}`);
+    return message.reply(`Using slot ${Slots.getSlot()} with file ${await Slots.getTitle()} (${Slots.getFilename()})`);
   }
   if (message.checkRegex(/\/slot reset ([0-9]+)/)) {
     const slot = message.captureRegex(/\/slot reset ([0-9]+)/);
@@ -125,12 +125,12 @@ export async function ProcessNotes(message: MessageWrapper)
     return message.reply(`Cleared slots`).then((x) => x.deleteAfterTime(1));
   }
   if (message.checkRegex(/\/slot/)) {
-    return message.reply(`Current slot ${Slots.getSlot()} with file ${Slots.getFilename()}`)
+    return message.reply(`Current slot ${Slots.getSlot()} with file ${await Slots.getTitle()} (${Slots.getFilename()})`)
       .then((x) => x.deleteAfterTime(1));
   }
 
   if (message.checkRegex(/\/path/)) {
-    return message.reply(`Current path: ${Slots.getFilename()}`)
+    return message.reply(`Current file: ${await Slots.getTitle()} (${Slots.getFilename()})`)
       .then((newmsg) => newmsg.deleteAfterTime(1));
   }
 

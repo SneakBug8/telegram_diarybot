@@ -68,7 +68,7 @@ class CryptoClass
 
     for (const a of arr) {
       res += `${a.pair.coin}: ${shortNum(a.change.previous)} -> ${shortNum(a.change.current)}` +
-        `(${a.change.mark}${shortNum(a.change.change)}%) (${a.pair.volume} ct) \n`;
+        ` (${a.change.mark}${shortNum(a.change.change)}%) (${a.pair.volume} ct) \n`;
     }
 
     return res;
