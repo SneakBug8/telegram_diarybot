@@ -6,6 +6,7 @@ import { Config } from "../config";
 import { CryptoPair } from "./CryptoData";
 import { Sleep } from "../util/Sleep";
 import { CryptoNotification } from "./NotificationsData";
+import { Crypto } from "./Crypto";
 
 const db = level(Config.dataPath() + "/cryptonotifications", { valueEncoding: "json" });
 
@@ -14,22 +15,22 @@ class CryptoNotificationsClass
   public coinslist: Array<{ id: string, symbol: string, name: string }> = [];
   public async Init()
   {
-    db.get("Notifications", (err, value) =>
+    await db.get("Notifications", async (err, value) =>
     {
       if (err?.name === "NotFoundError") {
-        db.put("Notifications", []);
+        await db.put("Notifications", []);
       }
     });
-    db.get("totaltriggered", (err, value) =>
+    await db.get("totaltriggered", async (err, value) =>
     {
       if (err?.name === "NotFoundError") {
-        db.put("totaltriggered", 0);
+        await db.put("totaltriggered", 0);
       }
     });
-    db.get("lastid", (err, value) =>
+    await db.get("lastid", async (err, value) =>
     {
       if (err?.name === "NotFoundError") {
-        db.put("lastid", 0);
+        await db.put("lastid", 0);
       }
     });
   }
@@ -49,15 +50,19 @@ class CryptoNotificationsClass
         i = 0;
       }
 
-      const prices = await this.getCoinPrice(notification.coin);
+      const prices = await Crypto.getCoinPrice(notification.coin);
 
       if (notification.minprice && prices.current < notification.minprice) {
-        res += `${notification.id}: ${notification.coin} dropped below ${notification.minprice}.\n`;
-        triggerednotifications.push(notification.id);
+        res += `${notification.id}: ${notification.coin} dropped below ${notification.minprice} (current: ${prices.current}).\n`;
+        // triggerednotifications.push(notification.id);
+        notification.minprice *= 0.9;
+        notification.maxprice *= 0.9;
       }
       else if (notification.maxprice && prices.current > notification.maxprice) {
-        res += `${notification.id}: ${notification.coin} rose higher than ${notification.maxprice}.\n`;
-        triggerednotifications.push(notification.id);
+        res += `${notification.id}: ${notification.coin} rose higher than ${notification.maxprice} (current: ${prices.current}).\n`;
+        // triggerednotifications.push(notification.id);
+        notification.maxprice *= 1.1;
+        notification.minprice *= 1.1;
       }
 
     }
@@ -72,29 +77,25 @@ class CryptoNotificationsClass
     return res;
   }
 
-  public async getCoinPrice(coinid: string)
-  {
-    try {
-      const res = await axios.get(
-        `https://api.coingecko.com/api/v3/coins/${coinid}/market_chart`,
-        { params: { vs_currency: "usd", days: 1, interval: "daily" } });
-      const previous = res.data.prices[0][1] as number;
-      const current = res.data.prices[1][1] as number;
-
-      return { current, previous };
-    }
-    catch (e) {
-      console.error(e);
-      return { current: 0, previous: 0 };
-    }
-  }
-
   public async addNotification(coinid: string, minprice: number, maxprice: number)
   {
     const notifications = await this.getNotifications();
 
+    const existing = notifications.find((x) => x.coin === coinid);
+
+    if (existing && minprice && !maxprice) {
+      existing.minprice = minprice;
+      await this.setNotifications(notifications);
+      return true;
+    }
+    else if (existing && !minprice && maxprice) {
+      existing.maxprice = maxprice;
+      await this.setNotifications(notifications);
+      return true;
+    }
+
     const notification = new CryptoNotification();
-    notification.id = await this.getLastId() + 1;
+    notification.id = await this.getNewId();
     notification.coin = coinid;
     notification.minprice = minprice;
     notification.maxprice = maxprice;
@@ -102,7 +103,6 @@ class CryptoNotificationsClass
     notifications.push(notification);
 
     await this.setNotifications(notifications);
-    await this.setLastId(notification.id);
 
     return true;
   }
@@ -127,7 +127,7 @@ class CryptoNotificationsClass
     let res = "";
 
     for (const notification of notifications) {
-      res += `${notification.id}: ${notification.coin} at ${notification.minprice}-${notification.maxprice}`;
+      res += `${notification.id}: ${notification.coin} at ${notification.minprice} - ${notification.maxprice}\n`;
     }
 
     return res;
@@ -141,7 +141,7 @@ class CryptoNotificationsClass
     this.coinslist = res.data;
   }
 
-  private async getNotifications()
+  public async getNotifications()
   {
     return await db.get("Notifications") as CryptoNotification[];
   }
@@ -150,13 +150,15 @@ class CryptoNotificationsClass
     await db.put("Notifications", notifications);
   }
 
-  private async getLastId()
+  private async getNewId()
   {
-    return await db.get("lastid") as number;
-  }
-  private async setLastId(lastid: number)
-  {
-    await db.put("lastid", lastid);
+    const nots = await this.getNotifications();
+    for (let i = 0; i < Number.MAX_SAFE_INTEGER; i++) {
+      if (!nots.find((x) => x.id === i)) {
+        return i;
+      }
+    }
+    return Math.round(Math.random() * Number.MAX_SAFE_INTEGER);
   }
 
   private async getTotalTriggered()

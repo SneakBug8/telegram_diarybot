@@ -19,7 +19,12 @@ function reply(msg: MessageWrapper, text: string)
 
 export async function InitCryptoNotifications()
 {
+  await CryptoNotifications.Init();
+
   setInterval(CheckNotifications, 15 * 60 * 1000);
+
+  const notifications = await CryptoNotifications.getNotifications();
+  console.log(`[Crypto Notifications] Read ${notifications.length} crypto notifications`);
 }
 
 async function CheckNotifications()

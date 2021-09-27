@@ -15,7 +15,7 @@ import { Sleep } from "../util/Sleep";
 let data = new BackupData();
 
 const datafilepath = path.resolve(Config.dataPath(), "backup.json");
-const daysbetweenbackups = 5;
+const daysbetweenbackups = 2;
 const whattimeofaday = 12;
 
 export async function InitBackup()
@@ -60,7 +60,9 @@ async function CreateBackup()
 
   await Sleep(1000);
 
-  BotAPI.sendDocument(Config.DefaultChat, fs.createReadStream(backuppath));
+  BotAPI.sendDocument(Config.DefaultChat, fs.createReadStream(backuppath), {
+    disable_notification: true
+  });
 
   Server.SendMessage("Created backup");
 

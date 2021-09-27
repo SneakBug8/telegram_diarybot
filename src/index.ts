@@ -19,6 +19,7 @@ import { InitProjects, ProcessProjects } from "./projects/Projects";
 import { InitInvestment, ProcessInvestments } from "./investment/Investment";
 import { InitBackup, ProcessBackup } from "./backup/BackupService";
 import { InitCrypto, ProcessCrypto } from "./investment/CryptoController";
+import { InitCryptoNotifications, ProcessCryptoNotifications } from "./investment/CryptoNotificationsController";
 
 let waitingCallback: ((message: MessageWrapper) => any) | null = null;
 
@@ -67,6 +68,7 @@ class App
         InitInvestment();
         InitBackup();
         InitCrypto();
+        InitCryptoNotifications();
 
         console.log(Config.projectPath());
 
@@ -139,6 +141,7 @@ class App
             const listeners = [
                 ProcessInvestments,
                 ProcessCrypto,
+                ProcessCryptoNotifications,
                 ProcessNotes,
                 ProcessLearning,
                 ProcessProjects,

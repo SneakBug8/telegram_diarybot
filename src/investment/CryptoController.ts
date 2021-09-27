@@ -28,6 +28,9 @@ export async function InitCrypto()
 {
   await Crypto.Init();
   setInterval(CryptoCycle, 15 * 60 * 1000);
+
+  const pairs = await Crypto.getPairs();
+  console.log(`[Crypto] Read ${pairs.length} crypto coins`);
 }
 
 const whattimeofaday = 18;
@@ -201,7 +204,7 @@ export async function ProcessCrypto(message: MessageWrapper)
     reply(message, "Daily crypto change\n" + await Crypto.getCryptoChange());
     return;
   }
-  if (message.checkRegex(/\/crypto/)) {
+  if (message.checkRegex(/\/crypto$/)) {
     reply(message, "Crypto module");
     return;
   }

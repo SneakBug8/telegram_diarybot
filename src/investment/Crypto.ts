@@ -13,30 +13,32 @@ const db = level(Config.dataPath() + "/crypto", { valueEncoding: "json" });
 class CryptoClass
 {
   public coinslist: Array<{ id: string, symbol: string, name: string }> = [];
+  public coinPricesCache = new Map<string, { current: number, previous: number, fetched: Date }>();
+
   public async Init()
   {
-    db.get("Pairs", (err, value) =>
+    db.get("Pairs", async (err, value) =>
     {
       if (err?.name === "NotFoundError") {
-        db.put("Pairs", []);
+        await db.put("Pairs", []);
       }
     });
-    db.get("usd", (err, value) =>
+    await db.get("usd", async (err, value) =>
     {
       if (err?.name === "NotFoundError") {
-        db.put("usd", 0);
+        await db.put("usd", 0);
       }
     });
-    db.get("totaltime", (err, value) =>
+    await db.get("totaltime", async (err, value) =>
     {
       if (err?.name === "NotFoundError") {
-        db.put("totaltime", 0);
+        await db.put("totaltime", 0);
       }
     });
-    db.get("totaltimes", (err, value) =>
+    await db.get("totaltimes", async (err, value) =>
     {
       if (err?.name === "NotFoundError") {
-        db.put("totaltimes", 0);
+        await db.put("totaltimes", 0);
       }
     });
   }
@@ -46,6 +48,8 @@ class CryptoClass
     const pairs = await this.getPairs();
     let res = "";
 
+    const arr = [];
+
     let i = 0;
     for (const pair of pairs) {
       i++;
@@ -54,8 +58,19 @@ class CryptoClass
         i = 0;
       }
 
-      res += `${pair.coin}: ${await this.getCoinChange(pair.coin)}\n`;
+      const change = await this.getCoinChange(pair.coin);
+
+      arr.push({ pair, change });
     }
+
+    arr.sort((x, y) => ((y.change.mark === "+") ? 1 : -1) * y.change.change -
+      ((x.change.mark === "+") ? 1 : -1) * x.change.change);
+
+    for (const a of arr) {
+      res += `${a.pair.coin}: ${shortNum(a.change.previous)} -> ${shortNum(a.change.current)}` +
+        `(${a.change.mark}${shortNum(a.change.change)}%) (${a.pair.volume} ct) \n`;
+    }
+
     return res;
   }
 
@@ -87,8 +102,6 @@ class CryptoClass
       change = Math.abs(change);
       const profit = (prices.current - pair.averageprice) * pair.volume;
 
-      console.log(pair);
-
       res += `${pair.coin}: ${shortNum(pair.averageprice)} -> ${shortNum(prices.current)} ` +
         `(${mark}${shortNum(change)} %), ${shortNum(pair.volume)}ct, profit: ${shortNum(profit)}\n`;
 
@@ -101,12 +114,10 @@ class CryptoClass
     const mark = (totalchange >= 0) ? "+" : "-";
     totalchange = Math.abs(totalchange);
 
-    console.log(await this.getUSDBalance());
-
     res += `\n---\n` +
       `Total: ${shortNum(totalinvested)} -> ${shortNum(totalprice)} ` +
       `(${mark}${shortNum(totalchange)} %), profit ${shortNum(totalprofit)}\n` +
-      `USD Balance: ${await this.getUSDBalance()}`;
+      `USD Balance: ${shortNum(await this.getUSDBalance())}`;
 
     // await this.setUSDBalance(-totalinvested);
 
@@ -116,37 +127,45 @@ class CryptoClass
   public async getCoinChange(coinid: string)
   {
     try {
-      const res = await axios.get(
-        `https://api.coingecko.com/api/v3/coins/${coinid}/market_chart`,
-        { params: { vs_currency: "usd", days: 1, interval: "daily" } });
-
-      const prev = res.data.prices[0][1];
-      const curr = res.data.prices[1][1];
-
-      let change = (curr / prev - 1) * 100;
+      const { current, previous } = await this.getCoinPrice(coinid);
+      let change = (current / previous - 1) * 100;
       const mark = (change >= 0) ? "+" : "-";
       change = Math.abs(change);
 
-      return `${shortNum(prev)} -> ${shortNum(curr)} (${mark}${shortNum(change)}%)`;
+      return { previous, current, mark, change };
+
+      // return `${shortNum(previous)} -> ${shortNum(current)} (${mark}${shortNum(change)}%)`;
     }
     catch (e) {
-      return e;
+      console.error(e);
+      return { previus: 0, current: 0, change: 0, mark: "+" };
     }
   }
 
   public async getCoinPrice(coinid: string)
   {
     try {
+      if (this.coinPricesCache.get(coinid)) {
+        const cached = this.coinPricesCache.get(coinid) as { current: number, previous: number, fetched: Date };
+        if (Math.abs(cached.fetched.getTime() - Date.now()) < 5 * 60 * 1000) {
+          return cached;
+        }
+      }
       const res = await axios.get(
         `https://api.coingecko.com/api/v3/coins/${coinid}/market_chart`,
         { params: { vs_currency: "usd", days: 1, interval: "daily" } });
       const previous = res.data.prices[0][1];
       const current = res.data.prices[1][1];
 
+      this.coinPricesCache.set(coinid, {
+        current, previous, fetched: new Date()
+      });
+
       return { current, previous };
     }
     catch (e) {
-      return e;
+      console.error(e);
+      return { current: 0, previous: 0 };
     }
   }
 
@@ -207,6 +226,8 @@ class CryptoClass
     pair.averageprice = (pair.averageprice * pair.volume + price * amount) / (pair.volume + amount);
     pair.volume += amount;
 
+    pairs.sort((x, y) => y.volume - x.volume);
+
     await this.setPairs(pairs);
     let usd = await this.getUSDBalance();
     usd -= amount * price;
@@ -227,6 +248,7 @@ class CryptoClass
     }
 
     pair.volume -= amount;
+    pairs.sort((x, y) => y.volume - x.volume);
 
     await this.setPairs(pairs);
     let usd = await this.getUSDBalance();
@@ -244,7 +266,7 @@ class CryptoClass
     this.coinslist = res.data;
   }
 
-  private async getPairs()
+  public async getPairs()
   {
     return await db.get("Pairs") as CryptoPair[];
   }
