@@ -15,7 +15,8 @@
     "fs-extra": "^8.1.0",
     "ftp": "^0.3.10",
     "level": "^7.0.0",
-    "node-telegram-bot-api": "^0.30.0"
+    "node-telegram-bot-api": "^0.30.0",
+    "quickchart-js": "^1.4.2"
   },
   "scripts": {
     "start": "tsc && node bin/index.js",

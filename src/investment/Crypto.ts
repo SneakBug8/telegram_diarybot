@@ -1,14 +1,38 @@
 import axios from "axios";
 import { shortNum, StringIncludes } from "../util/EqualString";
+import * as fs from "fs-extra";
+import * as path from "path";
 
 import * as level from "level";
 import { Config } from "../config";
 import { CryptoPair } from "./CryptoData";
 import { Sleep } from "../util/Sleep";
+import { Server } from "..";
+import { BotAPI } from "../api/bot";
+import dateFormat = require("dateformat");
 
 // 1) Create our database, supply location and options.
 //    This will create or open the underlying store.
 const db = level(Config.dataPath() + "/crypto", { valueEncoding: "json" });
+
+let marketHistoryData = new Array<
+  { date: number, cap: number, volume: number, liquidity: number, btcDominance: number }>();
+
+const roundings = new Map<number, string>([
+  [1000 * 1000 * 1000, "B"],
+  [1000 * 1000, "M"]
+]);
+
+function roundInt(n: number)
+{
+  for (const rounding of roundings) {
+    if (n >= rounding[0]) {
+      return (n / rounding[0]).toFixed(2) + rounding[1];
+    }
+  }
+
+  return n;
+}
 
 class CryptoClass
 {
@@ -169,6 +193,84 @@ class CryptoClass
     }
   }
 
+  public async createMarketChart()
+  {
+    try {
+      await this.getMarketHistory();
+
+      const labels = marketHistoryData.map((x) => dateFormat(new Date(x.date), "dd.mm.yyyy"));
+      const cap = marketHistoryData.map((x) => x.cap / 1000 / 1000 / 1000);
+      // const volume = marketHistoryData.map((x) => x.volume / 1000 / 1000 / 1000);
+      // const liquidity = marketHistoryData.map((x) => x.liquidity / 1000 / 1000 / 1000);
+
+      const res = await axios.post("https://quickchart.io/chart/create",
+        {
+          backgroundColor: "transparent",
+          width: 800,
+          height: 400,
+          format: "png",
+          chart: {
+            type: "line", data: {
+              labels,
+              datasets: [{ label: "Capitalization (B)", data: cap },
+              ]
+            }
+          }
+        });
+
+      const imageurl = res.data.url;
+
+      await this.downloadChart(imageurl, "capitalization.png");
+
+      const imagepath = path.resolve(Config.dataPath(), "capitalization.png");
+
+      BotAPI.sendPhoto(Config.DefaultChat, fs.createReadStream(imagepath), {
+        disable_notification: true
+      });
+    }
+    catch (e) {
+      Server.SendMessage(e + "");
+    }
+  }
+
+  public async downloadChart(url: string, name: string)
+  {
+    const imagepath = path.resolve(Config.dataPath(), name);
+    const writer = fs.createWriteStream(imagepath);
+
+    const response = await axios.get(url, {
+      responseType: "stream"
+    });
+
+    response.data.pipe(writer);
+
+    return new Promise((resolve, reject) =>
+    {
+      writer.on("finish", resolve);
+      writer.on("error", reject);
+    });
+  }
+
+  public async getMarketHistory()
+  {
+    try {
+      const res = await axios.post(
+        `https://api.livecoinwatch.com/overview/history`,
+        { currency: "USD", start: Date.now() - 1000 * 60 * 60 * 24 * 180, end: Date.now() },
+        {
+          headers: { "x-api-key": process.env.livecoinwatchapi },
+        });
+
+      marketHistoryData = res.data;
+
+      return marketHistoryData;
+    }
+    catch (e) {
+      console.error(e);
+      return [];
+    }
+  }
+
   public async getBitcoinChange()
   {
     return this.getCoinChange("bitcoin");
@@ -304,7 +406,6 @@ class CryptoClass
     await db.put("totaltime", total);
     await db.put("totaltimes", count);
   }
-
 
 }
 

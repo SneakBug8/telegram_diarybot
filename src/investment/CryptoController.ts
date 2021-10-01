@@ -52,6 +52,8 @@ async function CryptoSend()
   const now = new Date(Date.now());
   lastSend = now.getDay();
 
+  await Crypto.createMarketChart();
+
   await Server.SendMessage(`Daily crypto change\n` + await Crypto.getCryptoChange());
 }
 
@@ -59,6 +61,10 @@ export async function ProcessCrypto(message: MessageWrapper)
 {
   if (message.checkRegex(/\/crypto portfolio/)) {
     reply(message, `Crypto porfolio\n` + await Crypto.getCryptoPortfolio());
+    return;
+  }
+  if (message.checkRegex(/\/crypto chart/)) {
+    await Crypto.createMarketChart();
     return;
   }
   /*

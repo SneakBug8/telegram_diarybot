@@ -73,7 +73,7 @@ async function ProjectsCycle()
     let msg = `Ваши текущие проекты ${getWeekDays()[now.getDay() % 7]}:`;
 
     for (const en of triggeredentries) {
-      msg += "\n" + en.subject + `(${en.doneTimes}/${en.suggestedTimes}%)`;
+      msg += "\n" + en.subject + ` (${en.doneTimes}/${en.suggestedTimes})`;
 
       en.suggestedTimes++;
     }
