@@ -7,7 +7,7 @@ import { BotAPI } from "./api/bot";
 import { MessageWrapper } from "./MessageWrapper";
 import { AuthService } from "./AuthService";
 import { PublishService } from "./PublishService";
-import { InitNotes, LogNote, ProcessNotes } from "./notes/Notes";
+import { InitNotes, LogNote, ProcessNotes } from "./notes/NotesController";
 import { InitNetworking, ProcessNetworking } from "./networking/Networking";
 import { Config } from "./config";
 import { ProcessTimer } from "./timer/timer";
@@ -20,6 +20,7 @@ import { InitInvestment, ProcessInvestments } from "./investment/Investment";
 import { InitBackup, ProcessBackup } from "./backup/BackupService";
 import { InitCrypto, ProcessCrypto } from "./investment/CryptoController";
 import { InitCryptoNotifications, ProcessCryptoNotifications } from "./investment/CryptoNotificationsController";
+import { Sleep } from "./util/Sleep";
 
 let waitingCallback: ((message: MessageWrapper) => any) | null = null;
 
@@ -55,6 +56,7 @@ export function extraKeyboard(): TelegramBot.KeyboardButton[][]
 class App
 {
     private bot: TelegramBot;
+    private readingMessage: boolean = false;
 
     public constructor()
     {
@@ -74,102 +76,113 @@ class App
 
         this.bot.on("text", async (msg) =>
         {
-            const message = new MessageWrapper(msg);
-            const time = message.getPrintableTime();
-            console.log(`[${time}] ${msg.text}`);
-
-            if (message.checkRegex(/^\/id/)) {
-                message.reply(`Current chat id: ${message.message.chat.id}`); return;
+            while (this.readingMessage) {
+                await Sleep(100);
             }
+            this.readingMessage = true;
+            await this.messageHandler(msg);
+            this.readingMessage = false;
 
-            if (message.checkRegex(/^\/auth/)) {
-                AuthService.ResetAuth();
-            }
+        });
+    }
 
-            let res = AuthService.CheckAuth(msg.chat.id);
-            if (!res) {
-                res = AuthService.TryAuth(msg.text + "", msg.chat.id);
-                if (res) {
-                    message.reply("Authorized successfuly")
-                        .then((newmsg) => newmsg.deleteAfterTime(1));
-                    return;
-                }
-                else {
-                    message.reply("Wrong password")
-                        .then((newmsg) => newmsg.deleteAfterTime(1));
-                    return;
-                }
-            }
+    private async messageHandler(msg: TelegramBot.Message)
+    {
+        const message = new MessageWrapper(msg);
+        const time = message.getPrintableTime();
+        console.log(`[${time}] ${msg.text}`);
 
-            if (!res) {
-                message.reply("You are not authorized")
+        if (message.checkRegex(/^\/id/)) {
+            message.reply(`Current chat id: ${message.message.chat.id}`); return;
+        }
+
+        if (message.checkRegex(/^\/auth/)) {
+            AuthService.ResetAuth();
+        }
+
+        let res = AuthService.CheckAuth(msg.chat.id);
+        if (!res) {
+            res = AuthService.TryAuth(msg.text + "", msg.chat.id);
+            if (res) {
+                message.reply("Authorized successfuly")
                     .then((newmsg) => newmsg.deleteAfterTime(1));
                 return;
             }
-
-            if (!msg.text) {
+            else {
+                message.reply("Wrong password")
+                    .then((newmsg) => newmsg.deleteAfterTime(1));
                 return;
             }
+        }
 
-            if (waitingCallback) {
-                if (message.message.text === "/exit") {
-                    waitingCallback = null; return;
-                }
+        if (!res) {
+            message.reply("You are not authorized")
+                .then((newmsg) => newmsg.deleteAfterTime(1));
+            return;
+        }
 
-                const callback = waitingCallback;
-                waitingCallback = null;
-                await callback.call(this, message);
+        if (!msg.text) {
+            return;
+        }
 
-                return true;
+        if (waitingCallback) {
+            if (message.message.text === "/exit") {
+                waitingCallback = null; return;
             }
 
-            if (message.checkRegex(/\/exit/)) {
-                return message.reply("Main module.");
-            }
+            const callback = waitingCallback;
+            waitingCallback = null;
+            await callback.call(this, message);
 
-            if (message.checkRegex(/\/extra/)) {
-                return Server.SendMessage("Extra modules", extraKeyboard());
-            }
+            return true;
+        }
 
-            if (process.env.networkingenabled === "yes") {
-                const m2 = await ProcessNetworking(message);
-                if (m2 !== false) {
-                    return;
-                }
-            }
+        if (message.checkRegex(/\/exit/)) {
+            return message.reply("Main module.");
+        }
 
-            const listeners = [
-                ProcessInvestments,
-                ProcessCrypto,
-                ProcessCryptoNotifications,
-                ProcessNotes,
-                ProcessLearning,
-                ProcessProjects,
-                ProcessBackup,
-                ProcessNotifier,
-                ProcessTimer,
-                ProcessEval,
-                ImageGenProcess
-            ];
+        if (message.checkRegex(/\/extra/)) {
+            return Server.SendMessage("Extra modules", extraKeyboard());
+        }
 
-            for (const listener of listeners) {
-                const r = await listener(message);
-                if (r !== false) {
-                    return;
-                }
+        if (process.env.networkingenabled === "yes") {
+            const m2 = await ProcessNetworking(message);
+            if (m2 !== false) {
+                return;
             }
+        }
 
-            if (message.checkRegex(/^\/.*$/)) {
-                return message.deleteAfterTime(1);
-            }
+        const listeners = [
+            ProcessInvestments,
+            ProcessCrypto,
+            ProcessCryptoNotifications,
+            ProcessNotes,
+            ProcessLearning,
+            ProcessProjects,
+            ProcessBackup,
+            ProcessNotifier,
+            ProcessTimer,
+            ProcessEval,
+            ImageGenProcess
+        ];
 
-            if (process.env.notesenabled === "yes") {
-                await LogNote(message);
+        for (const listener of listeners) {
+            const r = await listener(message);
+            if (r !== false) {
+                return;
             }
-            else {
-                message.reply("Unknown command");
-            }
-        });
+        }
+
+        if (message.checkRegex(/^\/.*$/)) {
+            return message.deleteAfterTime(1);
+        }
+
+        if (process.env.notesenabled === "yes") {
+            await LogNote(message);
+        }
+        else {
+            message.reply("Unknown command");
+        }
     }
 
     public async SendMessage(text: string, keyboard: TelegramBot.KeyboardButton[][] | null = null)
