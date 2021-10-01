@@ -10,6 +10,27 @@ import { Crypto } from "./Crypto";
 
 const db = level(Config.dataPath() + "/cryptonotifications", { valueEncoding: "json" });
 
+const roundings = new Map<number, number>([
+  [10, 0.1],
+  [100, 1],
+  [1000, 10],
+  [10000, 100]
+]);
+
+function roundInt(n: number)
+{
+  for (const rounding of roundings) {
+    if (n >= rounding[0] && n % rounding[1] > rounding[1] / 2) {
+      return Math.floor(n / rounding[1]) * rounding[1];
+    }
+    else if (n >= rounding[0] && n % rounding[1] < rounding[1] / 2) {
+      return Math.ceil(n / rounding[1]) * rounding[1];
+    }
+  }
+
+  return n;
+}
+
 class CryptoNotificationsClass
 {
   public coinslist: Array<{ id: string, symbol: string, name: string }> = [];
@@ -33,6 +54,11 @@ class CryptoNotificationsClass
         await db.put("lastid", 0);
       }
     });
+
+    // Notifications cleanup on restart
+    const notifications = await this.getNotifications();
+    const cleanupnotifications = notifications.filter((x) => x.minprice !== 0 || x.maxprice !== 0);
+    await this.setNotifications(cleanupnotifications);
   }
 
   public async checkNotifications()
@@ -52,19 +78,24 @@ class CryptoNotificationsClass
 
       const prices = await Crypto.getCoinPrice(notification.coin);
 
-      if (notification.minprice && prices.current < notification.minprice) {
-        res += `${notification.id}: ${notification.coin} dropped below ${notification.minprice} (current: ${prices.current}).\n`;
+      if (notification.minprice && prices.current && prices.current < notification.minprice) {
+        res += `${notification.id}: ${notification.coin} dropped below `
+          + ` ${shortNum(notification.minprice)} (current: ${shortNum(prices.current)}).\n`;
         // triggerednotifications.push(notification.id);
         notification.minprice *= 0.9;
         notification.maxprice *= 0.9;
+        notification.maxprice = roundInt(notification.maxprice);
+        notification.minprice = roundInt(notification.minprice);
       }
-      else if (notification.maxprice && prices.current > notification.maxprice) {
-        res += `${notification.id}: ${notification.coin} rose higher than ${notification.maxprice} (current: ${prices.current}).\n`;
+      else if (notification.maxprice && prices.current && prices.current > notification.maxprice) {
+        res += `${notification.id}: ${notification.coin} rose higher than ` +
+          `${shortNum(notification.maxprice)} (current: ${shortNum(prices.current)}).\n`;
         // triggerednotifications.push(notification.id);
         notification.maxprice *= 1.1;
         notification.minprice *= 1.1;
+        notification.maxprice = roundInt(notification.maxprice);
+        notification.minprice = roundInt(notification.minprice);
       }
-
     }
 
     const newnotifications = notifications.filter((x) => !triggerednotifications.includes(x.id));
@@ -77,33 +108,33 @@ class CryptoNotificationsClass
     return res;
   }
 
-  public async addNotification(coinid: string, minprice: number, maxprice: number)
+  public async addNotification(coinid: string, minprice: number | undefined, maxprice: number | undefined)
   {
     const notifications = await this.getNotifications();
 
     const existing = notifications.find((x) => x.coin === coinid);
 
-    if (existing && minprice && !maxprice) {
+    if (existing && minprice !== undefined && !maxprice) {
       existing.minprice = minprice;
-      await this.setNotifications(notifications);
-      return true;
     }
-    else if (existing && !minprice && maxprice) {
+    else if (existing && !minprice && maxprice !== undefined) {
       existing.maxprice = maxprice;
-      await this.setNotifications(notifications);
-      return true;
     }
+    else if (!existing) {
 
-    const notification = new CryptoNotification();
-    notification.id = await this.getNewId();
-    notification.coin = coinid;
-    notification.minprice = minprice;
-    notification.maxprice = maxprice;
+      const notification = new CryptoNotification();
+      notification.id = await this.getNewId();
+      notification.coin = coinid;
+      notification.minprice = minprice || 0;
+      notification.maxprice = maxprice || 0;
 
-    notifications.push(notification);
+      notifications.push(notification);
+    }
+    else {
+      return "Incorrect input";
+    }
 
     await this.setNotifications(notifications);
-
     return true;
   }
   public async removeNotification(id: number)
@@ -127,7 +158,9 @@ class CryptoNotificationsClass
     let res = "";
 
     for (const notification of notifications) {
-      res += `${notification.id}: ${notification.coin} at ${notification.minprice} - ${notification.maxprice}\n`;
+      const count = await Crypto.getCount(notification.coin);
+      res += `${notification.id}. ${notification.coin} (${shortNum(count)}) at ${shortNum(notification.minprice)}`
+        + ` - ${shortNum(notification.maxprice)} \n`;
     }
 
     return res;
@@ -147,6 +180,14 @@ class CryptoNotificationsClass
   }
   private async setNotifications(notifications: CryptoNotification[])
   {
+    notifications = notifications.sort((a, b) =>
+    {
+      if (a.minprice !== b.minprice) {
+        return a.minprice - b.minprice;
+      }
+      return a.maxprice - b.maxprice;
+    });
+
     await db.put("Notifications", notifications);
   }
 

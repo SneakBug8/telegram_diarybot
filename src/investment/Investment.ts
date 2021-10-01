@@ -19,7 +19,7 @@ function getKeyboard(): TelegramBot.KeyboardButton[][]
   return [
     [{ text: "/investment in" }, { text: "/investment stats" }],
     [{ text: "/investment set target percentage" }],
-    [{ text: "/investment set investment per day" }],
+    [{ text: "/investment set investment per day" }, { text: "/investment policy set" }],
     [{ text: "/exit" }],
   ];
 }
@@ -111,7 +111,9 @@ async function FullStatistics()
   return await ShortStatistics() +
     `\n---` +
     `\nЦель: ${data.investperday} в день, ${data.targetpercentage}% годовых` +
-    `\nAverage profit per day: ${shortNum(data.profit / data.days)}`;
+    `\nAverage profit per day: ${shortNum(data.profit / data.days)}` +
+    `\n---\n` +
+    `${data.policy}`;
 }
 
 export async function ProcessInvestments(message: MessageWrapper)
@@ -162,6 +164,16 @@ export async function ProcessInvestments(message: MessageWrapper)
         InvestmentSave();
 
         reply(message, `New target investment per day is ${amt}.`);
+      });
+    return;
+  }
+  if (message.checkRegex(/^\/investment policy set/)) {
+    setWaitingForValue(`Please, write current investment policy`,
+      (msg) =>
+      {
+        data.policy = msg.message.text + "";
+        reply(msg, `Investment policy set`);
+        InvestmentSave();
       });
     return;
   }

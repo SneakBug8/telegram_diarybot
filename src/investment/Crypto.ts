@@ -147,7 +147,7 @@ class CryptoClass
     try {
       if (this.coinPricesCache.get(coinid)) {
         const cached = this.coinPricesCache.get(coinid) as { current: number, previous: number, fetched: Date };
-        if (Math.abs(cached.fetched.getTime() - Date.now()) < 5 * 60 * 1000) {
+        if (Math.abs(cached.fetched.getTime() - Date.now()) < 5 * 60 * 1000 && cached.current) {
           return cached;
         }
       }
@@ -264,6 +264,16 @@ class CryptoClass
       `https://api.coingecko.com/api/v3/coins/list`);
 
     this.coinslist = res.data;
+  }
+
+  public async getCount(coin: string)
+  {
+    const pairs = await this.getPairs();
+    const pair = pairs.find((x) => x.coin === coin);
+
+    if (!pair) { return 0; }
+
+    return pair.volume;
   }
 
   public async getPairs()

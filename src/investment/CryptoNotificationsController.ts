@@ -8,7 +8,7 @@ function getKeyboard(): TelegramBot.KeyboardButton[][]
   return [
     [{ text: "/crypto notification up" }, { text: "/crypto notification down" }],
     [{ text: "/crypto notifications" }],
-    [{ text: "/exit" }],
+    [{ text: "/crypto" }],
   ];
 }
 
@@ -52,13 +52,13 @@ export async function ProcessCryptoNotifications(message: MessageWrapper)
             const pricetext = msg2.message.text + "";
             const price = Number.parseFloat(pricetext);
 
-            if (!price) {
+            if (!price && price !== 0) {
               return reply(msg2, "Incorrect price");
             }
 
             if (!coin) { return; }
 
-            const res = await CryptoNotifications.addNotification(coin, 0, price);
+            const res = await CryptoNotifications.addNotification(coin, undefined, price);
             if (typeof res === "string") {
               reply(message, res);
             }
@@ -81,13 +81,13 @@ export async function ProcessCryptoNotifications(message: MessageWrapper)
             const pricetext = msg2.message.text + "";
             const price = Number.parseFloat(pricetext);
 
-            if (!price) {
+            if (!price && price !== 0) {
               return reply(msg2, "Incorrect price");
             }
 
             if (!coin) { return; }
 
-            const res = await CryptoNotifications.addNotification(coin, price, 0);
+            const res = await CryptoNotifications.addNotification(coin, price, undefined);
             if (typeof res === "string") {
               reply(message, res);
             }
