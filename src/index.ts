@@ -39,8 +39,8 @@ export function defaultKeyboard(): TelegramBot.KeyboardButton[][]
 {
     return [
         [{ text: "/slots" }, { text: "/slot prev" }, { text: "/slot next" }, { text: "/reset" }],
-        [{ text: "/logs" }, { text: "/publish" }, { text: "/load" }, { text: "/networking" }],
-        [{ text: "/crypto" }, { text: "/investment" }, { text: "/projects" }],
+        [{ text: "/logs" }, { text: "/publish" }, { text: "/load" }, {text: "/notes undo"}],
+        [{ text: "/networking" }, { text: "/crypto" }, { text: "/investment" }, { text: "/projects" }],
         [{ text: "/learning" }, { text: "/extra" }],
     ];
 }

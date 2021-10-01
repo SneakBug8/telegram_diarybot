@@ -1,5 +1,5 @@
 import { Logger } from "./logger";
-import { NotesDataSave, NotesRepo } from "./Notes";
+import { NotesDataSave, NotesRepo } from "./NotesController";
 import { NotesData } from "./NotesData";
 
 class SlotClass

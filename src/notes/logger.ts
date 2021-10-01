@@ -5,8 +5,11 @@ import * as dateFormat from "dateformat";
 import { Server } from "..";
 import { Config } from "../config";
 import { Slots } from "./Slots";
+import { NoteChange } from "./NoteChange";
 
 export const foldername: string = "diary";
+
+const changes = new Array<NoteChange>();
 
 class LoggerService
 {
@@ -47,21 +50,54 @@ class LoggerService
 
         let newfile = false;
 
+        let addedtext = "";
+
         if (!await fs.pathExists(filepath)) {
             await fs.ensureFile(filepath);
 
             if (!message.includes("# ")) {
-                await fs.appendFile(filepath,
-                    `# Telegram ${filename}`);
+                const header = `# Telegram ${filename}`;
+                await fs.appendFile(filepath, header);
+                addedtext += header;
             }
 
             newfile = true;
         }
 
-        fs.appendFile(filepath, "\n\n" + await this.ParseMessage(message));
+        const text = "\n\n" + await this.ParseMessage(message);
+        fs.appendFile(filepath, text);
+        addedtext += text;
+
+        changes.push(new NoteChange(filename, addedtext, newfile));
 
         if (newfile) {
             return "Created new file " + filename;
+        }
+    }
+
+    public async Undo()
+    {
+        try {
+            const change = changes.pop();
+
+            if (!change) { return "No changes to undo."; }
+            const filename = change.filename;
+            const filepath = this.resolveFile(filename);
+
+            if (change.newfile) {
+                fs.remove(filepath);
+                return true;
+            }
+
+            let filetext = (await fs.readFile(filepath)).toString();
+
+            filetext = filetext.substr(0, filetext.length - change.length);
+
+            await fs.writeFile(filepath, filetext);
+            return true;
+        }
+        catch (e) {
+            return e + "";
         }
     }
 

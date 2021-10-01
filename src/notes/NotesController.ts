@@ -245,7 +245,15 @@ export async function ProcessNotes(message: MessageWrapper)
   }
 
   if (message.checkRegex(/\/delete/)) {
-    message.reply(await Logger.DeleteFile()).then((newmsg) => newmsg.deleteAfterTime(1));
+    setWaitingForValue("Please, confirm deletion", async (msg) =>
+    {
+      if (msg.message.text === "yes") {
+        message.reply(await Logger.DeleteFile()).then((newmsg) => newmsg.deleteAfterTime(1));
+      }
+      else {
+        message.reply("Aborted");
+      }
+    })
   }
 
   if (message.checkRegex(/\/delete (.+)/)) {
@@ -255,10 +263,33 @@ export async function ProcessNotes(message: MessageWrapper)
       return;
     }
 
-    return message
-      .deleteAfterTime(1)
-      .reply(await Logger.DeleteFile(filename[1]))
-      .then((newmsg) => newmsg.deleteAfterTime(1));
+    setWaitingForValue("Please, confirm deletion", async (msg) =>
+    {
+      if (msg.message.text === "yes") {
+        return message
+          .deleteAfterTime(1)
+          .reply(await Logger.DeleteFile(filename[1]))
+          .then((newmsg) => newmsg.deleteAfterTime(1));
+      }
+      else {
+        message.reply("Aborted");
+      }
+    });
+  }
+
+  if (message.checkRegex(/\/notes undo/)) {
+    setWaitingForValue("Please, confirm reverting last change", async (msg) =>
+    {
+      if (msg.message.text === "yes") {
+        const res = await Logger.Undo();
+
+        return message.reply((res === true) ? "Successfully undid change" : res)
+          .then((newmsg) => newmsg.deleteAfterTime(1));
+      }
+      else {
+        message.reply("Aborted");
+      }
+    });
   }
   return false;
 }
