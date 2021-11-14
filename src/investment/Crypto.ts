@@ -53,6 +53,18 @@ class CryptoClass
         await db.put("usd", 0);
       }
     });
+    await db.get("maxcapital", async (err, value) =>
+    {
+      if (err?.name === "NotFoundError") {
+        await db.put("maxcapital", 0);
+      }
+    });
+    await db.get("rotated", async (err, value) =>
+    {
+      if (err?.name === "NotFoundError") {
+        await db.put("rotated", 0);
+      }
+    });
     await db.get("totaltime", async (err, value) =>
     {
       if (err?.name === "NotFoundError") {
@@ -65,6 +77,7 @@ class CryptoClass
         await db.put("totaltimes", 0);
       }
     });
+
   }
 
   public async getCryptoChange()
@@ -108,6 +121,9 @@ class CryptoClass
     let totalinvested = 0;
     let totalprice = 0;
     let totalprofit = 0;
+
+    const arr = [];
+
     for (const pair of pairs) {
       i++;
       if (i > 30) {
@@ -119,29 +135,46 @@ class CryptoClass
         continue;
       }
 
-      const prices = await this.getCoinPrice(pair.coin);
+      const price = await this.getCoinPrice(pair.coin);
 
-      let change = (prices.current / pair.averageprice - 1) * 100;
+      let change = (price.current / pair.averageprice - 1) * 100;
       const mark = (change > 0) ? "+" : "-";
       change = Math.abs(change);
-      const profit = (prices.current - pair.averageprice) * pair.volume;
+      const profit = (price.current - pair.averageprice) * pair.volume;
 
-      res += `${pair.coin}: ${shortNum(pair.averageprice)} -> ${shortNum(prices.current)} ` +
-        `(${mark}${shortNum(change)} %), ${shortNum(pair.volume)}ct, profit: ${shortNum(profit)}\n`;
+      arr.push({ pair, price, mark, change, profit });
 
       totalinvested += pair.averageprice * pair.volume;
-      totalprice += prices.current * pair.volume;
+      totalprice += price.current * pair.volume;
       totalprofit += profit;
+    }
+
+    const capital = await this.getMaxCapital();
+    if (totalinvested > capital) {
+      await this.setMaxCapital(totalinvested);
+    }
+
+    arr.sort((x, y) => ((y.mark === "+") ? 1 : -1) * y.change -
+      ((x.mark === "+") ? 1 : -1) * x.change);
+
+    for (const a of arr) {
+      res += `${a.pair.coin}: ${shortNum(a.pair.averageprice)} -> ${shortNum(a.price.current)} ` +
+        `(${a.mark}${shortNum(a.change)} %), ${shortNum(a.pair.volume)}ct, profit: ${shortNum(a.profit)}\n`;
     }
 
     let totalchange = (totalprice / totalinvested - 1) * 100;
     const mark = (totalchange >= 0) ? "+" : "-";
     totalchange = Math.abs(totalchange);
 
+    let fixeddiff = totalinvested + await this.getUSDBalance();
+    const diffmark = (fixeddiff >= 0) ? "+" : "-";
+    fixeddiff = Math.abs(fixeddiff);
+
     res += `\n---\n` +
       `Total: ${shortNum(totalinvested)} -> ${shortNum(totalprice)} ` +
-      `(${mark}${shortNum(totalchange)} %), profit ${shortNum(totalprofit)}\n` +
-      `USD Balance: ${shortNum(await this.getUSDBalance())}`;
+      `(${mark}${shortNum(totalchange)}%), profit ${shortNum(totalprofit)}\n` +
+      `USD Balance: ${shortNum(await this.getUSDBalance())} (${diffmark}${shortNum(fixeddiff)})\n` +
+      `Rotated: ${shortNum(await this.getUSDRotated())}, Max capital: ${shortNum(await this.getMaxCapital())}`;
 
     // await this.setUSDBalance(-totalinvested);
 
@@ -335,6 +368,8 @@ class CryptoClass
     usd -= amount * price;
     await this.setUSDBalance(usd);
 
+    await this.setUSDRotated(await this.getUSDRotated() + amount * price);
+
     return true;
   }
   public async sellPair(coinid: string, amount: number, price: number)
@@ -394,6 +429,24 @@ class CryptoClass
   private async setUSDBalance(value: number)
   {
     await db.put("usd", value);
+  }
+
+  private async getUSDRotated()
+  {
+    return await db.get("rotated") as number || 0;
+  }
+  private async setUSDRotated(value: number)
+  {
+    await db.put("rotated", value);
+  }
+
+  private async getMaxCapital()
+  {
+    return await db.get("maxcapital") as number || 0;
+  }
+  private async setMaxCapital(value: number)
+  {
+    await db.put("maxcapital", value);
   }
 
   private async incrementTimeSpent(value: number)

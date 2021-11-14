@@ -33,7 +33,7 @@ export async function InitCrypto()
   console.log(`[Crypto] Read ${pairs.length} crypto coins`);
 }
 
-const whattimeofaday = 12;
+const whattimeofaday = 18;
 const curdate = new Date();
 let lastSend = (curdate.getHours() < whattimeofaday) ? curdate.getDay() - 1 : curdate.getDay();
 

@@ -96,14 +96,14 @@ async function ShortStatistics()
   let res = "Инвестиции\n";
 
   if (data.delta >= 0) {
-    res += `Необходимо довложить: ${data.delta}\n`;
+    res += `Необходимо довложить: $${data.delta}\n`;
   }
   else {
     res += `Необходимо вложить через ${Math.round(-data.delta / data.investperday)} дней\n`;
   }
   return res +
-    `Ты уже скопил: ${Math.round(data.balance)}. Прибыль: ${data.profit.toFixed(2)}` +
-    ` (${data.lastdaychange.toFixed(2)}).`;
+    `Ты уже скопил: $${Math.round(data.balance)}. Прибыль: $${data.profit.toFixed(2)}` +
+    ` (+$${data.lastdaychange.toFixed(2)}).`;
 }
 
 async function FullStatistics()
