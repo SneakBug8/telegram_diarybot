@@ -8,6 +8,7 @@ import { NetworkingData, NetworkingStat } from "./NetworkingData";
 import TelegramBot = require("node-telegram-bot-api");
 import { shortNum } from "../util/EqualString";
 import { NetworkingChange } from "./NetworkingChange";
+import { NetworkingContact } from "./NetworkingContact";
 
 let data = new NetworkingData();
 
@@ -16,6 +17,7 @@ const howmanyperday = 1;
 const whattimeofaday = 12;
 
 const changesHistory = new Array<NetworkingChange>();
+let activeContacts = new Array<NetworkingContact>();
 
 function getKeyboard(): TelegramBot.KeyboardButton[][]
 {
@@ -55,10 +57,10 @@ export async function InitNetworking()
       NetworkingSave();
     }
 
-    console.log(`Read ${data.contacts.length} contacts.`);
+    console.log(`[Networking] Read ${data.contacts.length} contacts.`);
   }
   else {
-    console.log(`Created new datafile for networking.`);
+    console.log(`[Networking] Created new datafile for networking.`);
     NetworkingSave();
   }
 
@@ -77,7 +79,11 @@ async function NetworkingCycle()
 
   if (now.getHours() === whattimeofaday && now.getMinutes() <= 30 && data.lastSend !== now.getDay()) {
     console.log(now + " sending time");
-    NetworkingSend();
+    await NetworkingSend();
+
+    if (now.getDay() - 1 === 4) {
+      await WeeklyReview();
+    }
   }
 }
 
@@ -107,8 +113,62 @@ async function NetworkingSend()
     i++;
   }
 
+  activeContacts = activeContacts.filter((x) => !x.done);
+
+  if (activeContacts.length) {
+    res += `---\n`;
+  }
+
+  for (const contact of activeContacts) {
+    if (contact.init > 0) {
+      res += `Unfinished initiated contact with ${contact.name}\n`;
+    }
+    else if (contact.sent > 0) {
+      res += `Uninitiated contact with ${contact.name}\n`;
+    }
+
+    contact.init--;
+    contact.sent--;
+  }
+  activeContacts = activeContacts.filter((x) => x.sent > 0 || x.init > 0);
+
   if (data.policy) {
     res += `---\n${data.policy}`;
+  }
+
+  Server.SendMessage(res);
+  NetworkingSave();
+}
+
+async function WeeklyReview()
+{
+  let res = `Networking for weekends:\n`;
+
+  const firstpick = data.contacts.filter((x) => x.active && x.totalsent > x.initiated);
+  const secondpick = data.contacts.filter((x) => x.active);
+
+  let i = 0;
+
+  while (i < howmanyperday && firstpick.length) {
+    const contact = firstpick.pop();
+
+    if (contact) {
+      res += formatName(contact) + "\n";
+      i++;
+    }
+  }
+
+  const previds = new Array<number>();
+
+  while (i < howmanyperday && secondpick.length) {
+    const randomind = Math.floor(Math.random() * secondpick.length);
+
+    if (previds.includes(randomind) && previds.length !== secondpick.length) { continue; }
+
+    previds.push(randomind);
+
+    res += formatName(secondpick[randomind]) + "\n";
+    i++;
   }
 
   Server.SendMessage(res);
@@ -138,6 +198,10 @@ function RaiseSentForStat(name: string)
   data.totalsent++;
 
   changesHistory.push(new NetworkingChange(stat.name, "Sent"));
+  const contact = new NetworkingContact(name);
+  // 5 days before deletion
+  contact.sent = 5;
+  activeContacts.push(contact);
 
   return stat;
 
@@ -152,6 +216,13 @@ function RaiseDoneForStat(name: string)
 
   stat.done++;
   data.done++;
+
+  // delete
+  const contact = activeContacts.find((x) => x.name === name && !x.done);
+  if (contact) {
+    contact.done = true;
+    activeContacts = activeContacts.filter((x) => !x.done);
+  }
 
   changesHistory.push(new NetworkingChange(stat.name, "Done"));
 
@@ -170,6 +241,12 @@ function RaiseInitForStat(name: string)
 
   stat.initiated++;
   data.initiated++;
+
+  // 5 days before deletion
+  const contact = activeContacts.find((x) => x.name === name) || new NetworkingContact(name);
+  if (contact) {
+    contact.init = 5;
+  }
 
   return stat;
 
