@@ -34,7 +34,7 @@ export async function InitLearning()
 
     data = JSON.parse(file.toString()) as LearningData;
 
-    console.log(`Read ${data.Timetable.length} time entries and ${data.Records.length} existing entries.`);
+    console.log(`[Learning] Read ${data.Timetable.length} time entries and ${data.Records.length} existing entries.`);
   }
   else {
     const testtimeentry = new LearningTimeEntry();
