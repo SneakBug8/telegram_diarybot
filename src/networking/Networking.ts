@@ -9,6 +9,7 @@ import TelegramBot = require("node-telegram-bot-api");
 import { shortNum } from "../util/EqualString";
 import { NetworkingChange } from "./NetworkingChange";
 import { NetworkingContact } from "./NetworkingContact";
+import { Connection } from "../Database";
 
 let data = new NetworkingData();
 
@@ -17,7 +18,9 @@ const howmanyperday = 1;
 const whattimeofaday = 12;
 
 const changesHistory = new Array<NetworkingChange>();
-let activeContacts = new Array<NetworkingContact>();
+const activeContacts = new Array<NetworkingContact>();
+
+export const NetworkingEntriesRepository = () => Connection("NetworkingEntry");
 
 function getKeyboard(): TelegramBot.KeyboardButton[][]
 {
@@ -113,13 +116,13 @@ async function NetworkingSend()
     i++;
   }
 
-  activeContacts = activeContacts.filter((x) => !x.done);
+  const applicableContacts = activeContacts.filter((x) => (x.sent > 0 || x.init > 0) && !x.done);
 
-  if (activeContacts.length) {
+  if (applicableContacts.length) {
     res += `---\n`;
   }
 
-  for (const contact of activeContacts) {
+  for (const contact of applicableContacts) {
     if (contact.init > 0) {
       res += `Unfinished initiated contact with ${contact.name}\n`;
     }
@@ -130,7 +133,6 @@ async function NetworkingSend()
     contact.init--;
     contact.sent--;
   }
-  activeContacts = activeContacts.filter((x) => x.sent > 0 || x.init > 0);
 
   if (data.policy) {
     res += `---\n${data.policy}`;
@@ -203,6 +205,8 @@ function RaiseSentForStat(name: string)
   contact.sent = 5;
   activeContacts.push(contact);
 
+  writeChange(stat.name, 0);
+
   return stat;
 
   // data.contacts = data.contacts.filter((x) => !x.name.includes(name));
@@ -221,8 +225,9 @@ function RaiseDoneForStat(name: string)
   const contact = activeContacts.find((x) => x.name === name && !x.done);
   if (contact) {
     contact.done = true;
-    activeContacts = activeContacts.filter((x) => !x.done);
   }
+
+  writeChange(stat.name, 2);
 
   changesHistory.push(new NetworkingChange(stat.name, "Done"));
 
@@ -248,6 +253,8 @@ function RaiseInitForStat(name: string)
     contact.init = 5;
   }
 
+  writeChange(stat.name, 1);
+
   return stat;
 
   // data.contacts = data.contacts.filter((x) => !x.name.includes(name));
@@ -263,19 +270,24 @@ function undo()
   const stat = findStat(lastchange.name);
   if (typeof stat === "string") { return stat; }
 
+  const contact = activeContacts.find((x) => x.name === stat.name);
+
   if (lastchange.type === "Sent") {
     stat.totalsent--;
     data.totalsent--;
+    if (contact) { contact.sent = 0; }
     return `Undone sending ${stat.name}`;
   }
   else if (lastchange.type === "Init") {
     stat.initiated--;
     data.initiated--;
+    if (contact) { contact.init = 0; }
     return `Undone initiating ${stat.name}`;
   }
   else if (lastchange.type === "Done") {
     stat.done--;
     data.done--;
+    if (contact) { contact.done = false; }
     return `Undone doing ${stat.name}`;
   }
 
@@ -514,3 +526,13 @@ export async function ProcessNetworking(message: MessageWrapper)
   }
   return false;
 }
+
+async function writeChange(contact: string, type: number)
+  {
+    const r = {
+      Contact: contact,
+      Type: type,
+      MIS_DT: Date.now()
+    };
+    NetworkingEntriesRepository().insert(r);
+  }
