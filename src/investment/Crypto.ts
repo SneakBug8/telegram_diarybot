@@ -10,10 +10,14 @@ import { Sleep } from "../util/Sleep";
 import { Server } from "..";
 import { BotAPI } from "../api/bot";
 import dateFormat = require("dateformat");
+import { Connection } from "../Database";
 
 // 1) Create our database, supply location and options.
 //    This will create or open the underlying store.
 const db = level(Config.dataPath() + "/crypto", { valueEncoding: "json" });
+
+export const CryptoTransactionsRepository = () => Connection("InvestmentsTransactions");
+export const CryptoPortfolioRepository = () => Connection("CryptoPortfolio");
 
 let marketHistoryData = new Array<
   { date: number, cap: number, volume: number, liquidity: number, btcDominance: number }>();
@@ -111,7 +115,7 @@ class CryptoClass
     return res;
   }
 
-  public async getCryptoPortfolio()
+  public async getCryptoPortfolio(writeentry: boolean = false)
   {
     const pairs = await this.getPairs();
     let res = "";
@@ -177,6 +181,11 @@ class CryptoClass
       `Rotated: ${shortNum(await this.getUSDRotated())}, Max capital: ${shortNum(await this.getMaxCapital())}`;
 
     // await this.setUSDBalance(-totalinvested);
+
+    if (writeentry) {
+      await this.writePortfolio(totalprice, totalinvested, await this.getUSDBalance(),
+        fixeddiff, await this.getUSDRotated(), await this.getMaxCapital());
+    }
 
     return res;
   }
@@ -369,6 +378,7 @@ class CryptoClass
     await this.setUSDBalance(usd);
 
     await this.setUSDRotated(await this.getUSDRotated() + amount * price);
+    await this.writeTransaction(coinid, 0, price, amount);
 
     return true;
   }
@@ -391,6 +401,7 @@ class CryptoClass
     let usd = await this.getUSDBalance();
     usd += amount * price;
     await this.setUSDBalance(usd);
+    await this.writeTransaction(coinid, 1, price, amount);
 
     return true;
   }
@@ -447,6 +458,33 @@ class CryptoClass
   private async setMaxCapital(value: number)
   {
     await db.put("maxcapital", value);
+  }
+
+  private async writeTransaction(pair: string, type: number, price: number, volume: number)
+  {
+    const r = {
+      Pair: pair,
+      Type: type,
+      Price: price,
+      Volume: volume,
+      MIS_DT: Date.now()
+    };
+    CryptoTransactionsRepository().insert(r);
+  }
+
+  private async writePortfolio(assetsprice: number, invested: number,
+    balance: number, realizedgain: number, rotated: number, maxcapital: number)
+  {
+    const r = {
+      assetsprice,
+      invested,
+      balance,
+      realizedgain,
+      rotated,
+      maxcapital,
+      MIS_DT: Date.now()
+    };
+    CryptoTransactionsRepository().insert(r);
   }
 
   private async incrementTimeSpent(value: number)

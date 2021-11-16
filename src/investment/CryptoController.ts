@@ -54,7 +54,7 @@ async function CryptoSend()
 
   await Crypto.createMarketChart();
 
-  await Server.SendMessage(`Daily crypto change\n` + await Crypto.getCryptoChange());
+  await Server.SendMessage(`Crypto porfolio\n` + await Crypto.getCryptoPortfolio(true));
 }
 
 export async function ProcessCrypto(message: MessageWrapper)
