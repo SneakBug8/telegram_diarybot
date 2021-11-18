@@ -189,7 +189,7 @@ class App
             }
         }
         catch (e) {
-            Server.SendMessage(e);
+            Server.SendMessage(e + "");
         }
     }
 

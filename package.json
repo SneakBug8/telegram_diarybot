@@ -21,7 +21,7 @@
     "sqlite3": "^5.0.2"
   },
   "scripts": {
-    "start": "tsc && node bin/index.js",
+    "start": "node bin/index.js",
     "build": "tsc",
     "dev": "nodemon --exec \"ts-node src/index.ts\" -V -w src -e ts"
   },

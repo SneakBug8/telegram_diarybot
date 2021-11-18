@@ -7,7 +7,7 @@ module.exports = {
     args: 'start',
     instances: 1,
     autorestart: true,
-    watch: ["src"],
+    watch: ["bin"],
     exec_mode: "fork",
     max_memory_restart: '1G',
     env: {

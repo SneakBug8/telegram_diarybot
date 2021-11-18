@@ -10,7 +10,6 @@ import { Todo } from "./TodoData";
 
 export const TodosRepository = () => Connection<Todo>("Todos");
 
-
 let lastHourChecked = -1;
 const whattimeofaday = 18;
 
@@ -35,7 +34,7 @@ export async function InitTodos()
 
 async function GetActiveTodos()
 {
-  return TodosRepository().where("done", "false").select().orderBy("id", "desc");
+  return TodosRepository().where("done", "0").select().orderBy("id", "desc");
 }
 
 async function UpdateTodo(todo: Todo)
@@ -57,23 +56,40 @@ async function TodoCycle()
 {
   const now = new Date(Date.now());
 
+  if (lastHourChecked !== now.getHours() && now.getHours() === whattimeofaday) {
+  } else { return; }
+
+  const msg = await TodoSend();
+
+  if (msg) {
+    Server.SendMessage(msg);
+  }
+
+  lastHourChecked = now.getHours();
+}
+
+async function TodoSend()
+{
   const todos = await GetActiveTodos();
 
   if (todos.length) {
     let msg = `Ваши текущие задачи:`;
 
+    let i = 1;
+
     for (const en of todos) {
-      msg += "\n" + en.subject;
+      msg += `\n${i}. ` + en.subject;
 
       en.suggestedTimes++;
 
       await UpdateTodo(en);
+      i++;
     }
 
-    Server.SendMessage(msg);
+    return msg;
   }
 
-  lastHourChecked = now.getHours();
+  return "";
 }
 
 export async function ProcessTodos(message: MessageWrapper)
@@ -100,7 +116,7 @@ export async function ProcessTodos(message: MessageWrapper)
     return;
   }
   if (message.checkRegex(/\/todo list/)) {
-    TodoCycle();
+    message.reply(await TodoSend());
     return;
   }
   if (message.checkRegex(/\/todo stats/)) {

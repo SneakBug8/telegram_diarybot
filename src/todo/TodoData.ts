@@ -1,6 +1,6 @@
 export class Todo
 {
-  public id: number = 0;
+  public id: number | undefined;
   public subject = "";
   public MIS_DT = new Date();
   public suggestedTimes = 0;
