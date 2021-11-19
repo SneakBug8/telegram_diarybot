@@ -151,7 +151,7 @@ async function WeeklyReview()
 
   let i = 0;
 
-  while (i < howmanyperday && firstpick.length) {
+  while (i < 5 && firstpick.length) {
     const contact = firstpick.pop();
 
     if (contact) {
@@ -162,7 +162,7 @@ async function WeeklyReview()
 
   const previds = new Array<number>();
 
-  while (i < howmanyperday && secondpick.length) {
+  while (i < 5 && secondpick.length) {
     const randomind = Math.floor(Math.random() * secondpick.length);
 
     if (previds.includes(randomind) && previds.length !== secondpick.length) { continue; }
