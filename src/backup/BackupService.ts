@@ -16,7 +16,7 @@ let data = new BackupData();
 
 const datafilepath = path.resolve(Config.dataPath(), "backup.json");
 const daysbetweenbackups = 2;
-const whattimeofaday = 12;
+const whattimeofaday = 22;
 
 export async function InitBackup()
 {
@@ -45,7 +45,7 @@ async function BackupCycle()
 {
   const now = new Date(Date.now());
 
-  if (Math.abs(data.lastSend - now.getDate()) > daysbetweenbackups) {
+  if (Math.abs(data.lastSend - now.getDate()) > daysbetweenbackups && now.getHours() >= whattimeofaday) {
     console.log(now + " backup time");
     CreateBackup();
   }
