@@ -151,13 +151,13 @@ class ImageGenClass
     ctx.textAlign = "right";
 
     // Draw line under text
-    const text = ctx.measureText(author);
+    /*const text = ctx.measureText(author);
     ctx.strokeStyle = "orange";
     ctx.lineWidth = 2;
     ctx.beginPath();
     ctx.moveTo(0, 0);
     ctx.lineTo(0 - text.width, 0);
-    ctx.stroke();
+    ctx.stroke();*/
 
     ctx.fillText(author, 0, 0);
 
@@ -215,9 +215,9 @@ class ImageGenClass
         ctx.save();
 
         ctx.strokeStyle = "rgba(0, " + Math.floor(255 - deltay * i) + ", " +
-          Math.floor(255 - deltax * j) + ", 0.3)";
+          Math.floor(255 - deltax * j) + ", 0.15)";
         ctx.fillStyle = "rgba(0, " + Math.floor(255 - deltay * i) + ", " +
-          Math.floor(255 - deltax * j) + ", 0.3)";
+          Math.floor(255 - deltax * j) + ", 0.15)";
         ctx.beginPath();
 
         ctx.translate(excessx / 2, excessxy / 2);
