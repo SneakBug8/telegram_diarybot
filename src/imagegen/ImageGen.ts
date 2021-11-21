@@ -5,23 +5,27 @@ import { Canvas, createCanvas, loadImage, NodeCanvasRenderingContext2D } from "c
 
 import { Config } from "../config";
 import { BotAPI } from "../api/bot";
+import { setWaitingForValue } from "..";
 
 export async function ImageGenProcess(message: MessageWrapper)
 {
-  if (message.checkRegex(/\/image (.+)/)) {
-    const text = message.captureRegex(/\/image (.+)/);
+  if (message.checkRegex(/\/image/)) {
+    setWaitingForValue("Текст изображения?", async (msg) =>
+    {
+      const text = message.message.text;
 
-    if (!text) { return; }
+      if (!text) { return; }
 
-    line = text[1];
+      line = text[1];
 
-    const respath = await ImageGen.Run();
+      const respath = await ImageGen.Run();
 
-    await BotAPI.sendDocument(message.message.chat.id, respath);
+      await BotAPI.sendDocument(message.message.chat.id, respath);
 
-    await sleep(30000);
-    fs.unlinkSync(respath);
-    console.log(`Image file ${respath} deleted.`);
+      /*await sleep(30000);
+      fs.unlinkSync(respath);
+      console.log(`Image file ${respath} deleted.`);*/
+    });
   }
   return false;
 }
