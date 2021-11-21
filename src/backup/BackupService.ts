@@ -31,8 +31,6 @@ export async function InitBackup()
     console.log(`Created new datafile for backups.`);
     BackupSave();
   }
-
-  setInterval(BackupCycle, 90 * 60 * 1000);
 }
 
 export async function BackupSave()
@@ -41,7 +39,7 @@ export async function BackupSave()
   fs.writeFileSync(datafilepath, tdata);
 }
 
-async function BackupCycle()
+export async function BackupCycle()
 {
   const now = new Date(Date.now());
 

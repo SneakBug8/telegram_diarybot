@@ -40,8 +40,6 @@ export async function InitNotifier()
     console.log(`Created new datafile for Notifier.`);
     NotifierSave();
   }
-
-  setInterval(NotifierCycle, 15 * 60 * 1000);
 }
 
 export async function NotifierSave()
@@ -50,7 +48,7 @@ export async function NotifierSave()
   fs.writeFileSync(datafilepath, tcontacts);
 }
 
-async function NotifierCycle()
+export async function NotifierCycle()
 {
   const now = new Date(Date.now());
 

@@ -48,8 +48,6 @@ export async function InitInvestment()
     console.log(`Created new datafile for networking.`);
     InvestmentSave();
   }
-
-  setInterval(InvestmentCycle, 15 * 60 * 1000);
 }
 
 export async function InvestmentSave()
@@ -58,7 +56,7 @@ export async function InvestmentSave()
   fs.writeFileSync(datafilepath, tdata);
 }
 
-async function InvestmentCycle()
+export async function InvestmentCycle()
 {
   const now = new Date(Date.now());
 

@@ -27,11 +27,6 @@ function reply(msg: MessageWrapper, text: string)
   msg.reply(text, getKeyboard());
 }
 
-export async function InitTodos()
-{
-  setInterval(TodoCycle, 15 * 60 * 1000);
-}
-
 async function GetActiveTodos()
 {
   return TodosRepository().where("done", "0").select().orderBy("id", "desc");
@@ -52,7 +47,7 @@ async function DeleteTodo(todo: Todo)
   return TodosRepository().where("id", todo.id).del();
 }
 
-async function TodoCycle()
+export async function TodoCycle()
 {
   const now = new Date(Date.now());
 
@@ -116,7 +111,7 @@ export async function ProcessTodos(message: MessageWrapper)
     return;
   }
   if (message.checkRegex(/\/todo list/)) {
-    message.reply(await TodoSend());
+    reply(message, await TodoSend());
     return;
   }
   if (message.checkRegex(/\/todo stats/)) {

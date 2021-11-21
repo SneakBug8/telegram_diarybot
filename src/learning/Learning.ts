@@ -46,8 +46,6 @@ export async function InitLearning()
     console.log(`Created new datafile for learning.`);
     LearningSave();
   }
-
-  setInterval(LearningCycle, 15 * 60 * 1000);
 }
 
 export async function LearningSave()
@@ -56,7 +54,7 @@ export async function LearningSave()
   fs.writeFileSync(datafilepath, tdata);
 }
 
-async function LearningCycle()
+export async function LearningCycle()
 {
   const now = new Date(Date.now());
 

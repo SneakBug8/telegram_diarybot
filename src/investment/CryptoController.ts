@@ -27,8 +27,6 @@ function reply(msg: MessageWrapper, text: string)
 export async function InitCrypto()
 {
   await Crypto.Init();
-  setInterval(CryptoCycle, 15 * 60 * 1000);
-
   const pairs = await Crypto.getPairs();
   console.log(`[Crypto] Read ${pairs.length} crypto coins`);
 }
@@ -37,7 +35,7 @@ const whattimeofaday = 18;
 const curdate = new Date();
 let lastSend = (curdate.getHours() < whattimeofaday) ? curdate.getDay() - 1 : curdate.getDay();
 
-async function CryptoCycle()
+export async function CryptoCycle()
 {
   const now = new Date(Date.now());
 

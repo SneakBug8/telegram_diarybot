@@ -8,20 +8,21 @@ import { MessageWrapper } from "./MessageWrapper";
 import { AuthService } from "./AuthService";
 import { PublishService } from "./PublishService";
 import { InitNotes, LogNote, ProcessNotes } from "./notes/NotesController";
-import { InitNetworking, ProcessNetworking } from "./networking/Networking";
+import { InitNetworking, NetworkingCycle, ProcessNetworking } from "./networking/Networking";
 import { Config } from "./config";
 import { ProcessTimer } from "./timer/timer";
 import { ProcessEval } from "./eval/eval";
-import { InitLearning, ProcessLearning } from "./learning/Learning";
+import { InitLearning, LearningCycle, ProcessLearning } from "./learning/Learning";
 import { ImageGenProcess } from "./imagegen/ImageGen";
-import { InitNotifier, ProcessNotifier } from "./notifier/Notifier";
-import { InitProjects, ProcessProjects } from "./projects/Projects";
-import { InitInvestment, ProcessInvestments } from "./investment/Investment";
-import { InitBackup, ProcessBackup } from "./backup/BackupService";
-import { InitCrypto, ProcessCrypto } from "./investment/CryptoController";
-import { InitCryptoNotifications, ProcessCryptoNotifications } from "./investment/CryptoNotificationsController";
+import { InitNotifier, NotifierCycle, ProcessNotifier } from "./notifier/Notifier";
+import { InitProjects, ProcessProjects, ProjectsCycle } from "./projects/Projects";
+import { InitInvestment, InvestmentCycle, ProcessInvestments } from "./investment/Investment";
+import { BackupCycle, InitBackup, ProcessBackup } from "./backup/BackupService";
+import { CryptoCycle, InitCrypto, ProcessCrypto } from "./investment/CryptoController";
+import { CryptoNotificationsCycle, InitCryptoNotifications, ProcessCryptoNotifications } from "./investment/CryptoNotificationsController";
 import { Sleep } from "./util/Sleep";
-import { InitTodos, ProcessTodos } from "./todo/Todo";
+import { ProcessTodos, TodoCycle } from "./todo/Todo";
+import { PostsCycle } from "./postviews/PostViews";
 
 let waitingCallback: ((message: MessageWrapper) => any) | null = null;
 
@@ -40,9 +41,9 @@ export function defaultKeyboard(): TelegramBot.KeyboardButton[][]
 {
     return [
         [{ text: "/slots" }, { text: "/slot prev" }, { text: "/slot next" }],
-        [{ text: "/logs" }, { text: "/publish" }, { text: "/load" }, ],
+        [{ text: "/logs" }, { text: "/publish" }, { text: "/load" },],
         [{ text: "/networking" }, { text: "/crypto" }, { text: "/investment" }],
-        [{ text: "/reset" }, {text: "/notes undo"}, { text: "/extra" }],
+        [{ text: "/reset" }, { text: "/notes undo" }, { text: "/extra" }],
     ];
 }
 
@@ -52,7 +53,7 @@ export function extraKeyboard(): TelegramBot.KeyboardButton[][]
         [{ text: "/notify" }, { text: "/timer" }, { text: "/networking policy set" }],
         [{ text: "/projects" }, { text: "/learning" }, { text: "/todo" }],
 
-        [{ text: "/exit" },],
+        [{ text: "/exit" }],
     ];
 }
 
@@ -74,7 +75,6 @@ class App
         InitBackup();
         InitCrypto();
         InitCryptoNotifications();
-        InitTodos();
 
         this.bot.on("text", async (msg) =>
         {
@@ -86,6 +86,28 @@ class App
             this.readingMessage = false;
 
         });
+
+        setInterval(this.Intervals, 1 * 60 * 1000);
+    }
+
+    public async Intervals()
+    {
+        const listeners = [
+            TodoCycle,
+            PostsCycle,
+            ProjectsCycle,
+            NotifierCycle,
+            BackupCycle,
+            CryptoCycle,
+            CryptoNotificationsCycle,
+            InvestmentCycle,
+            LearningCycle,
+            NetworkingCycle
+        ];
+
+        for (const listener of listeners) {
+            const r = await listener();
+        }
     }
 
     private async messageHandler(msg: TelegramBot.Message)
@@ -196,7 +218,7 @@ class App
     public async SendMessage(text: string, keyboard: TelegramBot.KeyboardButton[][] | null = null)
     {
         console.log(text);
-        const msg = await BotAPI.sendMessage(Config.DefaultChat, text, {
+        const msg = await BotAPI.sendMessage(Config.DefaultChat, text || "null", {
             parse_mode: "Markdown",
             reply_markup: {
                 keyboard: keyboard || defaultKeyboard(),

@@ -66,8 +66,6 @@ export async function InitNetworking()
     console.log(`[Networking] Created new datafile for networking.`);
     NetworkingSave();
   }
-
-  setInterval(NetworkingCycle, 15 * 60 * 1000);
 }
 
 export async function NetworkingSave()
@@ -76,7 +74,7 @@ export async function NetworkingSave()
   fs.writeFileSync(datafilepath, tcontacts);
 }
 
-async function NetworkingCycle()
+export async function NetworkingCycle()
 {
   const now = new Date(Date.now());
 

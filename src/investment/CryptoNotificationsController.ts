@@ -21,13 +21,11 @@ export async function InitCryptoNotifications()
 {
   await CryptoNotifications.Init();
 
-  setInterval(CheckNotifications, 15 * 60 * 1000);
-
   const notifications = await CryptoNotifications.getNotifications();
   console.log(`[Crypto Notifications] Read ${notifications.length} crypto notifications`);
 }
 
-async function CheckNotifications()
+export async function CryptoNotificationsCycle()
 {
   const notifications = await CryptoNotifications.checkNotifications();
 

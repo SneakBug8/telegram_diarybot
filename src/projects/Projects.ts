@@ -43,8 +43,6 @@ export async function InitProjects()
     console.log(`Created new datafile for projects.`);
     ProjectsSave();
   }
-
-  setInterval(ProjectsCycle, 15 * 60 * 1000);
 }
 
 export async function ProjectsSave()
@@ -53,7 +51,7 @@ export async function ProjectsSave()
   fs.writeFileSync(datafilepath, tdata);
 }
 
-async function ProjectsCycle()
+export async function ProjectsCycle()
 {
   const now = new Date(Date.now());
 
