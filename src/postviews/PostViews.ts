@@ -91,9 +91,9 @@ async function getPostsList(page: number = 1)
       `https://sneakbug8.com/wp-json/wp/v2/posts?_fields=id,title,link,views&per_page=100&page=${page}`);
 
     pagesAvailable = res.headers["x-wp-totalpages"];
-    console.log(`PagesAvailable: ${pagesAvailable}`);
+    // console.log(`PagesAvailable: ${pagesAvailable}`);
 
-    console.log(`Received ${res.data.length} posts via API`);
+    // console.log(`Received ${res.data.length} posts via API`);
 
     return res.data as any[];
   }
