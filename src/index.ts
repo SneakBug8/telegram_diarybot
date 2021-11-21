@@ -87,7 +87,7 @@ class App
 
         });
 
-        setInterval(this.Intervals, 1 * 60 * 1000);
+        setInterval(this.Intervals, 15 * 60 * 1000);
     }
 
     public async Intervals()
