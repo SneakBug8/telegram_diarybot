@@ -194,11 +194,7 @@ class App
                 }
             }
 
-            if (message.checkRegex(/^\/.*$/)) {
-                return message.deleteAfterTime(1);
-            }
-
-            if (process.env.notesenabled === "yes") {
+            if (process.env.notesenabled === "yes" && !message.checkRegex(/^\/.*$/)) {
                 await LogNote(message);
             }
             else {
