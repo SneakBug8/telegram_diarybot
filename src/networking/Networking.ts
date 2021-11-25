@@ -532,5 +532,5 @@ async function writeChange(contact: string, type: number)
       Type: type,
       MIS_DT: Date.now()
     };
-    NetworkingEntriesRepository().insert(r);
+    await NetworkingEntriesRepository().insert(r);
   }

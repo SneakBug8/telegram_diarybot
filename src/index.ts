@@ -22,7 +22,7 @@ import { CryptoCycle, InitCrypto, ProcessCrypto } from "./investment/CryptoContr
 import { CryptoNotificationsCycle, InitCryptoNotifications, ProcessCryptoNotifications } from "./investment/CryptoNotificationsController";
 import { Sleep } from "./util/Sleep";
 import { ProcessTodos, TodoCycle } from "./todo/Todo";
-import { PostsCycle } from "./postviews/PostViews";
+import { PostsCycle, ProcessPostViews } from "./postviews/PostViews";
 
 let waitingCallback: ((message: MessageWrapper) => any) | null = null;
 
@@ -170,17 +170,12 @@ class App
                 return Server.SendMessage("Extra modules", extraKeyboard());
             }
 
-            if (process.env.networkingenabled === "yes") {
-                const m2 = await ProcessNetworking(message);
-                if (m2 !== false) {
-                    return;
-                }
-            }
-
             const listeners = [
+                ProcessNetworking,
                 ProcessInvestments,
                 ProcessCrypto,
                 ProcessCryptoNotifications,
+                ProcessPostViews,
                 ProcessNotes,
                 ProcessTodos,
                 ProcessLearning,

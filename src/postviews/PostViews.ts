@@ -93,7 +93,7 @@ async function getPostsList(page: number = 1)
     pagesAvailable = res.headers["x-wp-totalpages"];
     // console.log(`PagesAvailable: ${pagesAvailable}`);
 
-    // console.log(`Received ${res.data.length} posts via API`);
+    console.log(`Fetched ${res.data.length} posts via API`);
 
     return res.data as any[];
   }
@@ -122,7 +122,7 @@ async function LoadPosts(weekly: boolean = false)
   for (const post of posts) {
     const entry = new PostViewEntry();
     entry.postId = post.id;
-    entry.title = post?.title?.rendered;
+    entry.title = HtmlParse(post?.title?.rendered);
     entry.views = post.views;
     entry.MIS_DT = mis_dt.getTime();
 
@@ -222,5 +222,17 @@ async function PostViewsSendDaily()
 
 export async function ProcessPostViews(message: MessageWrapper)
 {
+  if (message.checkRegex(/\/posts force/)) {
+    await PostViewsSendDaily();
+    return;
+  }
   return false;
+}
+
+function HtmlParse(text: string)
+{
+  const res = text + "";
+  res.replace("&#8211;", "—");
+
+  return res;
 }

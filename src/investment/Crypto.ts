@@ -230,6 +230,7 @@ class CryptoClass
       return { current, previous };
     }
     catch (e) {
+      console.error(`Error fetching price for ${coinid}:`);
       console.error(e);
       return { current: 0, previous: 0 };
     }
