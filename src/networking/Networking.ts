@@ -10,6 +10,8 @@ import { shortNum } from "../util/EqualString";
 import { NetworkingChange } from "./NetworkingChange";
 import { NetworkingContact } from "./NetworkingContact";
 import { Connection } from "../Database";
+import { NetworkingCommunication } from "./NetworkingCommunication";
+import { MIS_DT } from "../util/MIS_DT";
 
 let data = new NetworkingData();
 
@@ -20,7 +22,6 @@ const whattimeofaday = 12;
 const changesHistory = new Array<NetworkingChange>();
 const activeContacts = new Array<NetworkingContact>();
 
-export const NetworkingEntriesRepository = () => Connection("NetworkingEntry");
 
 function getKeyboard(): TelegramBot.KeyboardButton[][]
 {
@@ -86,6 +87,41 @@ export async function NetworkingCycle()
       await WeeklyReview();
     }
   }
+
+  Server.SendMessage(JSON.stringify(await NetworkingCommunication.StatOfContacts()));
+  Server.SendMessage(JSON.stringify(await NetworkingCommunication.GetRecentCommsToComplete()));
+ /*
+  for (const contact of data.contacts) {
+    const done = contact.done;
+    const init = contact.initiated - done;
+    const sent = contact.totalsent - init;
+
+    for (let i = 0; i < done; i++) {
+      const comm = new NetworkingCommunication(contact.name);
+      comm.Sent = 1;
+      comm.Initiated = 1;
+      comm.Done = 1;
+      comm.MIS_DT = MIS_DT.GetDay() - MIS_DT.OneWeek() * 25;
+
+      await NetworkingCommunication.Insert(comm);
+    }
+    for (let i = 0; i < init; i++) {
+      const comm = new NetworkingCommunication(contact.name);
+      comm.Sent = 1;
+      comm.Initiated = 1;
+      comm.MIS_DT = MIS_DT.GetDay() - MIS_DT.OneWeek() * 25;
+
+      await NetworkingCommunication.Insert(comm);
+    }
+    for (let i = 0; i < sent; i++) {
+      const comm = new NetworkingCommunication(contact.name);
+      comm.Sent = 1;
+      comm.MIS_DT = MIS_DT.GetDay() - MIS_DT.OneWeek() * 25;
+
+      await NetworkingCommunication.Insert(comm);
+    }
+  }*/
+
 }
 
 async function NetworkingSend()
@@ -111,6 +147,11 @@ async function NetworkingSend()
     data.lastname = active[randomind].name;
     RaiseSentForStat(active[randomind].name);
 
+    const comm = new NetworkingCommunication(active[randomind].name);
+    comm.Sent = 1;
+
+    await NetworkingCommunication.Insert(comm);
+
     i++;
   }
 
@@ -122,10 +163,10 @@ async function NetworkingSend()
 
   for (const contact of applicableContacts) {
     if (contact.init > 0) {
-      res += `Unfinished initiated contact with ${contact.name}\n`;
+      res += `Unfinished initiated contact with ${contact.name} (${contact.sent}/${contact.init}/${contact.done})\n`;
     }
     else if (contact.sent > 0) {
-      res += `Uninitiated contact with ${contact.name}\n`;
+      res += `Uninitiated contact with ${contact.name} (${contact.sent}/${contact.init}/${contact.done})\n`;
     }
 
     contact.init--;
@@ -211,7 +252,7 @@ function RaiseSentForStat(name: string)
   // data.contacts.push(stat);
 }
 
-function RaiseDoneForStat(name: string)
+async function RaiseDoneForStat(name: string)
 {
   const stat = findStat(name);
   if (typeof stat === "string") { return stat; }
@@ -223,9 +264,18 @@ function RaiseDoneForStat(name: string)
   const contact = activeContacts.find((x) => x.name === name && !x.done);
   if (contact) {
     contact.done = true;
+    contact.init = 0;
   }
 
   writeChange(stat.name, 2);
+
+  const comm = await NetworkingCommunication.GetWithContactUnfinished(name);
+
+  if (comm.length) {
+    const currcomm = comm[0];
+    currcomm.Done = 1;
+    await NetworkingCommunication.Update(currcomm);
+  }
 
   changesHistory.push(new NetworkingChange(stat.name, "Done"));
 
@@ -235,7 +285,7 @@ function RaiseDoneForStat(name: string)
   // data.contacts.push(stat);
 }
 
-function RaiseInitForStat(name: string)
+async function RaiseInitForStat(name: string)
 {
   const stat = findStat(name);
   if (typeof stat === "string") { return stat; }
@@ -249,6 +299,15 @@ function RaiseInitForStat(name: string)
   const contact = activeContacts.find((x) => x.name === name) || new NetworkingContact(name);
   if (contact) {
     contact.init = 5;
+    contact.sent = 0;
+  }
+
+  const comm = await NetworkingCommunication.GetWithContactUninitiated(name);
+
+  if (comm.length) {
+    const currcomm = comm[0];
+    currcomm.Initiated = 1;
+    await NetworkingCommunication.Update(currcomm);
   }
 
   writeChange(stat.name, 1);
@@ -411,13 +470,13 @@ export async function ProcessNetworking(message: MessageWrapper)
   }
   if (message.checkRegex(/^\/networking done \(...\)/)) {
     setWaitingForValue(`Please, write name who to mark as done.`,
-      (msg) =>
+      async (msg) =>
       {
         const name = msg.message.text;
 
         if (!name) { return; }
 
-        const res = RaiseDoneForStat(name);
+        const res = await RaiseDoneForStat(name);
         if (typeof res === "string") {
           return reply(message, res);
         }
@@ -429,13 +488,13 @@ export async function ProcessNetworking(message: MessageWrapper)
   }
   if (message.checkRegex(/^\/networking init \(...\)/)) {
     setWaitingForValue(`Please, write name who to mark as initiated.`,
-      (msg) =>
+      async (msg) =>
       {
         const name = msg.message.text;
 
         if (!name) { return; }
 
-        const res = RaiseInitForStat(name);
+        const res = await RaiseInitForStat(name);
         if (typeof res === "string") {
           return reply(message, res);
         }
@@ -526,11 +585,13 @@ export async function ProcessNetworking(message: MessageWrapper)
 }
 
 async function writeChange(contact: string, type: number)
-  {
-    const r = {
-      Contact: contact,
-      Type: type,
-      MIS_DT: Date.now()
-    };
-    await NetworkingEntriesRepository().insert(r);
-  }
+{
+  const r = {
+    Contact: contact,
+    Type: type,
+    MIS_DT: MIS_DT.GetExact()
+  };
+  await NetworkingEntriesRepository().insert(r);
+}
+
+export const NetworkingEntriesRepository = () => Connection("NetworkingHistory");

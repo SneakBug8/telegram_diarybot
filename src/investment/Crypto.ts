@@ -11,6 +11,7 @@ import { Server } from "..";
 import { BotAPI } from "../api/bot";
 import dateFormat = require("dateformat");
 import { Connection } from "../Database";
+import { MIS_DT } from "../util/MIS_DT";
 
 // 1) Create our database, supply location and options.
 //    This will create or open the underlying store.
@@ -483,9 +484,9 @@ class CryptoClass
       realizedgain,
       rotated,
       maxcapital,
-      MIS_DT: Date.now()
+      MIS_DT: MIS_DT.GetDay()
     };
-    CryptoTransactionsRepository().insert(r);
+    CryptoPortfolioRepository().insert(r);
   }
 
   private async incrementTimeSpent(value: number)

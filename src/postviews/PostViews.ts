@@ -3,12 +3,13 @@
 
 import { MessageWrapper } from "../MessageWrapper";
 import TelegramBot = require("node-telegram-bot-api");
-import { StringIncludes } from "../util/EqualString";
+import { shortNum, StringIncludes } from "../util/EqualString";
 import { Connection } from "../Database";
 import { PostViewEntry } from "./PostViewData";
 import axios from "axios";
 import { Server } from "..";
 import { Sleep } from "../util/Sleep";
+import { MIS_DT } from "../util/MIS_DT";
 
 export const PostViewsRepository = () => Connection<PostViewEntry>("PostViews");
 
@@ -18,6 +19,8 @@ const whattimeofaday = 16;
 function getKeyboard(): TelegramBot.KeyboardButton[][]
 {
   return [
+    [{ text: "/posts top" }, { text: "/posts trending" }, { text: "/posts force" }],
+    [{ text: "/exit" }]
   ];
 }
 
@@ -33,43 +36,34 @@ async function GetLastBatch()
 
 function GetLastWeekMisDT()
 {
-  const mis_dt = new Date(Date.now());
-  mis_dt.setHours(0);
-  mis_dt.setMinutes(0);
-  mis_dt.setSeconds(0);
-  mis_dt.setMilliseconds(0);
-
-  return mis_dt.getTime() - 7 * 24 * 60 * 60 * 1000;
+  return MIS_DT.GetDay() - 7;
 }
 
 function GetDailyMisDT()
 {
-  const mis_dt = new Date(Date.now());
-  mis_dt.setHours(0);
-  mis_dt.setMinutes(0);
-  mis_dt.setSeconds(0);
-  mis_dt.setMilliseconds(0);
-
-  return mis_dt.getTime() - 24 * 60 * 60 * 1000;
+  return MIS_DT.GetDay() - 1;
 }
 
 async function GetWeeklyPostViews(postid: number)
 {
   const date = await GetLastBatch();
   // console.log(`MaxDate ${JSON.stringify(date)}`);
-  return PostViewsRepository().where("MIS_DT", GetLastWeekMisDT()).andWhere("postId", postid).select();
+  return PostViewsRepository().where("MIS_DT", "<=", GetLastWeekMisDT()).andWhere("postId", postid).select()
+    .orderBy("MIS_DT", "desc");
 }
 
 async function GetDailyPostViews(postid: number)
 {
   const date = await GetLastBatch();
   // console.log(`MaxDate ${JSON.stringify(date)}`);
-  return PostViewsRepository().where("MIS_DT", GetDailyMisDT()).andWhere("postId", postid).select();
+  //.where("MIS_DT", GetDailyMisDT())
+  return PostViewsRepository().andWhere("postId", postid).select()
+    .orderBy("MIS_DT", "desc");
 }
 
-async function GetSimilarEntries(entry: PostViewEntry)
+async function GetSimilarEntries(postId: number, MIS_DT: number)
 {
-  return PostViewsRepository().where({ postId: entry.postId, MIS_DT: entry.MIS_DT }).select();
+  return PostViewsRepository().where({ postId, MIS_DT }).select();
 }
 
 async function UpdateEntry(entry: PostViewEntry)
@@ -113,52 +107,62 @@ async function LoadPosts(weekly: boolean = false)
   }
   const entries = [];
 
-  const mis_dt = new Date(Date.now());
-  mis_dt.setHours(0);
-  mis_dt.setMinutes(0);
-  mis_dt.setSeconds(0);
-  mis_dt.setMilliseconds(0);
+  const mis_dt = MIS_DT.GetDay();
 
   for (const post of posts) {
-    const entry = new PostViewEntry();
-    entry.postId = post.id;
-    entry.title = HtmlParse(post?.title?.rendered);
-    entry.views = post.views;
-    entry.MIS_DT = mis_dt.getTime();
+    let comment = "";
+    let timeSinceLastUpdate = 0;
 
-    if (!entry.views) {
+    if (!post.id) {
       continue;
+    }
+
+    const dbentries = await GetSimilarEntries(post.id, mis_dt);
+    const entry = (dbentries.length) ? dbentries[0] : new PostViewEntry();
+
+    const newentry = !dbentries.length;
+
+    if (newentry) {
+      entry.postId = post.id;
+      entry.title = HtmlParse(post?.title?.rendered);
+      entry.views = post.views;
+      entry.MIS_DT = mis_dt;
+
+      if (!entry.views) {
+        continue;
+      }
     }
 
     const mentries = (!weekly && await GetDailyPostViews(entry.postId)) || await GetWeeklyPostViews(entry.postId);
 
     if (mentries.length) {
       const lastentry = mentries[0];
-      entry.change = entry.views - lastentry.views;
 
-      entry.CREATED_DT = lastentry.CREATED_DT;
+      if (newentry) {
+        entry.change = entry.views - lastentry.views;
+        entry.CREATED_DT = lastentry.CREATED_DT;
+      }
+
+      timeSinceLastUpdate = entry.MIS_DT - lastentry.MIS_DT;
+
+      if (lastentry.MIS_DT != GetDailyMisDT()) {
+        comment = `${shortNum(timeSinceLastUpdate / MIS_DT.OneDay())}d`;
+      }
 
       //console.log(`Post ${lastentry.postId} had ${lastentry.views} views.`);
     }
-    else {
-      entry.change = entry.views;
-      entry.CREATED_DT = mis_dt.getTime();
+    else if (newentry) {
+      entry.change = Number.parseInt(entry.views + "", 10);
+      entry.CREATED_DT = mis_dt;
     }
 
-    entries.push(entry);
-
-    const dbentries = await GetSimilarEntries(entry);
-
-    if (dbentries.length) {
-      const dbentry = dbentries[0];
-      entry.id = dbentry.id;
-      await UpdateEntry(entry);
-    }
-    else {
+    if (newentry) {
       await AddEntry(entry);
     }
-  }
 
+    entries.push({ entry, comment, timeSinceLastUpdate });
+
+  }
   return entries;
 }
 
@@ -181,17 +185,26 @@ async function PostViewsSendWeekly()
   const entries = await LoadPosts(true);
 
   let res = "Топ статей по просмотрам за неделю:\n";
+  let total = 0;
 
-  entries.sort((a, b) => b.change - a.change);
+  entries.sort((a, b) => b.entry.change - a.entry.change);
 
-  for (const entry of entries) {
+  for (const t of entries) {
+    const entry = t.entry;
+
     if (!entry.views || !entry.change) {
       continue;
     }
 
     const mark = (entry.change >= 0) ? "+" : "-";
-    res += `${entry.title} - ${entry.views} (${mark}${entry.change})\n`;
+    res += `${entry.title} - ${entry.views} (${mark}${entry.change}` +
+      `${(t.comment) ? ", " + t.comment : ""}`
+      + `)\n`;
+
+    total += entry.change;
   }
+
+  res += `---\nВсего просмотров за день:${total}`;
 
   await Server.SendMessage(res);
 
@@ -204,26 +217,95 @@ async function PostViewsSendDaily()
 
   let res = "Топ статей по просмотрам за день:\n";
 
-  entries.sort((a, b) => b.change - a.change);
+  entries.sort((a, b) => b.entry.change - a.entry.change);
 
-  for (const entry of entries) {
+  let total = 0;
+
+  for (const t of entries) {
+    const entry = t.entry;
+
     if (!entry.views || !entry.change) {
       continue;
     }
 
     const mark = (entry.change >= 0) ? "+" : "-";
-    res += `${entry.title} - ${entry.views} (${mark}${entry.change})\n`;
+    res += `${entry.title} - ${entry.views} (${mark}${entry.change}` +
+      `${(t.comment) ? ", " + t.comment : ""}` +
+      `)\n`;
+
+    total += entry.change;
   }
+
+  res += `---\nВсего просмотров за день:${total}`;
 
   await Server.SendMessage(res);
 
   return "";
 }
 
+async function TopPosts()
+{
+  const entries = await LoadPosts();
+
+  let res = "Топ статей по просмотрам:\n";
+
+  entries.sort((a, b) => b.entry.views - a.entry.views);
+
+  for (const t of entries) {
+    const entry = t.entry;
+
+    if (!entry.views) {
+      continue;
+    }
+
+    const mark = (entry.change >= 0) ? "+" : "-";
+    res += `${entry.title} - ${entry.views} (${new Date(entry.CREATED_DT).toDateString()})\n`;
+  }
+
+  return res;
+}
+
+async function TrendingPosts()
+{
+  const entries = await LoadPosts();
+
+  let res = "Трендовые статьи:\n";
+  let total = 0;
+  let days = 0;
+
+  entries.sort((a, b) => (a.entry.CREATED_DT / a.entry.views) - (b.entry.CREATED_DT / b.entry.views));
+
+  for (const t of entries) {
+    const entry = t.entry;
+
+    if (!entry.views) {
+      continue;
+    }
+    const entrydays = (entry.MIS_DT - entry.CREATED_DT) / 24 * 60 * 60 * 1000;
+    total += entry.views;
+    days += entrydays;
+
+    const mark = (entry.change >= 0) ? "+" : "-";
+    res += `${entry.title} - ${entry.views} (${new Date(entry.CREATED_DT).toDateString()})\n`;
+  }
+
+  res += `---\nВ среднем просмотров за день показа: ${shortNum(total / days)}`;
+
+  return res;
+}
+
 export async function ProcessPostViews(message: MessageWrapper)
 {
   if (message.checkRegex(/\/posts force/)) {
     await PostViewsSendDaily();
+    return;
+  }
+  if (message.checkRegex(/\/posts top/)) {
+    reply(message, await TopPosts());
+    return;
+  }
+  if (message.checkRegex(/\/posts trending/)) {
+    reply(message, await TrendingPosts());
     return;
   }
   return false;

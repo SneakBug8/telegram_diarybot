@@ -1,0 +1,3680 @@
+Thu, 25 Nov 2021 22:14:20 GMT node-telegram-bot-api deprecated Automatic enabling of cancellation of promises is deprecated.
+In the future, you will have to enable it yourself.
+See https://github.com/yagop/node-telegram-bot-api/issues/319. at internal/modules/cjs/loader.js:778:30
+Error fetching price for smooth-love-potion:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ripple:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for iota:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for neo:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for dash:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for litecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for binancecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for algorand:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cardano:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for eos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for uniswap:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for chainlink:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cosmos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for polkadot:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for terra-luna:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for filecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for solana:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ethereum:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for bitcoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for smooth-love-potion:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ripple:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for iota:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for neo:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for dash:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for litecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for binancecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for algorand:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cardano:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for eos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for uniswap:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for chainlink:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cosmos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for polkadot:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for terra-luna:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for filecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for solana:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ethereum:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for bitcoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for smooth-love-potion:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ripple:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for iota:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for dash:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for litecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for binancecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for algorand:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cardano:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for uniswap:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for chainlink:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cosmos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for polkadot:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for terra-luna:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for filecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for solana:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ethereum:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for bitcoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for smooth-love-potion:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ripple:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for iota:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for litecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for binancecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for algorand:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cardano:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for chainlink:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cosmos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for polkadot:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for terra-luna:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for filecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for solana:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ethereum:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for bitcoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for chainlink:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+{ Error: Request failed with status code 500
+    at createError (/home/sneak/diarybot/node_modules/axios/lib/core/createError.js:16:15)
+    at settle (/home/sneak/diarybot/node_modules/axios/lib/core/settle.js:17:12)
+    at IncomingMessage.handleStreamEnd (/home/sneak/diarybot/node_modules/axios/lib/adapters/http.js:269:11)
+    at IncomingMessage.emit (events.js:203:15)
+    at endReadableNT (_stream_readable.js:1145:12)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+  config:
+   { url:
+      'https://sneakbug8.com/wp-json/wp/v2/posts?_fields=id,title,link,views&per_page=100&page=1',
+     method: 'get',
+     headers:
+      { Accept: 'application/json, text/plain, */*',
+        'User-Agent': 'axios/0.21.4' },
+     transformRequest: [ [Function: transformRequest] ],
+     transformResponse: [ [Function: transformResponse] ],
+     timeout: 0,
+     adapter: [Function: httpAdapter],
+     xsrfCookieName: 'XSRF-TOKEN',
+     xsrfHeaderName: 'X-XSRF-TOKEN',
+     maxContentLength: -1,
+     maxBodyLength: -1,
+     validateStatus: [Function: validateStatus],
+     transitional:
+      { silentJSONParsing: true,
+        forcedJSONParsing: true,
+        clarifyTimeoutError: false },
+     data: undefined },
+  request:
+   ClientRequest {
+     _events:
+      [Object: null prototype] {
+        socket: [Function],
+        abort: [Function],
+        aborted: [Function],
+        connect: [Function],
+        error: [Function],
+        timeout: [Function],
+        prefinish: [Function: requestOnPrefinish] },
+     _eventsCount: 7,
+     _maxListeners: undefined,
+     output: [],
+     outputEncodings: [],
+     outputCallbacks: [],
+     outputSize: 0,
+     writable: true,
+     _last: true,
+     chunkedEncoding: false,
+     shouldKeepAlive: false,
+     useChunkedEncodingByDefault: false,
+     sendDate: false,
+     _removedConnection: false,
+     _removedContLen: false,
+     _removedTE: false,
+     _contentLength: 0,
+     _hasBody: true,
+     _trailer: '',
+     finished: true,
+     _headerSent: true,
+     socket:
+      TLSSocket {
+        _tlsOptions: [Object],
+        _secureEstablished: true,
+        _securePending: false,
+        _newSessionPending: false,
+        _controlReleased: true,
+        _SNICallback: null,
+        servername: 'sneakbug8.com',
+        alpnProtocol: false,
+        authorized: true,
+        authorizationError: null,
+        encrypted: true,
+        _events: [Object],
+        _eventsCount: 9,
+        connecting: false,
+        _hadError: false,
+        _handle: [TLSWrap],
+        _parent: null,
+        _host: 'sneakbug8.com',
+        _readableState: [ReadableState],
+        readable: true,
+        _maxListeners: undefined,
+        _writableState: [WritableState],
+        writable: false,
+        allowHalfOpen: false,
+        _sockname: null,
+        _pendingData: null,
+        _pendingEncoding: '',
+        server: undefined,
+        _server: null,
+        ssl: [TLSWrap],
+        _requestCert: true,
+        _rejectUnauthorized: true,
+        parser: null,
+        _httpMessage: [Circular],
+        [Symbol(res)]: [TLSWrap],
+        [Symbol(asyncId)]: 103846,
+        [Symbol(lastWriteQueueSize)]: 0,
+        [Symbol(timeout)]: null,
+        [Symbol(kBytesRead)]: 0,
+        [Symbol(kBytesWritten)]: 0,
+        [Symbol(connect-options)]: [Object] },
+     connection:
+      TLSSocket {
+        _tlsOptions: [Object],
+        _secureEstablished: true,
+        _securePending: false,
+        _newSessionPending: false,
+        _controlReleased: true,
+        _SNICallback: null,
+        servername: 'sneakbug8.com',
+        alpnProtocol: false,
+        authorized: true,
+        authorizationError: null,
+        encrypted: true,
+        _events: [Object],
+        _eventsCount: 9,
+        connecting: false,
+        _hadError: false,
+        _handle: [TLSWrap],
+        _parent: null,
+        _host: 'sneakbug8.com',
+        _readableState: [ReadableState],
+        readable: true,
+        _maxListeners: undefined,
+        _writableState: [WritableState],
+        writable: false,
+        allowHalfOpen: false,
+        _sockname: null,
+        _pendingData: null,
+        _pendingEncoding: '',
+        server: undefined,
+        _server: null,
+        ssl: [TLSWrap],
+        _requestCert: true,
+        _rejectUnauthorized: true,
+        parser: null,
+        _httpMessage: [Circular],
+        [Symbol(res)]: [TLSWrap],
+        [Symbol(asyncId)]: 103846,
+        [Symbol(lastWriteQueueSize)]: 0,
+        [Symbol(timeout)]: null,
+        [Symbol(kBytesRead)]: 0,
+        [Symbol(kBytesWritten)]: 0,
+        [Symbol(connect-options)]: [Object] },
+     _header:
+      'GET /wp-json/wp/v2/posts?_fields=id,title,link,views&per_page=100&page=1 HTTP/1.1\r\nAccept: application/json, text/plain, */*\r\nUser-Agent: axios/0.21.4\r\nHost: sneakbug8.com\r\nConnection: close\r\n\r\n',
+     _onPendingData: [Function: noopPendingOutput],
+     agent:
+      Agent {
+        _events: [Object],
+        _eventsCount: 1,
+        _maxListeners: undefined,
+        defaultPort: 443,
+        protocol: 'https:',
+        options: [Object],
+        requests: {},
+        sockets: [Object],
+        freeSockets: {},
+        keepAliveMsecs: 1000,
+        keepAlive: false,
+        maxSockets: Infinity,
+        maxFreeSockets: 256,
+        maxCachedSessions: 100,
+        _sessionCache: [Object] },
+     socketPath: undefined,
+     timeout: undefined,
+     method: 'GET',
+     insecureHTTPParser: undefined,
+     path:
+      '/wp-json/wp/v2/posts?_fields=id,title,link,views&per_page=100&page=1',
+     _ended: true,
+     res:
+      IncomingMessage {
+        _readableState: [ReadableState],
+        readable: false,
+        _events: [Object],
+        _eventsCount: 3,
+        _maxListeners: undefined,
+        socket: [TLSSocket],
+        connection: [TLSSocket],
+        httpVersionMajor: 1,
+        httpVersionMinor: 1,
+        httpVersion: '1.1',
+        complete: true,
+        headers: [Object],
+        rawHeaders: [Array],
+        trailers: {},
+        rawTrailers: [],
+        aborted: false,
+        upgrade: false,
+        url: '',
+        method: null,
+        statusCode: 500,
+        statusMessage: 'Internal Server Error',
+        client: [TLSSocket],
+        _consuming: false,
+        _dumped: false,
+        req: [Circular],
+        responseUrl:
+         'https://sneakbug8.com/wp-json/wp/v2/posts?_fields=id,title,link,views&per_page=100&page=1',
+        redirects: [] },
+     aborted: undefined,
+     timeoutCb: null,
+     upgradeOrConnect: false,
+     parser: null,
+     maxHeadersCount: null,
+     _redirectable:
+      Writable {
+        _writableState: [WritableState],
+        writable: true,
+        _events: [Object],
+        _eventsCount: 2,
+        _maxListeners: undefined,
+        _options: [Object],
+        _ended: true,
+        _ending: true,
+        _redirectCount: 0,
+        _redirects: [],
+        _requestBodyLength: 0,
+        _requestBodyBuffers: [],
+        _onNativeResponse: [Function],
+        _currentRequest: [Circular],
+        _currentUrl:
+         'https://sneakbug8.com/wp-json/wp/v2/posts?_fields=id,title,link,views&per_page=100&page=1' },
+     [Symbol(isCorked)]: false,
+     [Symbol(outHeadersKey)]:
+      [Object: null prototype] { accept: [Array], 'user-agent': [Array], host: [Array] } },
+  response:
+   { status: 500,
+     statusText: 'Internal Server Error',
+     headers:
+      { date: 'Fri, 26 Nov 2021 13:14:26 GMT',
+        'content-type': 'application/json; charset=UTF-8',
+        'content-length': '587',
+        connection: 'close',
+        server: 'Jino.ru/mod_pizza',
+        'cache-control': 'no-cache, must-revalidate, max-age=0',
+        expires: 'Wed, 11 Jan 1984 05:00:00 GMT' },
+     config:
+      { url:
+         'https://sneakbug8.com/wp-json/wp/v2/posts?_fields=id,title,link,views&per_page=100&page=1',
+        method: 'get',
+        headers: [Object],
+        transformRequest: [Array],
+        transformResponse: [Array],
+        timeout: 0,
+        adapter: [Function: httpAdapter],
+        xsrfCookieName: 'XSRF-TOKEN',
+        xsrfHeaderName: 'X-XSRF-TOKEN',
+        maxContentLength: -1,
+        maxBodyLength: -1,
+        validateStatus: [Function: validateStatus],
+        transitional: [Object],
+        data: undefined },
+     request:
+      ClientRequest {
+        _events: [Object],
+        _eventsCount: 7,
+        _maxListeners: undefined,
+        output: [],
+        outputEncodings: [],
+        outputCallbacks: [],
+        outputSize: 0,
+        writable: true,
+        _last: true,
+        chunkedEncoding: false,
+        shouldKeepAlive: false,
+        useChunkedEncodingByDefault: false,
+        sendDate: false,
+        _removedConnection: false,
+        _removedContLen: false,
+        _removedTE: false,
+        _contentLength: 0,
+        _hasBody: true,
+        _trailer: '',
+        finished: true,
+        _headerSent: true,
+        socket: [TLSSocket],
+        connection: [TLSSocket],
+        _header:
+         'GET /wp-json/wp/v2/posts?_fields=id,title,link,views&per_page=100&page=1 HTTP/1.1\r\nAccept: application/json, text/plain, */*\r\nUser-Agent: axios/0.21.4\r\nHost: sneakbug8.com\r\nConnection: close\r\n\r\n',
+        _onPendingData: [Function: noopPendingOutput],
+        agent: [Agent],
+        socketPath: undefined,
+        timeout: undefined,
+        method: 'GET',
+        insecureHTTPParser: undefined,
+        path:
+         '/wp-json/wp/v2/posts?_fields=id,title,link,views&per_page=100&page=1',
+        _ended: true,
+        res: [IncomingMessage],
+        aborted: undefined,
+        timeoutCb: null,
+        upgradeOrConnect: false,
+        parser: null,
+        maxHeadersCount: null,
+        _redirectable: [Writable],
+        [Symbol(isCorked)]: false,
+        [Symbol(outHeadersKey)]: [Object] },
+     data:
+      { code: 'internal_server_error',
+        message:
+         '<p>На сайте возникла критическая ошибка.</p><p><a href="https://wordpress.org/support/article/faq-troubleshooting/">Узнайте больше про решение проблем с WordPress.</a></p>',
+        data: [Object],
+        additional_errors: [] } },
+  isAxiosError: true,
+  toJSON: [Function: toJSON] }
+Fri, 26 Nov 2021 15:14:29 GMT node-telegram-bot-api deprecated In the future, content-type of files you send will default to "application/octet-stream". See https://github.com/yagop/node-telegram-bot-api/blob/master/doc/usage.md#sending-files for more information on how sending files has been improved and on how to disable this deprecation message altogether. at bin/investment/Crypto.js:228:30
+Error fetching price for smooth-love-potion:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ripple:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for iota:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for neo:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for dash:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for litecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for binancecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cardano:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for algorand:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for eos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for uniswap:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for chainlink:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cosmos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for polkadot:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for terra-luna:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for filecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for solana:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ethereum:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for bitcoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for smooth-love-potion:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ripple:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for iota:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for neo:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for dash:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for litecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for binancecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cardano:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for algorand:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for eos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for uniswap:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for chainlink:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cosmos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for polkadot:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for terra-luna:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for filecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for solana:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ethereum:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for bitcoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for smooth-love-potion:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ripple:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for iota:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for neo:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for dash:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for litecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for binancecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cardano:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for algorand:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for eos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for uniswap:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for chainlink:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cosmos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for polkadot:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for terra-luna:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for filecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for solana:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ethereum:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for bitcoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for smooth-love-potion:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ripple:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for iota:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for neo:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for dash:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for litecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for binancecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cardano:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for algorand:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for eos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for uniswap:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for chainlink:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cosmos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for terra-luna:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for filecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for solana:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ethereum:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for bitcoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for smooth-love-potion:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ripple:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for neo:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for dash:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for litecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for binancecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cardano:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for algorand:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for eos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for uniswap:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for chainlink:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for terra-luna:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for filecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for solana:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ethereum:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for bitcoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for smooth-love-potion:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ripple:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for iota:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for neo:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for dash:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for litecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for binancecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cardano:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for algorand:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for eos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for uniswap:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for chainlink:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cosmos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for polkadot:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for terra-luna:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for filecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for solana:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ethereum:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for bitcoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for smooth-love-potion:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ripple:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for iota:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for neo:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for dash:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for litecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for binancecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cardano:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for algorand:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for eos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for uniswap:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for chainlink:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cosmos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for polkadot:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for terra-luna:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for filecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for solana:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ethereum:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for bitcoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for smooth-love-potion:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for iota:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for litecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for binancecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for algorand:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for eos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for uniswap:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cosmos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for terra-luna:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for filecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for solana:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ethereum:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for bitcoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for iota:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for iota:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for iota:
+{ Error: Request failed with status code 422
+    at createError (/home/sneak/diarybot/node_modules/axios/lib/core/createError.js:16:15)
+    at settle (/home/sneak/diarybot/node_modules/axios/lib/core/settle.js:17:12)
+    at IncomingMessage.handleStreamEnd (/home/sneak/diarybot/node_modules/axios/lib/adapters/http.js:269:11)
+    at IncomingMessage.emit (events.js:203:15)
+    at endReadableNT (_stream_readable.js:1145:12)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+  config:
+   { url: 'https://api.coingecko.com/api/v3/coins/iota/market_chart',
+     method: 'get',
+     headers:
+      { Accept: 'application/json, text/plain, */*',
+        'User-Agent': 'axios/0.21.4' },
+     params: { vs_currency: 'usd', days: 1, interval: 'daily' },
+     transformRequest: [ [Function: transformRequest] ],
+     transformResponse: [ [Function: transformResponse] ],
+     timeout: 0,
+     adapter: [Function: httpAdapter],
+     xsrfCookieName: 'XSRF-TOKEN',
+     xsrfHeaderName: 'X-XSRF-TOKEN',
+     maxContentLength: -1,
+     maxBodyLength: -1,
+     validateStatus: [Function: validateStatus],
+     transitional:
+      { silentJSONParsing: true,
+        forcedJSONParsing: true,
+        clarifyTimeoutError: false },
+     data: undefined },
+  request:
+   ClientRequest {
+     _events:
+      [Object: null prototype] {
+        socket: [Function],
+        abort: [Function],
+        aborted: [Function],
+        connect: [Function],
+        error: [Function],
+        timeout: [Function],
+        prefinish: [Function: requestOnPrefinish] },
+     _eventsCount: 7,
+     _maxListeners: undefined,
+     output: [],
+     outputEncodings: [],
+     outputCallbacks: [],
+     outputSize: 0,
+     writable: true,
+     _last: true,
+     chunkedEncoding: false,
+     shouldKeepAlive: false,
+     useChunkedEncodingByDefault: false,
+     sendDate: false,
+     _removedConnection: false,
+     _removedContLen: false,
+     _removedTE: false,
+     _contentLength: 0,
+     _hasBody: true,
+     _trailer: '',
+     finished: true,
+     _headerSent: true,
+     socket:
+      TLSSocket {
+        _tlsOptions: [Object],
+        _secureEstablished: true,
+        _securePending: false,
+        _newSessionPending: false,
+        _controlReleased: true,
+        _SNICallback: null,
+        servername: 'api.coingecko.com',
+        alpnProtocol: false,
+        authorized: true,
+        authorizationError: null,
+        encrypted: true,
+        _events: [Object],
+        _eventsCount: 9,
+        connecting: false,
+        _hadError: false,
+        _handle: [TLSWrap],
+        _parent: null,
+        _host: 'api.coingecko.com',
+        _readableState: [ReadableState],
+        readable: true,
+        _maxListeners: undefined,
+        _writableState: [WritableState],
+        writable: false,
+        allowHalfOpen: false,
+        _sockname: null,
+        _pendingData: null,
+        _pendingEncoding: '',
+        server: undefined,
+        _server: null,
+        ssl: [TLSWrap],
+        _requestCert: true,
+        _rejectUnauthorized: true,
+        parser: null,
+        _httpMessage: [Circular],
+        [Symbol(res)]: [TLSWrap],
+        [Symbol(asyncId)]: 358995,
+        [Symbol(lastWriteQueueSize)]: 0,
+        [Symbol(timeout)]: null,
+        [Symbol(kBytesRead)]: 0,
+        [Symbol(kBytesWritten)]: 0,
+        [Symbol(connect-options)]: [Object] },
+     connection:
+      TLSSocket {
+        _tlsOptions: [Object],
+        _secureEstablished: true,
+        _securePending: false,
+        _newSessionPending: false,
+        _controlReleased: true,
+        _SNICallback: null,
+        servername: 'api.coingecko.com',
+        alpnProtocol: false,
+        authorized: true,
+        authorizationError: null,
+        encrypted: true,
+        _events: [Object],
+        _eventsCount: 9,
+        connecting: false,
+        _hadError: false,
+        _handle: [TLSWrap],
+        _parent: null,
+        _host: 'api.coingecko.com',
+        _readableState: [ReadableState],
+        readable: true,
+        _maxListeners: undefined,
+        _writableState: [WritableState],
+        writable: false,
+        allowHalfOpen: false,
+        _sockname: null,
+        _pendingData: null,
+        _pendingEncoding: '',
+        server: undefined,
+        _server: null,
+        ssl: [TLSWrap],
+        _requestCert: true,
+        _rejectUnauthorized: true,
+        parser: null,
+        _httpMessage: [Circular],
+        [Symbol(res)]: [TLSWrap],
+        [Symbol(asyncId)]: 358995,
+        [Symbol(lastWriteQueueSize)]: 0,
+        [Symbol(timeout)]: null,
+        [Symbol(kBytesRead)]: 0,
+        [Symbol(kBytesWritten)]: 0,
+        [Symbol(connect-options)]: [Object] },
+     _header:
+      'GET /api/v3/coins/iota/market_chart?vs_currency=usd&days=1&interval=daily HTTP/1.1\r\nAccept: application/json, text/plain, */*\r\nUser-Agent: axios/0.21.4\r\nHost: api.coingecko.com\r\nConnection: close\r\n\r\n',
+     _onPendingData: [Function: noopPendingOutput],
+     agent:
+      Agent {
+        _events: [Object],
+        _eventsCount: 1,
+        _maxListeners: undefined,
+        defaultPort: 443,
+        protocol: 'https:',
+        options: [Object],
+        requests: {},
+        sockets: [Object],
+        freeSockets: {},
+        keepAliveMsecs: 1000,
+        keepAlive: false,
+        maxSockets: Infinity,
+        maxFreeSockets: 256,
+        maxCachedSessions: 100,
+        _sessionCache: [Object] },
+     socketPath: undefined,
+     timeout: undefined,
+     method: 'GET',
+     insecureHTTPParser: undefined,
+     path:
+      '/api/v3/coins/iota/market_chart?vs_currency=usd&days=1&interval=daily',
+     _ended: true,
+     res:
+      IncomingMessage {
+        _readableState: [ReadableState],
+        readable: false,
+        _events: [Object],
+        _eventsCount: 3,
+        _maxListeners: undefined,
+        socket: [TLSSocket],
+        connection: [TLSSocket],
+        httpVersionMajor: 1,
+        httpVersionMinor: 1,
+        httpVersion: '1.1',
+        complete: true,
+        headers: [Object],
+        rawHeaders: [Array],
+        trailers: {},
+        rawTrailers: [],
+        aborted: false,
+        upgrade: false,
+        url: '',
+        method: null,
+        statusCode: 422,
+        statusMessage: 'Unprocessable Entity',
+        client: [TLSSocket],
+        _consuming: true,
+        _dumped: false,
+        req: [Circular],
+        responseUrl:
+         'https://api.coingecko.com/api/v3/coins/iota/market_chart?vs_currency=usd&days=1&interval=daily',
+        redirects: [] },
+     aborted: undefined,
+     timeoutCb: null,
+     upgradeOrConnect: false,
+     parser: null,
+     maxHeadersCount: null,
+     _redirectable:
+      Writable {
+        _writableState: [WritableState],
+        writable: true,
+        _events: [Object],
+        _eventsCount: 2,
+        _maxListeners: undefined,
+        _options: [Object],
+        _ended: true,
+        _ending: true,
+        _redirectCount: 0,
+        _redirects: [],
+        _requestBodyLength: 0,
+        _requestBodyBuffers: [],
+        _onNativeResponse: [Function],
+        _currentRequest: [Circular],
+        _currentUrl:
+         'https://api.coingecko.com/api/v3/coins/iota/market_chart?vs_currency=usd&days=1&interval=daily' },
+     [Symbol(isCorked)]: false,
+     [Symbol(outHeadersKey)]:
+      [Object: null prototype] { accept: [Array], 'user-agent': [Array], host: [Array] } },
+  response:
+   { status: 422,
+     statusText: 'Unprocessable Entity',
+     headers:
+      { date: 'Sun, 28 Nov 2021 01:44:26 GMT',
+        'content-type': 'application/json; charset=utf-8',
+        'transfer-encoding': 'chunked',
+        connection: 'close',
+        vary: 'Accept-Encoding, Origin',
+        'cache-control': 'no-cache',
+        'x-request-id': 'b2b04ff8-9f17-4727-ac93-0a0704902e34',
+        'x-runtime': '0.005802',
+        'cf-cache-status': 'MISS',
+        'expect-ct':
+         'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+        server: 'cloudflare',
+        'cf-ray': '6b4fe93b2e133b85-CDG' },
+     config:
+      { url: 'https://api.coingecko.com/api/v3/coins/iota/market_chart',
+        method: 'get',
+        headers: [Object],
+        params: [Object],
+        transformRequest: [Array],
+        transformResponse: [Array],
+        timeout: 0,
+        adapter: [Function: httpAdapter],
+        xsrfCookieName: 'XSRF-TOKEN',
+        xsrfHeaderName: 'X-XSRF-TOKEN',
+        maxContentLength: -1,
+        maxBodyLength: -1,
+        validateStatus: [Function: validateStatus],
+        transitional: [Object],
+        data: undefined },
+     request:
+      ClientRequest {
+        _events: [Object],
+        _eventsCount: 7,
+        _maxListeners: undefined,
+        output: [],
+        outputEncodings: [],
+        outputCallbacks: [],
+        outputSize: 0,
+        writable: true,
+        _last: true,
+        chunkedEncoding: false,
+        shouldKeepAlive: false,
+        useChunkedEncodingByDefault: false,
+        sendDate: false,
+        _removedConnection: false,
+        _removedContLen: false,
+        _removedTE: false,
+        _contentLength: 0,
+        _hasBody: true,
+        _trailer: '',
+        finished: true,
+        _headerSent: true,
+        socket: [TLSSocket],
+        connection: [TLSSocket],
+        _header:
+         'GET /api/v3/coins/iota/market_chart?vs_currency=usd&days=1&interval=daily HTTP/1.1\r\nAccept: application/json, text/plain, */*\r\nUser-Agent: axios/0.21.4\r\nHost: api.coingecko.com\r\nConnection: close\r\n\r\n',
+        _onPendingData: [Function: noopPendingOutput],
+        agent: [Agent],
+        socketPath: undefined,
+        timeout: undefined,
+        method: 'GET',
+        insecureHTTPParser: undefined,
+        path:
+         '/api/v3/coins/iota/market_chart?vs_currency=usd&days=1&interval=daily',
+        _ended: true,
+        res: [IncomingMessage],
+        aborted: undefined,
+        timeoutCb: null,
+        upgradeOrConnect: false,
+        parser: null,
+        maxHeadersCount: null,
+        _redirectable: [Writable],
+        [Symbol(isCorked)]: false,
+        [Symbol(outHeadersKey)]: [Object] },
+     data: { error: 'Missing parameter vs_currency' } },
+  isAxiosError: true,
+  toJSON: [Function: toJSON] }
+Sun, 28 Nov 2021 19:14:30 GMT node-telegram-bot-api deprecated In the future, content-type of files you send will default to "application/octet-stream". See https://github.com/yagop/node-telegram-bot-api/blob/master/doc/usage.md#sending-files for more information on how sending files has been improved and on how to disable this deprecation message altogether. at bin/backup/BackupService.js:63:22
+Error fetching price for smooth-love-potion:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ripple:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for iota:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for neo:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for dash:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for litecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for binancecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cardano:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for algorand:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for eos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for uniswap:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for chainlink:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cosmos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for polkadot:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for terra-luna:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for filecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for solana:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ethereum:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for bitcoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for smooth-love-potion:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ripple:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for iota:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for neo:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for dash:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for litecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for binancecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cardano:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for algorand:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for eos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for uniswap:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for chainlink:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cosmos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for polkadot:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for terra-luna:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for filecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for solana:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ethereum:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for bitcoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for smooth-love-potion:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ripple:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for iota:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for neo:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for dash:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for litecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for binancecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cardano:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for algorand:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for eos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for uniswap:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for chainlink:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cosmos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for polkadot:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for terra-luna:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for filecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for solana:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ethereum:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for bitcoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for smooth-love-potion:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ripple:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for iota:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for neo:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for dash:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for litecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for binancecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cardano:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for algorand:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for eos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for uniswap:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for chainlink:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cosmos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for polkadot:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for terra-luna:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for filecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for solana:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ethereum:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for bitcoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for smooth-love-potion:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ripple:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for iota:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for litecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for binancecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cardano:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for algorand:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for chainlink:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cosmos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for polkadot:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for terra-luna:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for filecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for solana:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ethereum:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for bitcoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ripple:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for algorand:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for polkadot:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for filecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for smooth-love-potion:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ripple:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for iota:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for neo:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for dash:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for litecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for binancecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cardano:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for algorand:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for eos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for uniswap:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for chainlink:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cosmos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for polkadot:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for terra-luna:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for filecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for solana:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ethereum:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for bitcoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for smooth-love-potion:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ripple:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for iota:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for neo:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for dash:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for litecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for binancecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cardano:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for algorand:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for eos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for uniswap:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for chainlink:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cosmos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for polkadot:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for terra-luna:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for filecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for solana:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ethereum:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for bitcoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for smooth-love-potion:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ripple:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for iota:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for neo:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for dash:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for litecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for binancecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cardano:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for algorand:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for eos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for uniswap:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for chainlink:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cosmos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for polkadot:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for terra-luna:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for filecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for solana:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ethereum:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for bitcoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for smooth-love-potion:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ripple:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for iota:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for neo:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for dash:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for litecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for binancecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cardano:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for algorand:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for eos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for uniswap:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for chainlink:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cosmos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for polkadot:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for terra-luna:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for filecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for solana:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ethereum:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for bitcoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for smooth-love-potion:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ripple:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for iota:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for neo:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for dash:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for litecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for binancecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cardano:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for algorand:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for eos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for uniswap:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for chainlink:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cosmos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for polkadot:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for terra-luna:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for filecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for solana:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ethereum:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for bitcoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for smooth-love-potion:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ripple:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for dash:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for litecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for binancecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cardano:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for algorand:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for uniswap:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for chainlink:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cosmos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for polkadot:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for terra-luna:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for filecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for solana:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ethereum:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for bitcoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for smooth-love-potion:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ripple:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for iota:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for neo:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for dash:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for litecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for binancecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cardano:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for algorand:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for eos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for uniswap:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for chainlink:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cosmos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for polkadot:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for terra-luna:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for filecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for solana:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ethereum:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for bitcoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for smooth-love-potion:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ripple:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for iota:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for neo:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for dash:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for litecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for binancecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cardano:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for algorand:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for eos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for uniswap:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for chainlink:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cosmos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for polkadot:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for terra-luna:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for filecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for solana:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ethereum:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for bitcoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for smooth-love-potion:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ripple:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for iota:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for dash:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for litecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for binancecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cardano:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for eos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for chainlink:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cosmos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for polkadot:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for solana:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ethereum:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for bitcoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for smooth-love-potion:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ripple:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for iota:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for dash:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for litecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for binancecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cardano:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for eos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for chainlink:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cosmos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for polkadot:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for solana:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ethereum:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for bitcoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for smooth-love-potion:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ripple:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for dash:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for litecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for binancecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cardano:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for eos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for chainlink:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cosmos:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for polkadot:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for solana:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for ethereum:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for bitcoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for dash:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for binancecoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for cardano:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for chainlink:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for polkadot:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Error fetching price for bitcoin:
+TypeError: Cannot read property '1' of undefined
+    at CryptoClass.<anonymous> (/home/sneak/diarybot/bin/investment/Crypto.js:191:51)
+    at Generator.next (<anonymous>)
+    at fulfilled (/home/sneak/diarybot/bin/investment/Crypto.js:5:58)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+Wed, 01 Dec 2021 10:04:44 GMT node-telegram-bot-api deprecated Automatic enabling of cancellation of promises is deprecated.
+In the future, you will have to enable it yourself.
+See https://github.com/yagop/node-telegram-bot-api/issues/319. at internal/modules/cjs/loader.js:778:30
+Wed, 01 Dec 2021 11:14:12 GMT node-telegram-bot-api deprecated Automatic enabling of cancellation of promises is deprecated.
+In the future, you will have to enable it yourself.
+See https://github.com/yagop/node-telegram-bot-api/issues/319. at internal/modules/cjs/loader.js:778:30
+Wed, 01 Dec 2021 11:22:09 GMT node-telegram-bot-api deprecated Automatic enabling of cancellation of promises is deprecated.
+In the future, you will have to enable it yourself.
+See https://github.com/yagop/node-telegram-bot-api/issues/319. at internal/modules/cjs/loader.js:778:30
+Wed, 01 Dec 2021 11:55:06 GMT node-telegram-bot-api deprecated Automatic enabling of cancellation of promises is deprecated.
+In the future, you will have to enable it yourself.
+See https://github.com/yagop/node-telegram-bot-api/issues/319. at internal/modules/cjs/loader.js:778:30
+Wed, 01 Dec 2021 12:15:34 GMT node-telegram-bot-api deprecated Automatic enabling of cancellation of promises is deprecated.
+In the future, you will have to enable it yourself.
+See https://github.com/yagop/node-telegram-bot-api/issues/319. at internal/modules/cjs/loader.js:778:30
+Wed, 01 Dec 2021 12:56:31 GMT node-telegram-bot-api deprecated Automatic enabling of cancellation of promises is deprecated.
+In the future, you will have to enable it yourself.
+See https://github.com/yagop/node-telegram-bot-api/issues/319. at internal/modules/cjs/loader.js:778:30
+Wed, 01 Dec 2021 13:22:34 GMT node-telegram-bot-api deprecated Automatic enabling of cancellation of promises is deprecated.
+In the future, you will have to enable it yourself.
+See https://github.com/yagop/node-telegram-bot-api/issues/319. at internal/modules/cjs/loader.js:778:30
