@@ -87,14 +87,38 @@ export async function NetworkingCycle()
       await WeeklyReview();
     }
   }
+}
 
-  Server.SendMessage(JSON.stringify(await NetworkingCommunication.StatOfContacts()));
-  Server.SendMessage(JSON.stringify(await NetworkingCommunication.GetRecentCommsToComplete()));
- /*
+async function GetActiveContacts()
+{
+  let res = "";
+
+  const applicableContacts = await NetworkingCommunication.GetRecentCommsToComplete();
+
+  if (applicableContacts.length) {
+    res += `---\n`;
+  }
+
+  for (const contact of applicableContacts) {
+    if (contact.Initiated > 0) {
+      res += `Unfinished initiated contact with ${contact.Contact} (${new Date(contact.MIS_DT).toDateString()})\n`;
+    }
+    else if (contact.Sent > 0) {
+      res += `Uninitiated contact with ${contact.Contact} (${new Date(contact.MIS_DT).toDateString()})\n`;
+    }
+  }
+
+  return res;
+}
+
+async function MigrateNetworkingCommunications()
+{
+  let comms = 0;
+
   for (const contact of data.contacts) {
     const done = contact.done;
     const init = contact.initiated - done;
-    const sent = contact.totalsent - init;
+    const sent = contact.totalsent - contact.initiated;
 
     for (let i = 0; i < done; i++) {
       const comm = new NetworkingCommunication(contact.name);
@@ -102,6 +126,8 @@ export async function NetworkingCycle()
       comm.Initiated = 1;
       comm.Done = 1;
       comm.MIS_DT = MIS_DT.GetDay() - MIS_DT.OneWeek() * 25;
+
+      comms++;
 
       await NetworkingCommunication.Insert(comm);
     }
@@ -111,6 +137,8 @@ export async function NetworkingCycle()
       comm.Initiated = 1;
       comm.MIS_DT = MIS_DT.GetDay() - MIS_DT.OneWeek() * 25;
 
+      comms++;
+
       await NetworkingCommunication.Insert(comm);
     }
     for (let i = 0; i < sent; i++) {
@@ -118,10 +146,12 @@ export async function NetworkingCycle()
       comm.Sent = 1;
       comm.MIS_DT = MIS_DT.GetDay() - MIS_DT.OneWeek() * 25;
 
+      comms++;
+
       await NetworkingCommunication.Insert(comm);
     }
-  }*/
-
+  }
+  return `Regenerated ${comms} networkingcomms`;
 }
 
 async function NetworkingSend()
@@ -155,6 +185,7 @@ async function NetworkingSend()
     i++;
   }
 
+  /*
   const applicableContacts = activeContacts.filter((x) => (x.sent > 0 || x.init > 0) && !x.done);
 
   if (applicableContacts.length) {
@@ -172,6 +203,9 @@ async function NetworkingSend()
     contact.init--;
     contact.sent--;
   }
+  */
+
+  res += await GetActiveContacts();
 
   if (data.policy) {
     res += `---\n${data.policy}`;
@@ -179,6 +213,9 @@ async function NetworkingSend()
 
   Server.SendMessage(res);
   NetworkingSave();
+
+  // Server.SendMessage(JSON.stringify(await NetworkingCommunication.StatOfContacts()));
+  // Server.SendMessage(JSON.stringify(await NetworkingCommunication.GetRecentCommsToComplete()));
 }
 
 async function WeeklyReview()
@@ -269,12 +306,20 @@ async function RaiseDoneForStat(name: string)
 
   writeChange(stat.name, 2);
 
-  const comm = await NetworkingCommunication.GetWithContactUnfinished(name);
+  const comms = await NetworkingCommunication.GetWithContactUnfinished(stat.name);
 
-  if (comm.length) {
-    const currcomm = comm[0];
+  if (comms.length) {
+  for (const currcomm of comms) {
+    if (currcomm.Done) {
+      continue;
+    }
     currcomm.Done = 1;
     await NetworkingCommunication.Update(currcomm);
+    break;
+    }
+  }
+  else {
+    return "No record to raise Done";
   }
 
   changesHistory.push(new NetworkingChange(stat.name, "Done"));
@@ -302,15 +347,23 @@ async function RaiseInitForStat(name: string)
     contact.sent = 0;
   }
 
-  const comm = await NetworkingCommunication.GetWithContactUninitiated(name);
+  const comms = await NetworkingCommunication.GetWithContactUninitiated(stat.name);
 
-  if (comm.length) {
-    const currcomm = comm[0];
-    currcomm.Initiated = 1;
-    await NetworkingCommunication.Update(currcomm);
+  if (comms.length) {
+    for (const currcomm of comms) {
+      if (currcomm.Initiated) {
+        continue;
+      }
+      currcomm.Initiated = 1;
+      await NetworkingCommunication.Update(currcomm);
+      break;
+    }
+  }
+  else {
+    return "No record to raise Initiated";
   }
 
-  writeChange(stat.name, 1);
+  await writeChange(stat.name, 1);
 
   return stat;
 
@@ -318,7 +371,7 @@ async function RaiseInitForStat(name: string)
   // data.contacts.push(stat);
 }
 
-function undo()
+async function undo()
 {
   const lastchange = changesHistory.pop();
 
@@ -333,18 +386,47 @@ function undo()
     stat.totalsent--;
     data.totalsent--;
     if (contact) { contact.sent = 0; }
+
+    const comms = await NetworkingCommunication.GetWithContact(stat.name);
+    for (const currcomm of comms) {
+      if (currcomm.Id) {
+        await NetworkingCommunication.Delete(currcomm.Id);
+        break;
+      }
+    }
+
     return `Undone sending ${stat.name}`;
   }
   else if (lastchange.type === "Init") {
     stat.initiated--;
     data.initiated--;
     if (contact) { contact.init = 0; }
+
+    const comms = await NetworkingCommunication.GetWithContact(stat.name);
+    for (const currcomm of comms) {
+      if (currcomm.Initiated) {
+        currcomm.Initiated = 0;
+        await NetworkingCommunication.Update(currcomm);
+        break;
+      }
+    }
+
     return `Undone initiating ${stat.name}`;
   }
   else if (lastchange.type === "Done") {
     stat.done--;
     data.done--;
     if (contact) { contact.done = false; }
+
+    const comms = await NetworkingCommunication.GetWithContact(stat.name);
+    for (const currcomm of comms) {
+      if (currcomm.Done) {
+        currcomm.Done = 0;
+        await NetworkingCommunication.Update(currcomm);
+        break;
+      }
+    }
+
     return `Undone doing ${stat.name}`;
   }
 
@@ -563,7 +645,17 @@ export async function ProcessNetworking(message: MessageWrapper)
     return;
   }
   if (message.checkRegex(/^\/networking undo/)) {
-    reply(message, undo());
+    reply(message, await undo());
+
+    return;
+  }
+  if (message.checkRegex(/^\/networking migrate/)) {
+    reply(message, await MigrateNetworkingCommunications());
+
+    return;
+  }
+  if (message.checkRegex(/^\/networking unfinished/)) {
+    reply(message, await GetActiveContacts());
 
     return;
   }

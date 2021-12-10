@@ -208,14 +208,26 @@ class App
 
     public async SendMessage(text: string, keyboard: TelegramBot.KeyboardButton[][] | null = null)
     {
-        console.log(text);
-        const msg = await BotAPI.sendMessage(Config.DefaultChat, text || "null", {
-            parse_mode: "Markdown",
-            reply_markup: {
-                keyboard: keyboard || defaultKeyboard(),
-            }
-        });
-        return new MessageWrapper(msg);
+        try {
+            console.log(text);
+            const msg = await BotAPI.sendMessage(Config.DefaultChat, text || "null", {
+                parse_mode: "Markdown",
+                reply_markup: {
+                    keyboard: keyboard || defaultKeyboard(),
+                }
+            });
+            return new MessageWrapper(msg);
+        }
+        catch (e) {
+            console.error(e);
+            const msg = await BotAPI.sendMessage(Config.DefaultChat, JSON.stringify(e) || "null", {
+                parse_mode: "Markdown",
+                reply_markup: {
+                    keyboard: keyboard || defaultKeyboard(),
+                }
+            });
+            return new MessageWrapper(msg);
+        }
     }
 }
 
