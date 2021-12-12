@@ -196,15 +196,17 @@ async function PostViewsSendWeekly()
       continue;
     }
 
-    const mark = (entry.change >= 0) ? "+" : "-";
-    res += `${entry.title} - ${entry.views} (${mark}${entry.change}` +
-      `${(t.comment) ? ", " + t.comment : ""}`
-      + `)\n`;
+    if (entry.change > 5) {
+      const mark = (entry.change >= 0) ? "+" : "-";
+      res += `${entry.title} - ${entry.views} (${mark}${entry.change}` +
+        `${(t.comment) ? ", " + t.comment : ""}`
+        + `)\n`;
+    }
 
     total += entry.change;
   }
 
-  res += `---\nВсего просмотров за день:${total}`;
+  res += `---\nВсего просмотров за неделю:${total}`;
 
   await Server.SendMessage(res);
 
@@ -228,10 +230,13 @@ async function PostViewsSendDaily()
       continue;
     }
 
-    const mark = (entry.change >= 0) ? "+" : "-";
-    res += `${entry.title} - ${entry.views} (${mark}${entry.change}` +
-      `${(t.comment) ? ", " + t.comment : ""}` +
-      `)\n`;
+    if (entry.change > 5) {
+
+      const mark = (entry.change >= 0) ? "+" : "-";
+      res += `${entry.title} - ${entry.views} (${mark}${entry.change}` +
+        `${(t.comment) ? ", " + t.comment : ""}` +
+        `)\n`;
+    }
 
     total += entry.change;
   }
