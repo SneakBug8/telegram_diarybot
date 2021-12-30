@@ -9,11 +9,18 @@ export class NetworkingCommunication
     return NetworkingCommunicationsRepository().where("Contact", contact).select().orderBy("MIS_DT", "desc");
   }
 
-  public static async StatOfContacts()
+  public static async GetContactsStats()
   {
     return NetworkingCommunicationsRepository().groupBy("Contact").sum({
       Sent: "Sent", Initiated: "Initiated", Done: "Done"
     }).select("Contact");
+  }
+
+  public static async GetContactStat(name: string)
+  {
+    return (await NetworkingCommunicationsRepository().where("Contact", name).groupBy("Contact").sum({
+      Sent: "Sent", Initiated: "Initiated", Done: "Done"
+    }))[0];
   }
 
   public static async GetWithContactUnfinished(contact: string)

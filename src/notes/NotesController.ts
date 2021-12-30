@@ -14,7 +14,7 @@ export let NotesRepo = new NotesData();
 
 const datafilepath = path.resolve(Config.dataPath(), "notes.json");
 
-function yesNoKeyboard(): TelegramBot.KeyboardButton[][]
+export function yesNoKeyboard(): TelegramBot.KeyboardButton[][]
 {
   return [
     [{ text: "yes" }, { text: "no" }],

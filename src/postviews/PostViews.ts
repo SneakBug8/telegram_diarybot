@@ -127,6 +127,7 @@ async function LoadPosts(weekly: boolean = false)
       entry.title = HtmlParse(post?.title?.rendered);
       entry.views = post.views;
       entry.MIS_DT = mis_dt;
+      entry.CREATED_DT = mis_dt;
 
       if (!entry.views) {
         continue;
@@ -145,8 +146,8 @@ async function LoadPosts(weekly: boolean = false)
 
       timeSinceLastUpdate = entry.MIS_DT - lastentry.MIS_DT;
 
-      if (lastentry.MIS_DT != GetDailyMisDT()) {
-        comment = `${shortNum(timeSinceLastUpdate / MIS_DT.OneDay())}d`;
+      if (lastentry.MIS_DT !== GetDailyMisDT()) {
+        comment = `${shortNum(timeSinceLastUpdate)}d`;
       }
 
       //console.log(`Post ${lastentry.postId} had ${lastentry.views} views.`);
@@ -170,14 +171,14 @@ export async function PostsCycle()
 {
   const now = new Date(Date.now());
 
-  if (lastHourChecked !== now.getHours() && now.getHours() === whattimeofaday && now.getDay() === 4) {
+  if (lastHourChecked !== now.getHours() && now.getHours() === whattimeofaday && now.getDay() === 5) {
     await PostViewsSendWeekly();
-    lastHourChecked = now.getHours();
   }
   else if (lastHourChecked !== now.getHours() && now.getHours() === whattimeofaday) {
     await PostViewsSendDaily();
-    lastHourChecked = now.getHours();
   }
+
+  lastHourChecked = now.getHours();
 }
 
 async function PostViewsSendWeekly()

@@ -81,20 +81,20 @@ class CryptoNotificationsClass
       if (notification.minprice && prices.current && prices.current < notification.minprice) {
         res += `${notification.id}: ${notification.coin} dropped below `
           + ` ${shortNum(notification.minprice)} (current: ${shortNum(prices.current)}).\n`;
-        // triggerednotifications.push(notification.id);
-        notification.minprice *= 0.9;
-        notification.maxprice *= 0.9;
-        notification.maxprice = roundInt(notification.maxprice);
-        notification.minprice = roundInt(notification.minprice);
+        triggerednotifications.push(notification.id);
+        // notification.minprice *= 0.9;
+        // notification.maxprice *= 0.9;
+        // notification.maxprice = roundInt(notification.maxprice);
+        // notification.minprice = roundInt(notification.minprice);
       }
       else if (notification.maxprice && prices.current && prices.current > notification.maxprice) {
         res += `${notification.id}: ${notification.coin} rose higher than ` +
           `${shortNum(notification.maxprice)} (current: ${shortNum(prices.current)}).\n`;
-        // triggerednotifications.push(notification.id);
-        notification.maxprice *= 1.1;
-        notification.minprice *= 1.1;
-        notification.maxprice = roundInt(notification.maxprice);
-        notification.minprice = roundInt(notification.minprice);
+        triggerednotifications.push(notification.id);
+        // notification.maxprice *= 1.1;
+        // notification.minprice *= 1.1;
+        // notification.maxprice = roundInt(notification.maxprice);
+        // notification.minprice = roundInt(notification.minprice);
       }
     }
 

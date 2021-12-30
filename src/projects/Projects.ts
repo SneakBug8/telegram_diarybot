@@ -8,6 +8,9 @@ import dateFormat = require("dateformat");
 import TelegramBot = require("node-telegram-bot-api");
 import { ProjectRecord, ProjectsData, Project } from "./ProjectsData";
 import { StringIncludes } from "../util/EqualString";
+import { Connection } from "../Database";
+import { ProjectEntry } from "./ProjectEntry";
+import { MIS_DT } from "../util/MIS_DT";
 
 let data = new ProjectsData();
 const datafilepath = path.resolve(Config.dataPath(), "projects.json");
@@ -74,6 +77,12 @@ export async function ProjectsCycle()
       msg += "\n" + en.subject + ` (${en.doneTimes}/${en.suggestedTimes})`;
 
       en.suggestedTimes++;
+
+      const entry = new ProjectEntry();
+      entry.subject = en.subject;
+      entry.suggested = 1;
+
+      ProjectEntriesRepository().insert(entry);
     }
 
     data.TotalDays++;
@@ -138,7 +147,7 @@ export async function ProcessProjects(message: MessageWrapper)
   if (message.checkRegex(/\/projects done/)) {
     setWaitingForValue(
       `Write the name of the project to be marked.`,
-      (msg) =>
+      async (msg) =>
       {
         const subject = msg.message.text;
 
@@ -149,6 +158,21 @@ export async function ProcessProjects(message: MessageWrapper)
         if (!proj) { return reply(message, `No such project.`); }
 
         proj.doneTimes++;
+
+        // SQL
+        const suitableentries = await ProjectEntriesRepository().where("done", 0).orderBy("MIS_DT", "desc").select();
+        if (suitableentries.length) {
+          const entry = suitableentries[0];
+          entry.done = 1;
+          entry.UPDATE_DT = MIS_DT.GetExact();
+          await ProjectEntriesRepository().update(entry);
+        }
+        else {
+          const entry = new ProjectEntry();
+          entry.subject = proj.subject;
+          entry.done = 1;
+          await ProjectEntriesRepository().insert(entry);
+        }
 
         ProjectsSave();
 
@@ -181,7 +205,7 @@ export async function ProcessProjects(message: MessageWrapper)
 
       res += `\n${entry.subject}` +
         ` (${entry.doneTimes} / ${entry.suggestedTimes}, ` +
-        `${ (entry.doneTimes * 100 / entry.suggestedTimes).toFixed(2) }%)`;
+        `${(entry.doneTimes * 100 / entry.suggestedTimes).toFixed(2)}%)`;
       subjects.push(entry.subject);
     }
 
@@ -237,7 +261,7 @@ export async function ProcessProjects(message: MessageWrapper)
 
         if (!subject) { return reply(message, `Specify which project to add day to.`); }
 
-        const proj = data.Projects.find((x) => x.subject.includes(subject.toLowerCase()));
+        const proj = data.Projects.find((x) => StringIncludes(x.subject, subject));
 
         if (!proj) { return reply(message, `No such project.`); }
 
@@ -343,3 +367,5 @@ export async function ProcessProjects(message: MessageWrapper)
   }
   return false;
 }
+
+export const ProjectEntriesRepository = () => Connection<ProjectEntry>("ProjectEntries");

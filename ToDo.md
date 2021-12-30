@@ -1,4 +1,8 @@
-- Telegram Keyboard
-- Learning module
-- Switch to SQLite?
-- Subcommands for different modules
+- Add SQLite as a duplicate
+  - [x] Projects
+  - [x] Networking
+- Remove other storages
+- Personal networking
+- Sort out why investment writes no data
+- Web interface?
+- Нарезка длинных логов

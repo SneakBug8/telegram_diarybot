@@ -3,15 +3,17 @@ import * as fs from "fs";
 import * as path from "path";
 
 import { Config } from "../config";
-import { Server, setWaitingForValue } from "..";
+import { Server, setWaitingForValue, setWaitingForValuePure } from "..";
 import { NetworkingData, NetworkingStat } from "./NetworkingData";
 import TelegramBot = require("node-telegram-bot-api");
-import { shortNum } from "../util/EqualString";
+import { shortNum, StringIncludes } from "../util/EqualString";
 import { NetworkingChange } from "./NetworkingChange";
-import { NetworkingContact } from "./NetworkingContact";
+import { NetworkingContact, NetworkingContactsRepository } from "./NetworkingContact";
 import { Connection } from "../Database";
 import { NetworkingCommunication } from "./NetworkingCommunication";
 import { MIS_DT } from "../util/MIS_DT";
+import { OfflineNetworking } from "./offlinenetworking/OfflineNetworking";
+import { yesNoKeyboard } from "../notes/NotesController";
 
 let data = new NetworkingData();
 
@@ -19,9 +21,7 @@ const datafilepath = path.resolve(Config.dataPath(), "networking.json");
 const howmanyperday = 1;
 const whattimeofaday = 12;
 
-const changesHistory = new Array<NetworkingChange>();
-const activeContacts = new Array<NetworkingContact>();
-
+export const networkingChangesHistory = new Array<NetworkingChange>();
 
 function getKeyboard(): TelegramBot.KeyboardButton[][]
 {
@@ -29,7 +29,7 @@ function getKeyboard(): TelegramBot.KeyboardButton[][]
     [{ text: "/networking done" }, { text: "/networking init" }, { text: "/networking list" }],
     [{ text: "/networking add" }, { text: "/networking remove" }, { text: "/networking stats" }],
     [{ text: "/networking done (...)" }, { text: "/networking init (...)" }, { text: "/networking send (...)" }],
-    [{ text: "/networking force" }, { text: "/networking undo" }, { text: "/exit" }],
+    [{ text: "/networking offline" }, { text: "/networking undo" }, { text: "/exit" }],
   ];
 }
 
@@ -154,6 +154,20 @@ async function MigrateNetworkingCommunications()
   return `Regenerated ${comms} networkingcomms`;
 }
 
+async function MigrateContacts()
+{
+  await NetworkingContactsRepository().delete();
+
+  for (const contact of data.contacts) {
+    const entry = new NetworkingContact(contact.name);
+    entry.active = contact.active;
+
+    await NetworkingContact.Insert(entry);
+  }
+
+  return `Migrated ${data.contacts.length} contacts`;
+}
+
 async function NetworkingSend()
 {
   const now = new Date(Date.now());
@@ -173,14 +187,9 @@ async function NetworkingSend()
 
     previds.push(randomind);
 
-    res += formatName(active[randomind]) + "\n";
+    res += await formatName(active[randomind]) + "\n";
     data.lastname = active[randomind].name;
     RaiseSentForStat(active[randomind].name);
-
-    const comm = new NetworkingCommunication(active[randomind].name);
-    comm.Sent = 1;
-
-    await NetworkingCommunication.Insert(comm);
 
     i++;
   }
@@ -231,7 +240,7 @@ async function WeeklyReview()
     const contact = firstpick.pop();
 
     if (contact) {
-      res += formatName(contact) + "\n";
+      res += await formatName(contact) + "\n";
       i++;
     }
   }
@@ -245,7 +254,7 @@ async function WeeklyReview()
 
     previds.push(randomind);
 
-    res += formatName(secondpick[randomind]) + "\n";
+    res += await formatName(secondpick[randomind]) + "\n";
     i++;
   }
 
@@ -253,9 +262,21 @@ async function WeeklyReview()
   NetworkingSave();
 }
 
-function findStat(name: string)
+export async function findStat(name: string)
 {
-  const stats = data.contacts.filter((x) => x.name.toLowerCase().includes(name.toLowerCase()));
+  // find duplicates
+  const duplicates = new Array<NetworkingStat>();
+  for (const contact of data.contacts) {
+    const identical = data.contacts.filter((x) => x.name === contact.name);
+    if (identical.length > 1) {
+      duplicates.push(identical[1]);
+    }
+  }
+
+  data.contacts = data.contacts.filter((x) => !duplicates.includes(x));
+  await NetworkingSave();
+
+  const stats = data.contacts.filter((x) => StringIncludes(x.name, name));
 
   if (!stats.length) {
     return `Noone named ${name} in the contacts list`;
@@ -267,21 +288,21 @@ function findStat(name: string)
   return stats[0];
 }
 
-function RaiseSentForStat(name: string)
+async function RaiseSentForStat(name: string)
 {
-  const stat = findStat(name);
+  const stat = await findStat(name);
   if (typeof stat === "string") { return stat; }
 
   stat.totalsent++;
   data.totalsent++;
 
-  changesHistory.push(new NetworkingChange(stat.name, "Sent"));
-  const contact = new NetworkingContact(name);
-  // 5 days before deletion
-  contact.sent = 5;
-  activeContacts.push(contact);
+  networkingChangesHistory.push(new NetworkingChange(stat.name, "Sent"));
 
   writeChange(stat.name, 0);
+
+  const comm = new NetworkingCommunication(stat.name);
+  comm.Sent = 1;
+  await NetworkingCommunication.Insert(comm);
 
   return stat;
 
@@ -291,38 +312,31 @@ function RaiseSentForStat(name: string)
 
 async function RaiseDoneForStat(name: string)
 {
-  const stat = findStat(name);
+  const stat = await findStat(name);
   if (typeof stat === "string") { return stat; }
 
   stat.done++;
   data.done++;
-
-  // delete
-  const contact = activeContacts.find((x) => x.name === name && !x.done);
-  if (contact) {
-    contact.done = true;
-    contact.init = 0;
-  }
 
   writeChange(stat.name, 2);
 
   const comms = await NetworkingCommunication.GetWithContactUnfinished(stat.name);
 
   if (comms.length) {
-  for (const currcomm of comms) {
-    if (currcomm.Done) {
-      continue;
-    }
-    currcomm.Done = 1;
-    await NetworkingCommunication.Update(currcomm);
-    break;
+    for (const currcomm of comms) {
+      if (currcomm.Done) {
+        continue;
+      }
+      currcomm.Done = 1;
+      await NetworkingCommunication.Update(currcomm);
+      break;
     }
   }
   else {
     return "No record to raise Done";
   }
 
-  changesHistory.push(new NetworkingChange(stat.name, "Done"));
+  networkingChangesHistory.push(new NetworkingChange(stat.name, "Done"));
 
   return stat;
 
@@ -332,20 +346,13 @@ async function RaiseDoneForStat(name: string)
 
 async function RaiseInitForStat(name: string)
 {
-  const stat = findStat(name);
+  const stat = await findStat(name);
   if (typeof stat === "string") { return stat; }
 
-  changesHistory.push(new NetworkingChange(stat.name, "Init"));
+  networkingChangesHistory.push(new NetworkingChange(stat.name, "Init"));
 
   stat.initiated++;
   data.initiated++;
-
-  // 5 days before deletion
-  const contact = activeContacts.find((x) => x.name === name) || new NetworkingContact(name);
-  if (contact) {
-    contact.init = 5;
-    contact.sent = 0;
-  }
 
   const comms = await NetworkingCommunication.GetWithContactUninitiated(stat.name);
 
@@ -373,19 +380,16 @@ async function RaiseInitForStat(name: string)
 
 async function undo()
 {
-  const lastchange = changesHistory.pop();
+  const lastchange = networkingChangesHistory.pop();
 
   if (!lastchange) { return "No changes history"; }
 
-  const stat = findStat(lastchange.name);
+  const stat = await findStat(lastchange.name);
   if (typeof stat === "string") { return stat; }
-
-  const contact = activeContacts.find((x) => x.name === stat.name);
 
   if (lastchange.type === "Sent") {
     stat.totalsent--;
     data.totalsent--;
-    if (contact) { contact.sent = 0; }
 
     const comms = await NetworkingCommunication.GetWithContact(stat.name);
     for (const currcomm of comms) {
@@ -400,7 +404,6 @@ async function undo()
   else if (lastchange.type === "Init") {
     stat.initiated--;
     data.initiated--;
-    if (contact) { contact.init = 0; }
 
     const comms = await NetworkingCommunication.GetWithContact(stat.name);
     for (const currcomm of comms) {
@@ -416,7 +419,6 @@ async function undo()
   else if (lastchange.type === "Done") {
     stat.done--;
     data.done--;
-    if (contact) { contact.done = false; }
 
     const comms = await NetworkingCommunication.GetWithContact(stat.name);
     for (const currcomm of comms) {
@@ -429,18 +431,34 @@ async function undo()
 
     return `Undone doing ${stat.name}`;
   }
+  else if (lastchange.type === "Offline") {
+    await OfflineNetworking.RemoveEntry(lastchange.name);
+  }
 
   return `Unexpected error`;
 }
 
-function formatName(contact: NetworkingStat)
+async function formatName(contact: NetworkingStat)
 {
   let res = `${contact.name}`;
-  if (contact.active) {
-    res += ` (d${contact.done} / i${contact.initiated} / t${contact.totalsent})`;
+
+  const offline = await OfflineNetworking.Count(contact.name);
+  const c = await NetworkingContact.GetContact(contact.name);
+  const stat = await NetworkingCommunication.GetContactStat(contact.name);
+
+  /*if (contact.active) {
+    res += ` (d${contact.done} / i${contact.initiated} / t${contact.totalsent}, offline${offline})`;
   }
   else {
-    res += ` (disabled, d${contact.done} / i${contact.initiated} / t${contact.totalsent})`;
+    res += ` (disabled, d${contact.done} / i${contact.initiated} / t${contact.totalsent}, offline${offline})`;
+  }
+  res += `\n`;*/
+
+  if (c?.active) {
+    res += ` (d${stat?.Done} / i${stat?.Initiated} / t${stat?.Sent}, offline${offline})`;
+  }
+  else {
+    res += ` (disabled, d${stat?.Done} / i${stat?.Initiated} / t${stat?.Sent}, offline${offline})`;
   }
   res += `\n`;
   return res;
@@ -539,7 +557,7 @@ export async function ProcessNetworking(message: MessageWrapper)
     });
 
     for (const contact of sorted) {
-      res += formatName(contact);
+      res += await formatName(contact);
     }
 
     const active = data.contacts.filter((x) => x.active);
@@ -588,13 +606,13 @@ export async function ProcessNetworking(message: MessageWrapper)
   }
   if (message.checkRegex(/^\/networking send \(...\)/)) {
     setWaitingForValue(`Please, write name who to mark as sent.`,
-      (msg) =>
+      async (msg) =>
       {
         const name = msg.message.text;
 
         if (!name) { return; }
 
-        const res = RaiseSentForStat(name);
+        const res = await RaiseSentForStat(name);
         if (typeof res === "string") {
           return reply(message, res);
         }
@@ -604,15 +622,39 @@ export async function ProcessNetworking(message: MessageWrapper)
       });
     return;
   }
-  if (message.checkRegex(/^\/networking remove/)) {
-    setWaitingForValue(`Please, write name who to remove.`,
-      (msg) =>
+  if (message.checkRegex(/^\/networking offline/)) {
+    setWaitingForValue(`Please, write name who to mark as communicated offline.`,
+      async (msg) =>
       {
         const name = msg.message.text;
 
         if (!name) { return; }
 
-        const suitable = data.contacts.filter((x) => x.name.toLowerCase().includes(name.toLowerCase()));
+        const res = await OfflineNetworking.AddEntry(name);
+        if (typeof res === "string") {
+          return reply(message, res);
+        }
+      });
+    return;
+  }
+  if (message.checkRegex(/^\/networking remove/)) {
+    setWaitingForValue(`Please, write name who to remove.`,
+      async (msg) =>
+      {
+        const name = msg.message.text;
+
+        if (!name) { return; }
+
+        const c = await NetworkingContact.GetContact(name);
+        if (c) {
+          c.active = false;
+          await NetworkingContact.Update(c);
+        }
+        else {
+          return reply(message, "No such contact");
+        }
+
+        const suitable = data.contacts.filter((x) => StringIncludes(x.name, name));
 
         if (suitable.length > 1) {
           return reply(message, `More than one suitable entry: ` + suitable.join(", "));
@@ -627,6 +669,7 @@ export async function ProcessNetworking(message: MessageWrapper)
         sel.push(suitable[0]);
 
         data.contacts = sel;
+
         reply(message, `Deactivated ${name} in your networking contacts.`);
         NetworkingSave();
       });
@@ -645,11 +688,30 @@ export async function ProcessNetworking(message: MessageWrapper)
     return;
   }
   if (message.checkRegex(/^\/networking undo/)) {
-    reply(message, await undo());
+    message.reply("Are you sure you want to undo?", yesNoKeyboard());
+    return setWaitingForValuePure(undo);
+  }
+  if (message.checkRegex(/^\/networking migrate contacts/)) {
+    reply(message, await MigrateContacts());
 
     return;
   }
-  if (message.checkRegex(/^\/networking migrate/)) {
+  if (message.checkRegex(/^\/networking test contacts stats/)) {
+    const contacts = await NetworkingContact.GetContacts();
+
+    let res = "";
+    for (const contact of contacts) {
+      const stat = await NetworkingCommunication.GetContactStat(contact.name);
+      res += `\n${contact.name}\n`;
+
+      res += JSON.stringify(stat);
+    }
+
+    reply(message, res);
+
+    return;
+  }
+  if (message.checkRegex(/^\/networking migrate$/)) {
     reply(message, await MigrateNetworkingCommunications());
 
     return;

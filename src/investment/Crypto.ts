@@ -231,8 +231,7 @@ class CryptoClass
       return { current, previous };
     }
     catch (e) {
-      console.error(`Error fetching price for ${coinid}:`);
-      console.error(e);
+      console.error(`Error fetching price for ${coinid}.`);
       return { current: 0, previous: 0 };
     }
   }
@@ -486,7 +485,7 @@ class CryptoClass
       maxcapital,
       MIS_DT: MIS_DT.GetDay()
     };
-    CryptoPortfolioRepository().insert(r);
+    await CryptoPortfolioRepository().insert(r);
   }
 
   private async incrementTimeSpent(value: number)

@@ -5,6 +5,7 @@
         "one-line":false,
         "object-literal-sort-keys":false,
         "trailing-comma":false,
-        "ordered-imports": false
+        "ordered-imports": false,
+        "member-ordering": false
     }
 }
