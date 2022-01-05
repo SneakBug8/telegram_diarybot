@@ -1,3 +1,5 @@
+import { FindMyIp } from "./util/FindMyIp";
+
 class ConfigClass
 {
   // ChatIds that don't require auth
@@ -35,6 +37,19 @@ class ConfigClass
   public dataPath(): string
   {
     return __dirname + "/../data";
+  }
+
+  private cachedIp = "";
+
+  public async ip()
+  {
+    if (this.cachedIp) {
+      return this.cachedIp;
+    }
+
+    const ip = await FindMyIp.Ipify();
+    this.cachedIp = ip;
+    return ip;
   }
 }
 

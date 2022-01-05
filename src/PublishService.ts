@@ -5,6 +5,7 @@ import * as fs from "fs-extra";
 import * as path from "path";
 import { Server } from ".";
 import { Config } from "./config";
+import { BotAPI } from "./api/bot";
 
 class PublishServiceClass
 {
@@ -17,42 +18,48 @@ class PublishServiceClass
 
     public PublishLast()
     {
-        const c = new Client();
-        c.on("ready", () =>
-        {
-            const filename = Logger.getFilename();
-            const filepath = Logger.resolveFile(filename);
-
-            // Make temporary file with better formating for upload
-            const tempfilepath = path.resolve(Config.basePath(), "temp.md");
-            fs.copyFileSync(filepath, tempfilepath);
-            const text = fs.readFileSync(tempfilepath);
-            const newtext = this.FormatFileBeforePublishing(text.toString());
-            fs.writeFileSync(tempfilepath, newtext);
-
-            const fragments = path.dirname(filename);
-
-            // Ensure remote has needed folder for upload
-            c.mkdir(fragments, true, (err) =>
+        try {
+            const c = new Client();
+            c.on("ready", () =>
             {
-                if (err) { throw err; }
+                const filename = Logger.getFilename();
+                const filepath = Logger.resolveFile(filename);
+
+                // Make temporary file with better formating for upload
+                const tempfilepath = path.resolve(Config.dataPath(), "temp.md");
+                fs.copyFileSync(filepath, tempfilepath);
+                const text = fs.readFileSync(tempfilepath);
+                const newtext = this.FormatFileBeforePublishing(text.toString());
+                fs.writeFileSync(tempfilepath, newtext);
+
+                const fragments = path.dirname(filename);
+
+                // Ensure remote has needed folder for upload
+                c.mkdir(fragments, true, (err) =>
+                {
+                    if (err) { throw err; }
+                });
+
+                c.put(tempfilepath, filename + ".txt", (err) =>
+                {
+                    if (err) { throw err; }
+
+                    Server.SendMessage(`Uploaded ${filepath} to ${filename}.txt`)
+                        .then((x) => x.deleteAfterTime(1));
+                    c.end();
+                });
             });
 
-            c.put(tempfilepath, filename + ".txt", (err) =>
-            {
-                if (err) { throw err; }
-
-                Server.SendMessage(`Uploaded ${filepath} to ${filename}.txt`)
-                    .then((x) => x.deleteAfterTime(1));
-                c.end();
+            c.connect({
+                host: Config.ftphost(),
+                user: Config.ftpuser(),
+                password: Config.ftppassword(),
             });
-        });
-
-        c.connect({
-            host: Config.ftphost(),
-            user: Config.ftpuser(),
-            password: Config.ftppassword(),
-        });
+        }
+        catch (e) {
+            console.error(e);
+            Server.SendMessage(JSON.stringify(e) || "null");
+        }
     }
 
     public DownloadLast()

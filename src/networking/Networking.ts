@@ -165,7 +165,7 @@ async function MigrateContacts()
     await NetworkingContact.Insert(entry);
   }
 
-  return `Migrated ${data.contacts.length} contacts`;
+  return `Migrated ${await NetworkingContact.GetContacts()} contacts`;
 }
 
 async function NetworkingSend()

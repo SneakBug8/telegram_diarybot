@@ -128,7 +128,11 @@ class LoggerService
 
         const logs = await fs.readFile(filepath);
 
-        if (logs) {
+        if (logs.length >= 10000) {
+            return `Publish the note to read more at https://wiki.sneakbug8.com/${filename}`
+            + `\n-- -\n` + logs.toString().substr(logs.length - 10000, 10000);
+        }
+        else if (logs) {
             return logs.toString();
         }
         else {

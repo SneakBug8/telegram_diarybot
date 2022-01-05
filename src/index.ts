@@ -234,4 +234,9 @@ class App
 export const Server = new App();
 
 console.log("Bot started");
+async function a()
+{
+    console.log(`Server ip ${await Config.ip()}`);
+}
+a();
 Server.SendMessage("Bot restarted");
