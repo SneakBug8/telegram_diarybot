@@ -6,6 +6,7 @@ import { Server } from "..";
 import { Config } from "../config";
 import { Slots } from "./Slots";
 import { NoteChange } from "./NoteChange";
+import { PublishService } from "./PublishService";
 
 export const foldername: string = "diary";
 
@@ -45,7 +46,6 @@ class LoggerService
     public async Log(message: string, checkdate = true)
     {
         const filename = this.getFilename();
-
         const filepath = this.resolveFile(filename);
 
         let newfile = false;
@@ -69,6 +69,8 @@ class LoggerService
         addedtext += text;
 
         changes.push(new NoteChange(filename, addedtext, newfile));
+
+        PublishService.QueuePublishing(filename);
 
         if (newfile) {
             return "Created new file " + filename;
@@ -117,6 +119,8 @@ class LoggerService
         else {
             filename = date;
         }
+
+        await PublishService.Download(filename, true, false);
 
         console.log("Reading logs " + filename);
 

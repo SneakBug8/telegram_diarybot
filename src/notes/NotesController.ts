@@ -24,7 +24,7 @@ export function yesNoKeyboard(): TelegramBot.KeyboardButton[][]
 function waitingForPublishAnswer(msg: MessageWrapper)
 {
   if (msg.message.text === "yes") {
-    PublishService.PublishLast(true, true);
+    PublishService.PublishLast(true);
   }
   else {
     msg.reply("Publishing aborted.");

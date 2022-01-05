@@ -6,6 +6,7 @@ import * as path from "path";
 import { Server } from "..";
 import { Config } from "../config";
 import { BotAPI } from "../api/bot";
+import { Sleep } from "../util/Sleep";
 
 class PublishServiceClass
 {
@@ -19,18 +20,36 @@ class PublishServiceClass
         return text;
     }
 
-    public PublishLast(force = false, verbose = false)
+    private lastSend = 0;
+
+    public Interval()
     {
-        const filename = Logger.getFilename();
-        return this.Publish(filename, force);
+        const now = new Date(Date.now());
+
+        if (now.getHours() === 6 && now.getMinutes() <= 30 && this.lastSend !== now.getDay()) {
+            console.log(`Removed ${this.DownloadCache.length} items from Download Cache`);
+            this.DownloadCache = [];
+            for (const queued of this.PublishQueue) {
+                this.Publish(queued);
+            }
+            console.log(`Published ${this.PublishQueue.length} items`);
+            this.lastSend = now.getDay();
+        }
     }
 
-    public Publish(filename: string, force = false, verbose = false)
+    public PublishLast(verbose = false)
     {
-        if (!force) {
-            return this.PublishQueue.push(filename);
-        }
+        const filename = Logger.getFilename();
+        return this.Publish(filename, verbose);
+    }
 
+    public QueuePublishing(filename: string)
+    {
+        return this.PublishQueue.push(filename);
+    }
+
+    public Publish(filename: string, verbose = false)
+    {
         try {
             const c = new Client();
             c.on("ready", () =>
@@ -76,17 +95,19 @@ class PublishServiceClass
         }
     }
 
-    public DownloadLast(force = false, verbose = false)
+    public async DownloadLast(force = false, verbose = false)
     {
         const filename = Logger.getFilename();
-        return this.Download(filename, force, verbose);
+        return await this.Download(filename, force, verbose);
     }
 
-    public Download(filename: string, force = false, verbose = false)
+    public async Download(filename: string, force = false, verbose = false)
     {
         if (!force && this.DownloadCache.includes(filename)) {
             return;
         }
+
+        let blocker = true;
 
         const c = new Client();
         c.on("ready", async () =>
@@ -115,6 +136,8 @@ class PublishServiceClass
                         Server.SendMessage(`Downloaded ${filename}.txt to ${filepath}`)
                             .then((x) => x.deleteAfterTime(1));
                     }
+
+                    blocker = false;
                 });
             });
         });
@@ -130,6 +153,10 @@ class PublishServiceClass
             user: Config.ftpuser(),
             password: Config.ftppassword(),
         });
+
+        while (blocker) {
+            await Sleep(1000);
+        }
 
         this.DownloadCache.push(filename);
     }
