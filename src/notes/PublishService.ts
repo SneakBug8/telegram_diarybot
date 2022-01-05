@@ -1,14 +1,17 @@
-import { foldername, Logger } from "./notes/logger";
+import { foldername, Logger } from "./logger";
 
 import * as Client from "ftp";
 import * as fs from "fs-extra";
 import * as path from "path";
-import { Server } from ".";
-import { Config } from "./config";
-import { BotAPI } from "./api/bot";
+import { Server } from "..";
+import { Config } from "../config";
+import { BotAPI } from "../api/bot";
 
 class PublishServiceClass
 {
+    private DownloadCache = new Array<string>();
+    private PublishQueue = new Array<string>();
+
     public FormatFileBeforePublishing(text: string)
     {
         text = text.replace(new RegExp("\n"), "\n\n");
@@ -16,13 +19,22 @@ class PublishServiceClass
         return text;
     }
 
-    public PublishLast()
+    public PublishLast(force = false, verbose = false)
     {
+        const filename = Logger.getFilename();
+        return this.Publish(filename, force);
+    }
+
+    public Publish(filename: string, force = false, verbose = false)
+    {
+        if (!force) {
+            return this.PublishQueue.push(filename);
+        }
+
         try {
             const c = new Client();
             c.on("ready", () =>
             {
-                const filename = Logger.getFilename();
                 const filepath = Logger.resolveFile(filename);
 
                 // Make temporary file with better formating for upload
@@ -44,8 +56,10 @@ class PublishServiceClass
                 {
                     if (err) { throw err; }
 
-                    Server.SendMessage(`Uploaded ${filepath} to ${filename}.txt`)
-                        .then((x) => x.deleteAfterTime(1));
+                    if (verbose) {
+                        Server.SendMessage(`Uploaded ${filepath} to ${filename}.txt`)
+                            .then((x) => x.deleteAfterTime(1));
+                    }
                     c.end();
                 });
             });
@@ -62,12 +76,21 @@ class PublishServiceClass
         }
     }
 
-    public DownloadLast()
+    public DownloadLast(force = false, verbose = false)
     {
+        const filename = Logger.getFilename();
+        return this.Download(filename, force, verbose);
+    }
+
+    public Download(filename: string, force = false, verbose = false)
+    {
+        if (!force && this.DownloadCache.includes(filename)) {
+            return;
+        }
+
         const c = new Client();
         c.on("ready", async () =>
         {
-            const filename = Logger.getFilename();
             const filepath = Logger.resolveFile(filename);
 
             await fs.ensureFile(filepath);
@@ -75,8 +98,10 @@ class PublishServiceClass
             c.size(filename + ".txt", (err, size) =>
             {
                 if (!size) {
-                    Server.SendMessage(`No file ${filename}.txt on remote server.`)
-                        .then((x) => x.deleteAfterTime(1));
+                    if (verbose) {
+                        Server.SendMessage(`No file ${filename}.txt on remote server.`)
+                            .then((x) => x.deleteAfterTime(1));
+                    }
                     return;
                 }
 
@@ -86,8 +111,10 @@ class PublishServiceClass
                     stream.once("close", () => { c.end(); });
                     stream.pipe(fs.createWriteStream(filepath));
 
-                    Server.SendMessage(`Downloaded ${filename}.txt to ${filepath}`)
-                        .then((x) => x.deleteAfterTime(1));
+                    if (verbose) {
+                        Server.SendMessage(`Downloaded ${filename}.txt to ${filepath}`)
+                            .then((x) => x.deleteAfterTime(1));
+                    }
                 });
             });
         });
@@ -103,6 +130,8 @@ class PublishServiceClass
             user: Config.ftpuser(),
             password: Config.ftppassword(),
         });
+
+        this.DownloadCache.push(filename);
     }
 }
 

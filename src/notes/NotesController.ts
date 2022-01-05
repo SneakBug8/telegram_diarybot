@@ -1,6 +1,6 @@
 import { Logger } from "./logger";
 import { MessageWrapper } from "../MessageWrapper";
-import { PublishService } from "../PublishService";
+import { PublishService } from "./PublishService";
 import { NotesData } from "./NotesData";
 import * as path from "path";
 import * as fs from "fs";
@@ -24,7 +24,7 @@ export function yesNoKeyboard(): TelegramBot.KeyboardButton[][]
 function waitingForPublishAnswer(msg: MessageWrapper)
 {
   if (msg.message.text === "yes") {
-    PublishService.PublishLast();
+    PublishService.PublishLast(true, true);
   }
   else {
     msg.reply("Publishing aborted.");
@@ -33,7 +33,7 @@ function waitingForPublishAnswer(msg: MessageWrapper)
 function waitingForLoadAnswer(msg: MessageWrapper)
 {
   if (msg.message.text === "yes") {
-    PublishService.DownloadLast();
+    PublishService.DownloadLast(true, true);
   }
   else {
     msg.reply("Loading aborted.");
@@ -263,7 +263,8 @@ export async function ProcessNotes(message: MessageWrapper)
       return;
     }
 
-    setWaitingForValue("Please, confirm deletion", async (msg) =>
+    message.reply("Please, confirm deletion", yesNoKeyboard());
+    return setWaitingForValuePure(async (msg) =>
     {
       if (msg.message.text === "yes") {
         return message
@@ -278,13 +279,13 @@ export async function ProcessNotes(message: MessageWrapper)
   }
 
   if (message.checkRegex(/\/notes undo/)) {
-    setWaitingForValue("Please, confirm reverting last change", async (msg) =>
+    message.reply("Please, confirm reverting last change", yesNoKeyboard());
+    return setWaitingForValuePure(async (msg) =>
     {
       if (msg.message.text === "yes") {
         const res = await Logger.Undo();
 
-        return message.reply((res === true) ? "Successfully undid change" : res)
-          .then((newmsg) => newmsg.deleteAfterTime(1));
+        return message.reply((res === true) ? "Successfully undid change" : res);
       }
       else {
         message.reply("Aborted");

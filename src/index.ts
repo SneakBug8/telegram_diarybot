@@ -6,7 +6,7 @@ import { Logger } from "./notes/logger";
 import { BotAPI } from "./api/bot";
 import { MessageWrapper } from "./MessageWrapper";
 import { AuthService } from "./AuthService";
-import { PublishService } from "./PublishService";
+import { PublishService } from "./notes/PublishService";
 import { InitNotes, LogNote, ProcessNotes } from "./notes/NotesController";
 import { InitNetworking, NetworkingCycle, ProcessNetworking } from "./networking/Networking";
 import { Config } from "./config";
