@@ -125,7 +125,7 @@ async function MigrateNetworkingCommunications()
       comm.Sent = 1;
       comm.Initiated = 1;
       comm.Done = 1;
-      comm.MIS_DT = MIS_DT.GetDay() - MIS_DT.OneWeek() * 25;
+      comm.MIS_DT = MIS_DT.GetDay() - MIS_DT.OneDay() * 25;
 
       comms++;
 
@@ -135,7 +135,7 @@ async function MigrateNetworkingCommunications()
       const comm = new NetworkingCommunication(contact.name);
       comm.Sent = 1;
       comm.Initiated = 1;
-      comm.MIS_DT = MIS_DT.GetDay() - MIS_DT.OneWeek() * 25;
+      comm.MIS_DT = MIS_DT.GetDay() - MIS_DT.OneDay() * 25;
 
       comms++;
 
@@ -144,7 +144,7 @@ async function MigrateNetworkingCommunications()
     for (let i = 0; i < sent; i++) {
       const comm = new NetworkingCommunication(contact.name);
       comm.Sent = 1;
-      comm.MIS_DT = MIS_DT.GetDay() - MIS_DT.OneWeek() * 25;
+      comm.MIS_DT = MIS_DT.GetDay() - MIS_DT.OneDay() * 25;
 
       comms++;
 

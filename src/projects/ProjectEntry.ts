@@ -1,3 +1,4 @@
+import { Connection } from "../Database";
 import { MIS_DT } from "../util/MIS_DT";
 
 export class ProjectEntry
@@ -8,4 +9,30 @@ export class ProjectEntry
   public UPDATE_DT = MIS_DT.GetExact();
   public suggested = 0;
   public done = 0;
+
+  public static async GetUndone()
+  {
+    return await ProjectEntriesRepository().where("done", 0).orderBy("MIS_DT", "desc").select();
+  }
+
+  public static async All()
+  {
+    return await ProjectEntriesRepository().select();
+  }
+
+  public static async GetLastYear()
+  {
+    return await ProjectEntriesRepository().where("MIS_DT", ">=", MIS_DT.GetExact() - MIS_DT.OneDay() * 365).select();
+  }
+
+  public static async Insert(entry: ProjectEntry)
+  {
+    return ProjectEntriesRepository().insert(entry);
+  }
+
+  public static async Update(entry: ProjectEntry)
+  {
+    return ProjectEntriesRepository().where("Id", entry.Id).update(entry);
+  }
 }
+export const ProjectEntriesRepository = () => Connection<ProjectEntry>("ProjectEntries");

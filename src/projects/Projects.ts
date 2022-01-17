@@ -11,6 +11,8 @@ import { StringIncludes } from "../util/EqualString";
 import { Connection } from "../Database";
 import { ProjectEntry } from "./ProjectEntry";
 import { MIS_DT } from "../util/MIS_DT";
+import { ProjectsStatsExporter } from "./ProjectsStatsExporter";
+import { BotAPI } from "../api/bot";
 
 let data = new ProjectsData();
 const datafilepath = path.resolve(Config.dataPath(), "projects.json");
@@ -82,7 +84,7 @@ export async function ProjectsCycle()
       entry.subject = en.subject;
       entry.suggested = 1;
 
-      ProjectEntriesRepository().insert(entry);
+      await ProjectEntry.Insert(entry);
     }
 
     data.TotalDays++;
@@ -160,18 +162,18 @@ export async function ProcessProjects(message: MessageWrapper)
         proj.doneTimes++;
 
         // SQL
-        const suitableentries = await ProjectEntriesRepository().where("done", 0).orderBy("MIS_DT", "desc").select();
+        const suitableentries = await ProjectEntry.GetUndone();
         if (suitableentries.length) {
           const entry = suitableentries[0];
           entry.done = 1;
           entry.UPDATE_DT = MIS_DT.GetExact();
-          await ProjectEntriesRepository().update(entry);
+          await ProjectEntry.Update(entry);
         }
         else {
           const entry = new ProjectEntry();
           entry.subject = proj.subject;
           entry.done = 1;
-          await ProjectEntriesRepository().insert(entry);
+          await ProjectEntry.Insert(entry);
         }
 
         ProjectsSave();
@@ -356,6 +358,12 @@ export async function ProcessProjects(message: MessageWrapper)
       });
     return;
   }
+  if (message.checkRegex(/\/projects export/)) {
+    const path = await ProjectsStatsExporter.Export();
+
+    await BotAPI.sendDocument(message.message.chat.id, path);
+    return;
+  }
   if (message.checkRegex(/^\/projects force$/)) {
     ProjectsCycle();
     return;
@@ -367,5 +375,3 @@ export async function ProcessProjects(message: MessageWrapper)
   }
   return false;
 }
-
-export const ProjectEntriesRepository = () => Connection<ProjectEntry>("ProjectEntries");

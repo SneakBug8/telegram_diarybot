@@ -9,12 +9,26 @@ export class MIS_DT
     mis_dt.setMinutes(0);
     mis_dt.setSeconds(0);
     mis_dt.setMilliseconds(0);
-    return mis_dt.getTime() / MIS_DT.OneDay();
+    return mis_dt.getTime();
   }
 
   public static GetExact()
   {
     const mis_dt = new Date(Date.now());
+    return mis_dt.getTime();
+  }
+
+  public static Various(date: Date)
+  {
+    return date.getTime();
+  }
+
+  public static RoundToDay(mis_dt: Date)
+  {
+    mis_dt.setHours(0);
+    mis_dt.setMinutes(0);
+    mis_dt.setSeconds(0);
+    mis_dt.setMilliseconds(0);
     return mis_dt.getTime();
   }
 
