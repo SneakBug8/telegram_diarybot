@@ -23,6 +23,7 @@ import { CryptoNotificationsCycle, InitCryptoNotifications, ProcessCryptoNotific
 import { Sleep } from "./util/Sleep";
 import { ProcessTodos, TodoCycle } from "./todo/Todo";
 import { PostsCycle, ProcessPostViews } from "./postviews/PostViews";
+import { EvergreenCycle, ProcessEvergreen } from "./evergreenposts/Evergreen";
 
 let waitingCallback: ((message: MessageWrapper) => any) | null = null;
 
@@ -102,7 +103,8 @@ class App
             CryptoNotificationsCycle,
             InvestmentCycle,
             LearningCycle,
-            NetworkingCycle
+            NetworkingCycle,
+            EvergreenCycle
         ];
 
         for (const listener of listeners) {
@@ -180,6 +182,7 @@ class App
                 ProcessTodos,
                 ProcessLearning,
                 ProcessProjects,
+                ProcessEvergreen,
                 ProcessBackup,
                 ProcessNotifier,
                 ProcessTimer,

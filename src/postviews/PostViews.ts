@@ -36,7 +36,7 @@ async function GetLastBatch()
 
 function GetLastWeekMisDT()
 {
-  return MIS_DT.GetExact() - 7  * MIS_DT.OneDay();
+  return MIS_DT.GetExact() - 7 * MIS_DT.OneDay();
 }
 
 function GetDailyMisDT()
@@ -77,6 +77,7 @@ async function AddEntry(entry: PostViewEntry)
 }
 
 let pagesAvailable = 0;
+let totalPosts = 0;
 
 async function getPostsList(page: number = 1)
 {
@@ -85,9 +86,11 @@ async function getPostsList(page: number = 1)
       `https://sneakbug8.com/wp-json/wp/v2/posts?_fields=id,title,link,views&per_page=100&page=${page}`);
 
     pagesAvailable = res.headers["x-wp-totalpages"];
+    totalPosts = res.headers["x-wp-total"];
+
     // console.log(`PagesAvailable: ${pagesAvailable}`);
 
-    console.log(`Fetched ${res.data.length} posts via API`);
+    console.log(`Fetched ${res.data.length} out of ${totalPosts} posts via API`);
 
     return res.data as any[];
   }
@@ -97,19 +100,64 @@ async function getPostsList(page: number = 1)
   }
 }
 
-async function LoadPosts(weekly: boolean = false)
+type Post = {
+  id: number,
+  title: { rendered: string },
+  views: number | undefined
+};
+
+const PostsCache = new Map<number, { post: any, mis_dt: number }>();
+
+export async function GetPost(postid: number, ignorecache = false)
 {
-  const posts = await getPostsList(1);
+  if (!postid) {
+    return [];
+  }
+
+  if (PostsCache.get(postid) && PostsCache.get(postid)?.mis_dt || 0 > MIS_DT.GetExact() - 30 * MIS_DT.OneMinute()) {
+    return PostsCache.get(postid)?.post;
+  }
+
+  try {
+    const res = await axios.get(
+      `https://sneakbug8.com/wp-json/wp/v2/posts/${postid}`);
+
+    console.log(`Fetched post ${postid}`);
+
+    PostsCache.set(postid, { post: res.data, mis_dt: MIS_DT.GetExact() });
+
+    return res.data as any;
+  }
+  catch (e) {
+    console.error(e);
+    return null;
+  }
+}
+
+export async function getAllPosts()
+{
+  let posts = await getPostsList(1);
 
   for (let i = 2; i <= pagesAvailable; i++) {
-    await Sleep(2000);
-    posts.push(await getPostsList(i));
+    await Sleep(1000);
+
+    const t = await getPostsList(i);
+    // console.log(`Concat ${posts.length} with ${t.length}`);
+    posts = posts.concat(t);
+    // console.log(`Results in ${posts.length}`);
   }
+
+  console.log(`Got ${posts.length} posts.`);
+
+  return posts;
+}
+
+export async function LoadPosts(weekly: boolean = false)
+{
+  const posts = await getAllPosts();
   const entries = [];
 
   const mis_dt = MIS_DT.GetExact();
-
-  console.log(`Got ${posts.length} posts.`);
 
   for (const post of posts) {
     let comment = "";
@@ -205,11 +253,13 @@ async function PostViewsSendWeekly()
       continue;
     }
 
-    if (entry.change > 5) {
-      const mark = (entry.change >= 0) ? "+" : "-";
-      res += `${entry.title} - ${entry.views} (${mark}${entry.change}` +
-        `${(t.comment) ? ", " + t.comment : ""}`
-        + `)\n`;
+    const mark = (entry.change >= 0) ? "+" : "-";
+    const tstring = `${entry.title} - ${entry.views} (${mark}${entry.change}` +
+      `${(t.comment) ? ", " + t.comment : ""}` +
+      `)\n`;
+
+    if (entry.change > 5 && res.length + tstring.length <= 10000) {
+      res += tstring;
     }
 
     total += entry.change;
@@ -240,12 +290,13 @@ async function PostViewsSendDaily()
       continue;
     }
 
-    if (entry.change > 5) {
+    const mark = (entry.change >= 0) ? "+" : "-";
+    const tstring = `${entry.title} - ${entry.views} (${mark}${entry.change}` +
+      `${(t.comment) ? ", " + t.comment : ""}` +
+      `)\n`;
 
-      const mark = (entry.change >= 0) ? "+" : "-";
-      res += `${entry.title} - ${entry.views} (${mark}${entry.change}` +
-        `${(t.comment) ? ", " + t.comment : ""}` +
-        `)\n`;
+    if (entry.change > 5 && res.length + tstring.length <= 10000) {
+      res += tstring;
     }
 
     total += entry.change;

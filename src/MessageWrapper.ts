@@ -2,6 +2,7 @@ import TelegramBot = require("node-telegram-bot-api");
 import { BotAPI } from "./api/bot";
 import dateFormat = require("dateformat");
 import { defaultKeyboard } from ".";
+import { MIS_DT } from "./util/MIS_DT";
 
 export class MessageWrapper
 {
@@ -72,6 +73,6 @@ export class MessageWrapper
     public getPrintableTime()
     {
         const now = this.message.date * 1000;
-        return dateFormat(now, "HH:MM");
+        return MIS_DT.FormatTime(now);
     }
 }

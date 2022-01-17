@@ -7,6 +7,7 @@ import { Server, setWaitingForValue } from "..";
 import TelegramBot = require("node-telegram-bot-api");
 import { NotifierData, NotifierEntry } from "./NotifierData";
 import dateFormat = require("dateformat");
+import { MIS_DT } from "../util/MIS_DT";
 
 let data = new NotifierData();
 
@@ -73,7 +74,7 @@ async function NotifierSend()
   for (const pending of data.Pending) {
     const datetime = (pending.datetime) ? new Date(pending.datetime) : new Date();
     if (datetime.getTime() <= Date.now()) {
-      res += `${dateFormat(datetime, "HH:MM")} - ${pending.name}`;
+      res += `${MIS_DT.FormatTime(datetime.getTime())} - ${pending.name}`;
       fordelete.push(pending);
     }
   }

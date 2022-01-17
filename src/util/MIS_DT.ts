@@ -1,3 +1,5 @@
+import dateFormat = require("dateformat");
+
 export class MIS_DT
 {
   public static GetDay()
@@ -39,5 +41,15 @@ export class MIS_DT
   public static OneWeek()
   {
     return 7 * 24 * 60 * 60 * 1000;
+  }
+
+  public static FormatDate(mis_dt: number)
+  {
+    return dateFormat(new Date(mis_dt), "dd.mm.yyyy");
+  }
+
+  public static FormatTime(mis_dt: number)
+  {
+    return dateFormat(new Date(mis_dt), "HH:MM");
   }
 }
