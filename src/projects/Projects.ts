@@ -6,7 +6,7 @@ import { Config } from "../config";
 import { Server, setWaitingForValue } from "..";
 import dateFormat = require("dateformat");
 import TelegramBot = require("node-telegram-bot-api");
-import { ProjectRecord, ProjectsData, Project } from "./ProjectsData";
+import { ProjectRecord, ProjectsData, Project, ProjectsRepository } from "./ProjectsData";
 import { StringIncludes } from "../util/EqualString";
 import { Connection } from "../Database";
 import { ProjectEntry } from "./ProjectEntry";
@@ -14,7 +14,7 @@ import { MIS_DT } from "../util/MIS_DT";
 import { ProjectsStatsExporter } from "./ProjectsStatsExporter";
 import { BotAPI } from "../api/bot";
 
-let data = new ProjectsData();
+export let ProjectsDataRepo = new ProjectsData();
 const datafilepath = path.resolve(Config.dataPath(), "projects.json");
 
 let lastHourChecked = -1;
@@ -40,9 +40,9 @@ export async function InitProjects()
   if (fs.existsSync(datafilepath)) {
     const file = fs.readFileSync(datafilepath);
 
-    data = JSON.parse(file.toString()) as ProjectsData;
+    ProjectsDataRepo = JSON.parse(file.toString()) as ProjectsData;
 
-    console.log(`Read ${data.Projects.length} time entries.`);
+    console.log(`Read ${ProjectsDataRepo.Projects.length} time entries.`);
   }
   else {
     console.log(`Created new datafile for projects.`);
@@ -52,7 +52,7 @@ export async function InitProjects()
 
 export async function ProjectsSave()
 {
-  const tdata = JSON.stringify(data);
+  const tdata = JSON.stringify(ProjectsDataRepo);
   fs.writeFileSync(datafilepath, tdata);
 }
 
@@ -63,7 +63,7 @@ export async function ProjectsCycle()
   const triggeredentries = new Array<Project>();
 
   if (lastHourChecked !== now.getHours()) {
-    for (const entry of data.Projects) {
+    for (const entry of ProjectsDataRepo.Projects) {
       // console.log(`hours: ${entry.time}, now: ${now.getHours()}, days: ${entry.days}, now: ${now.getDay() % 7}`);
       if (entry.time === now.getHours() && entry.days.find((x) => x === now.getDay() - 1)) {
         triggeredentries.push(entry);
@@ -87,7 +87,7 @@ export async function ProjectsCycle()
       await ProjectEntry.Insert(entry);
     }
 
-    data.TotalDays++;
+    ProjectsDataRepo.TotalDays++;
     ProjectsSave();
 
     Server.SendMessage(msg);
@@ -155,7 +155,7 @@ export async function ProcessProjects(message: MessageWrapper)
 
         if (!subject) { return reply(message, `Specify which project to mark.`); }
 
-        const proj = data.Projects.find((x) => x.subject.toLowerCase().includes(subject.toLowerCase()));
+        const proj = ProjectsDataRepo.Projects.find((x) => x.subject.toLowerCase().includes(subject.toLowerCase()));
 
         if (!proj) { return reply(message, `No such project.`); }
 
@@ -185,7 +185,7 @@ export async function ProcessProjects(message: MessageWrapper)
   if (message.checkRegex(/\/projects list/)) {
     let res = "";
 
-    const sorted = data.Projects.sort(projectsSort);
+    const sorted = ProjectsDataRepo.Projects.sort(projectsSort);
 
     for (const entry of sorted) {
       res += `\n${entry.subject} - ${entry.time}h, ${getProjectDaysFormatted(entry)}.`;
@@ -197,7 +197,7 @@ export async function ProcessProjects(message: MessageWrapper)
   if (message.checkRegex(/\/projects stats/)) {
     let res = "";
 
-    const sorted = data.Projects.sort(projectsSort);
+    const sorted = ProjectsDataRepo.Projects.sort(projectsSort);
     const subjects = new Array<string>();
 
     for (const entry of sorted) {
@@ -226,7 +226,7 @@ export async function ProcessProjects(message: MessageWrapper)
         proj.days = [];
         proj.time = whattimeofaday;
         proj.subject = subject;
-        data.Projects.push(proj);
+        ProjectsDataRepo.Projects.push(proj);
 
         ProjectsSave();
 
@@ -243,9 +243,9 @@ export async function ProcessProjects(message: MessageWrapper)
 
         if (!subject) { return reply(message, `Specify which project to add.`); }
 
-        const projs = data.Projects.filter((x) => !x.subject.includes(subject));
+        const projs = ProjectsDataRepo.Projects.filter((x) => !x.subject.includes(subject));
 
-        data.Projects = projs;
+        ProjectsDataRepo.Projects = projs;
 
         ProjectsSave();
 
@@ -263,7 +263,7 @@ export async function ProcessProjects(message: MessageWrapper)
 
         if (!subject) { return reply(message, `Specify which project to add day to.`); }
 
-        const proj = data.Projects.find((x) => StringIncludes(x.subject, subject));
+        const proj = ProjectsDataRepo.Projects.find((x) => StringIncludes(x.subject, subject));
 
         if (!proj) { return reply(message, `No such project.`); }
 
@@ -300,7 +300,7 @@ export async function ProcessProjects(message: MessageWrapper)
 
         if (!subject) { return reply(message, `Specify which project to remove day from.`); }
 
-        const proj = data.Projects.find((x) => StringIncludes(x.subject, subject));
+        const proj = ProjectsDataRepo.Projects.find((x) => StringIncludes(x.subject, subject));
 
         if (!proj) { return reply(message, `No such project.`); }
 
@@ -336,7 +336,7 @@ export async function ProcessProjects(message: MessageWrapper)
 
         if (!subject) { return reply(message, `Specify which project to remove day from.`); }
 
-        const proj = data.Projects.find((x) => StringIncludes(x.subject, subject));
+        const proj = ProjectsDataRepo.Projects.find((x) => StringIncludes(x.subject, subject));
 
         if (!proj) { return reply(message, `No such project.`); }
 
@@ -364,12 +364,32 @@ export async function ProcessProjects(message: MessageWrapper)
     await BotAPI.sendDocument(message.message.chat.id, path);
     return;
   }
+  if (message.checkRegex(/\/projects migrate/)) {
+    let upd = 0; let ins = 0;
+    for (const project of ProjectsDataRepo.Projects) {
+      const existingentry = await Project.GetWithSubject(project.subject);
+
+      if (existingentry.length) {
+        project.Id = existingentry[0].Id;
+        await Project.Update(project);
+        upd++;
+      }
+      else {
+        await Project.Insert(project);
+        ins++;
+      }
+    }
+    reply(message, `Migrated ${ProjectsDataRepo.Projects.length} projects: ${ins} new, ${upd} updated.`);
+    return;
+  }
   if (message.checkRegex(/^\/projects force$/)) {
     ProjectsCycle();
     return;
   }
   if (message.checkRegex(/^\/projects$/)) {
-    reply(message, `Projects module.`);
+    reply(message, `Projects module.\n` +
+      `Dashboard: ${await Config.url()}projectschart.html\n` +
+      `Every proj stat: ${ await Config.url() }projectchart.html`);
 
     return;
   }

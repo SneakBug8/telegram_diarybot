@@ -10,6 +10,11 @@ export class ProjectEntry
   public suggested = 0;
   public done = 0;
 
+  public static async Projects()
+  {
+    return await ProjectEntriesRepository().select("subject").groupBy("subject");
+  }
+
   public static async GetUndone()
   {
     return await ProjectEntriesRepository().where("done", 0).orderBy("MIS_DT", "desc").select();
@@ -23,6 +28,17 @@ export class ProjectEntry
   public static async GetLastYear()
   {
     return await ProjectEntriesRepository().where("MIS_DT", ">=", MIS_DT.GetExact() - MIS_DT.OneDay() * 365).select();
+  }
+
+  public static async GetLastMonth()
+  {
+    return await ProjectEntriesRepository().where("MIS_DT", ">=", MIS_DT.GetExact() - MIS_DT.OneDay() * 30).select();
+  }
+
+  public static async GetLastMonthWithSubject(subj: string)
+  {
+    return await ProjectEntriesRepository().where("MIS_DT", ">=", MIS_DT.GetExact() - MIS_DT.OneDay() * 30)
+      .andWhere("subject", subj).select();
   }
 
   public static async Insert(entry: ProjectEntry)

@@ -5,6 +5,10 @@ import { MIS_DT } from "../util/MIS_DT";
 import { EvergreenEntry } from "./EvergreenEntry";
 import { getAllPosts, GetPost, LoadPosts } from "../postviews/PostViews";
 import { Sleep } from "../util/Sleep";
+import { WebApi } from "../api/web";
+
+import * as express from "express";
+import { Symbols } from "../util/Symbols";
 
 const whattimeofaday = 18;
 
@@ -219,4 +223,29 @@ export async function ProcessEvergreen(message: MessageWrapper)
     return;
   }
   return false;
+}
+
+export async function InitEverGreen()
+{
+  WebApi.app.get("/evergreen", OnEvergreen);
+}
+
+async function OnEvergreen(req: express.Request, res: express.Response)
+{
+  const entries = await EvergreenEntry.All();
+
+  const posts = await getAllPosts();
+
+  for (const entry of entries) {
+    const post = posts.find((x) => x.id === entry.postId);
+    (entry as any).views = post?.views || 0;
+    (entry as any).rate = (entry as any).views / (MIS_DT.GetExact() - entry.UPDATE_DT);
+    (entry as any).link = post.link;
+    (entry as any).language =
+      Symbols.Russian().some((x) => entry.title.toLowerCase().includes(x)) ? "RU" : "EN";
+  }
+
+  entries.sort((a, b) => (b as any).rate - (a as any).rate);
+
+  res.json(entries);
 }

@@ -88,6 +88,9 @@ async function getPostsList(page: number = 1)
     pagesAvailable = res.headers["x-wp-totalpages"];
     totalPosts = res.headers["x-wp-total"];
 
+    const views = res.data.reduce((p: number, c: any) => p + Number.parseInt(c?.views || 0, 10), 0);
+    console.log(`Views in page: ${JSON.stringify(views)}`);
+
     // console.log(`PagesAvailable: ${pagesAvailable}`);
 
     console.log(`Fetched ${res.data.length} out of ${totalPosts} posts via API`);
@@ -122,7 +125,7 @@ export async function GetPost(postid: number, ignorecache = false)
     const res = await axios.get(
       `https://sneakbug8.com/wp-json/wp/v2/posts/${postid}`);
 
-    console.log(`Fetched post ${postid}`);
+    // console.log(`Fetched post ${postid}`);
 
     PostsCache.set(postid, { post: res.data, mis_dt: MIS_DT.GetExact() });
 
@@ -139,7 +142,7 @@ export async function getAllPosts()
   let posts = await getPostsList(1);
 
   for (let i = 2; i <= pagesAvailable; i++) {
-    await Sleep(1000);
+    // await Sleep(500);
 
     const t = await getPostsList(i);
     // console.log(`Concat ${posts.length} with ${t.length}`);
@@ -258,7 +261,7 @@ async function PostViewsSendWeekly()
       `${(t.comment) ? ", " + t.comment : ""}` +
       `)\n`;
 
-    if (entry.change > 5 && res.length + tstring.length <= 10000) {
+    if (entry.change > 5 && res.length + tstring.length <= 4000) {
       res += tstring;
     }
 
@@ -295,7 +298,7 @@ async function PostViewsSendDaily()
       `${(t.comment) ? ", " + t.comment : ""}` +
       `)\n`;
 
-    if (entry.change > 5 && res.length + tstring.length <= 10000) {
+    if (entry.change > 5 && res.length + tstring.length <= 4000) {
       res += tstring;
     }
 

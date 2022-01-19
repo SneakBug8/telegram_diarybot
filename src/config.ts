@@ -51,6 +51,16 @@ class ConfigClass
     this.cachedIp = ip;
     return ip;
   }
+
+  public port()
+  {
+    return 3000;
+  }
+
+  public async url()
+  {
+    return `http://${await this.ip()}:${this.port()}/`;
+  }
 }
 
 export const Config = new ConfigClass();

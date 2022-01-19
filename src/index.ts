@@ -23,7 +23,8 @@ import { CryptoNotificationsCycle, InitCryptoNotifications, ProcessCryptoNotific
 import { Sleep } from "./util/Sleep";
 import { ProcessTodos, TodoCycle } from "./todo/Todo";
 import { PostsCycle, ProcessPostViews } from "./postviews/PostViews";
-import { EvergreenCycle, ProcessEvergreen } from "./evergreenposts/Evergreen";
+import { EvergreenCycle, InitEverGreen, ProcessEvergreen } from "./evergreenposts/Evergreen";
+import { ProjectsStatsExporter } from "./projects/ProjectsStatsExporter";
 
 let waitingCallback: ((message: MessageWrapper) => any) | null = null;
 
@@ -76,6 +77,8 @@ class App
         InitBackup();
         InitCrypto();
         InitCryptoNotifications();
+        ProjectsStatsExporter.Init();
+        InitEverGreen();
 
         this.bot.on("text", async (msg) =>
         {
