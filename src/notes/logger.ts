@@ -7,6 +7,10 @@ import { Config } from "../config";
 import { Slots } from "./Slots";
 import { NoteChange } from "./NoteChange";
 import { PublishService } from "./PublishService";
+import { WebApi } from "../api/web";
+import { MIS_DT } from "../util/MIS_DT";
+import * as express from "express";
+import { Color } from "../util/Color";
 
 export const foldername: string = "diary";
 
@@ -68,9 +72,12 @@ class LoggerService
         fs.appendFile(filepath, text);
         addedtext += text;
 
-        changes.push(new NoteChange(filename, addedtext, newfile));
+        const change = new NoteChange(filename, addedtext, newfile);
+        const r = await NoteChange.Insert(change);
+        changes.push(r);
 
-        PublishService.QueuePublishing(filename);
+        // PublishService.QueuePublishing(filename);
+        // PublishService.Publish(filename);
 
         if (newfile) {
             return "Created new file " + filename;
@@ -96,6 +103,10 @@ class LoggerService
             filetext = filetext.substr(0, filetext.length - change.length);
 
             await fs.writeFile(filepath, filetext);
+
+            if (change.Id) {
+                await NoteChange.Delete(change.Id);
+            }
             return true;
         }
         catch (e) {
@@ -120,7 +131,7 @@ class LoggerService
             filename = date;
         }
 
-        await PublishService.Download(filename, true, false);
+        // await PublishService.Download(filename, true, false);
 
         console.log("Reading logs " + filename);
 
@@ -134,7 +145,7 @@ class LoggerService
 
         if (logs.length >= 10000) {
             return `Publish the note to read more at https://wiki.sneakbug8.com/${filename}`
-            + `\n-- -\n` + logs.toString().substr(logs.length - 10000, 10000);
+                + `\n-- -\n` + logs.toString().substr(logs.length - 10000, 10000);
         }
         else if (logs) {
             return logs.toString();
@@ -193,6 +204,49 @@ class LoggerService
     public ResetFile()
     {
         Slots.setFilename("");
+    }
+
+    public Init()
+    {
+        WebApi.app.get("/notes/graph", this.OnNotesGraph);
+    }
+
+    private async OnNotesGraph(req: express.Request, res: express.Response)
+    {
+        const allchanges = await NoteChange.All();
+
+        if (!allchanges) {
+            return;
+        }
+
+        const created = new Array<number>();
+
+        for (let i = MIS_DT.GetDay() - MIS_DT.OneDay() * 30; i <= MIS_DT.GetDay(); i += MIS_DT.OneDay()) {
+            const c = allchanges.filter((x) => MIS_DT.RoundToDay(new Date(x.MIS_DT)) === i);
+
+            const comb = c.reduce((p, c) => p + c.length, 0);
+
+            created.push(comb);
+        }
+        // console.log(`${proj.subject}: ${arr}`);
+
+        const datasets = new Array<object>();
+
+        datasets.push({
+            label: "Chars written",
+            data: created,
+            borderColor: Color.GetColor(0),
+            fill: "origin",
+            backgroundColor: Color.GetBackground(0)
+        });
+
+        const labels = [];
+
+        for (let i = MIS_DT.GetDay() - MIS_DT.OneDay() * 30; i <= MIS_DT.GetDay(); i += MIS_DT.OneDay()) {
+            labels.push(MIS_DT.FormatDate(i));
+        }
+
+        res.json({ datasets, labels });
     }
 }
 

@@ -44,11 +44,15 @@ export async function EvergreenCycle()
     }
 
     let msg = `Старые статьи для обновления`;
+    const end = `---\nИтого: ${entries.length}`;
 
     for (const en of entries) {
-      msg += "\n" + en.title + ` (${en.Updates}/${MIS_DT.FormatDate(en.UPDATE_DT)})`;
+      const t = "\n" + en.title + ` (${en.Updates}/${MIS_DT.FormatDate(en.UPDATE_DT)})`;
+      if (msg.length + t.length + end.length <= 4000) {
+        msg += t;
+      }
     }
-    Server.SendMessage(msg);
+    Server.SendMessage(msg + end);
   }
 }
 

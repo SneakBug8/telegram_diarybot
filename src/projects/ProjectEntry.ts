@@ -15,9 +15,9 @@ export class ProjectEntry
     return await ProjectEntriesRepository().select("subject").groupBy("subject");
   }
 
-  public static async GetUndone()
+  public static async GetUndone(subj: string)
   {
-    return await ProjectEntriesRepository().where("done", 0).orderBy("MIS_DT", "desc").select();
+    return await ProjectEntriesRepository().where("done", 0).andWhere("subject", subj).orderBy("MIS_DT", "desc").select();
   }
 
   public static async All()

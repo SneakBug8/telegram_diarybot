@@ -155,30 +155,31 @@ export async function ProcessProjects(message: MessageWrapper)
 
         if (!subject) { return reply(message, `Specify which project to mark.`); }
 
-        const proj = ProjectsDataRepo.Projects.find((x) => x.subject.toLowerCase().includes(subject.toLowerCase()));
+        const proj = ProjectsDataRepo.Projects.find((x) => StringIncludes(x.subject, subject));
 
         if (!proj) { return reply(message, `No such project.`); }
 
         proj.doneTimes++;
 
         // SQL
-        const suitableentries = await ProjectEntry.GetUndone();
+        const suitableentries = await ProjectEntry.GetUndone(proj.subject);
         if (suitableentries.length) {
           const entry = suitableentries[0];
           entry.done = 1;
           entry.UPDATE_DT = MIS_DT.GetExact();
           await ProjectEntry.Update(entry);
+          reply(message, `Marked project ${proj.subject} worked on.`);
         }
         else {
           const entry = new ProjectEntry();
           entry.subject = proj.subject;
           entry.done = 1;
           await ProjectEntry.Insert(entry);
+          reply(message, `New work entry for ${proj.subject}.`);
         }
 
         ProjectsSave();
 
-        reply(message, `Marked project ${proj.subject} worked on.`);
       });
     return;
   }
@@ -389,8 +390,7 @@ export async function ProcessProjects(message: MessageWrapper)
   if (message.checkRegex(/^\/projects$/)) {
     reply(message, `Projects module.\n` +
       `Dashboard: ${await Config.url()}projectschart.html\n` +
-      `Every proj stat: ${ await Config.url() }projectchart.html`);
-
+      `Every proj stat: ${await Config.url()}projectchart.html`);
     return;
   }
   return false;

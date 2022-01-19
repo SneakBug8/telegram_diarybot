@@ -21,7 +21,7 @@ import { BackupCycle, InitBackup, ProcessBackup } from "./backup/BackupService";
 import { CryptoCycle, InitCrypto, ProcessCrypto } from "./investment/CryptoController";
 import { CryptoNotificationsCycle, InitCryptoNotifications, ProcessCryptoNotifications } from "./investment/CryptoNotificationsController";
 import { Sleep } from "./util/Sleep";
-import { ProcessTodos, TodoCycle } from "./todo/Todo";
+import { ProcessTodos, TodoCycle, TodoInit } from "./todo/Todo";
 import { PostsCycle, ProcessPostViews } from "./postviews/PostViews";
 import { EvergreenCycle, InitEverGreen, ProcessEvergreen } from "./evergreenposts/Evergreen";
 import { ProjectsStatsExporter } from "./projects/ProjectsStatsExporter";
@@ -68,6 +68,7 @@ class App
     {
         this.bot = BotAPI;
 
+        Logger.Init();
         InitNotes();
         InitNetworking();
         InitLearning();
@@ -79,6 +80,7 @@ class App
         InitCryptoNotifications();
         ProjectsStatsExporter.Init();
         InitEverGreen();
+        TodoInit();
 
         this.bot.on("text", async (msg) =>
         {

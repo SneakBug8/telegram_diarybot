@@ -29,11 +29,17 @@ class PublishServiceClass
         if (now.getHours() === 6 && now.getMinutes() <= 30 && this.lastSend !== now.getDay()) {
             console.log(`Removed ${this.DownloadCache.length} items from Download Cache`);
             this.DownloadCache = [];
-            for (const queued of this.PublishQueue) {
-                this.Publish(queued);
-            }
-            console.log(`Published ${this.PublishQueue.length} items`);
             this.lastSend = now.getDay();
+        }
+
+        if (this.PublishQueue.length) {
+            console.log(`Publishing ${this.PublishQueue.length} items`);
+        }
+        while (this.PublishQueue.length) {
+            const item = this.PublishQueue.pop();
+            if (item) {
+                this.Publish(item);
+            }
         }
     }
 

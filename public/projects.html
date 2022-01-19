@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Evergreen dashboard</title>
+    <title>Projects entries</title>
     <meta name="description" content="A simple HTML5 Template for new projects.">
     <meta name="author" content="SitePoint">
 
@@ -22,45 +22,51 @@
 
 <body>
     <a href="/">Home</a>
-    <table id="evergreen">
+    <table id="projects">
         <thead>
-            <td>Title</td>
-            <td>Language</td>
+            <td>Id</td>
+            <td>subject</td>
+            <td>MIS_DT</td>
             <td>UPDATE_DT</td>
-            <td>Updates</td>
-            <td>Views</td>
-            <td>Rate</td>
+            <td>suggested</td>
+            <td>done</td>
         </thead>
         <tbody id="tbody">
-
         </tbody>
     </table>
     <script>
-        axios.get('/evergreen')
+        axios.get('/projects')
             .then(fillTable)
             .catch(function (error) {
                 // handle error
                 console.log(error);
             });
-            function formatDate(d) {
-                return d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate();
-            }
+
+        function azb(n) {
+            return (n < 10 ? '0' : '') + n;
+        }
+
+        function formatDate(d) {
+            return d.getFullYear() + "-" + azb(d.getMonth() + 1) + "-" + azb(d.getDate()) +
+                " " + azb(d.getHours()) + ":" + azb(d.getMinutes());
+        }
+
         function fillTable(response) {
             for (const entry of response.data) {
                 $("#tbody").append(
                     `<tr>` +
-                    `<td><a href="${entry.link}">${entry.title}</a></td>` +
-                    `<td>${entry.language}</td>` +
+                    `<td>${entry.Id}</td>` +
+                    `<td>${entry.subject}</td>` +
+                    `<td>${formatDate(new Date(entry.MIS_DT))}</td>` +
                     `<td>${formatDate(new Date(entry.UPDATE_DT))}</td>` +
-                    `<td>${entry.Updates}</td>` +
-                    `<td>${entry.views}</td>` +
-                    `<td>${Math.round(entry.rate * 10000000000)}</td>` +
+                    `<td>${entry.suggested}</td>` +
+                    `<td>${entry.done}</td>` +
                     `</tr>`
                 )
             }
 
             $(document).ready(function () {
-                $('#evergreen').DataTable();
+                $('#projects').DataTable();
             });
         }
     </script>

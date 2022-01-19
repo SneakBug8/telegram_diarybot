@@ -81,7 +81,7 @@ class ProjectsStatsExporterClass
 
       for (let i = MIS_DT.GetDay() - MIS_DT.OneDay() * 30; i <= MIS_DT.GetDay(); i += MIS_DT.OneDay()) {
         const entry = projectentries.filter((x) => MIS_DT.RoundToDay(new Date(x.MIS_DT)) === i &&
-          x.subject === proj.subject);
+          x.subject === proj.subject && x.done);
 
         sum += entry.length;
 
@@ -136,7 +136,7 @@ class ProjectsStatsExporterClass
 
     for (let i = MIS_DT.GetDay() - MIS_DT.OneDay() * 30; i <= MIS_DT.GetDay(); i += MIS_DT.OneDay()) {
       const entry = projectentries.filter((x) => MIS_DT.RoundToDay(new Date(x.MIS_DT)) === i &&
-        x.subject === proj.subject);
+        x.subject === proj.subject && x.done);
 
       sum += entry.length;
 
