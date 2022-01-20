@@ -63,14 +63,26 @@ export class NetworkingWebClass
   public async OnNetworkingChartCumulative(req: express.Request, res: express.Response)
   {
     const entries = await NetworkingCommunication.GetLastMonth();
+    const preventries = await NetworkingCommunication.GetBetweenDates(
+      MIS_DT.GetDay() - MIS_DT.OneDay() * 60,
+      MIS_DT.GetDay() - MIS_DT.OneDay() * 30
+    );
 
     const crarr = new Array<number>();
     const inarr = new Array<number>();
     const doarr = new Array<number>();
 
+    const prevcrarr = new Array<number>();
+    const previnarr = new Array<number>();
+    const prevdoarr = new Array<number>();
+
     let crsum = 0;
     let insum = 0;
     let dosum = 0;
+
+    let prevcrsum = 0;
+    let previnsum = 0;
+    let prevdosum = 0;
 
     for (let i = MIS_DT.GetDay() - MIS_DT.OneDay() * 30; i <= MIS_DT.GetDay(); i += MIS_DT.OneDay()) {
       const created = entries.filter((x) => x.Sent && MIS_DT.RoundToDay(new Date(x.CREATED_DT)) === i);
@@ -84,6 +96,21 @@ export class NetworkingWebClass
       crarr.push(crsum);
       inarr.push(insum);
       doarr.push(dosum);
+
+      const prevcreated = preventries.filter((x) => x.Sent &&
+        MIS_DT.RoundToDay(new Date(x.CREATED_DT)) === i - MIS_DT.OneDay() * 30);
+      const previnitiated = preventries.filter((x) => x.Initiated &&
+        MIS_DT.RoundToDay(new Date(x.INITIATED_DT)) === i - MIS_DT.OneDay() * 30);
+      const prevdone = preventries.filter((x) => x.Done &&
+        MIS_DT.RoundToDay(new Date(x.DONE_DT)) === i - MIS_DT.OneDay() * 30);
+
+      prevcrsum += prevcreated.length;
+      previnsum += previnitiated.length;
+      prevdosum += prevdone.length;
+
+      prevcrarr.push(prevcrsum);
+      previnarr.push(previnsum);
+      prevdoarr.push(prevdosum);
     }
 
     const datasets = new Array<object>();
@@ -102,6 +129,22 @@ export class NetworkingWebClass
       label: "Done",
       data: doarr,
       borderColor: Color.GetColor(2),
+    });
+
+    datasets.push({
+      label: "Sent Prev Period",
+      data: prevcrarr,
+      borderColor: Color.GetAlphaColor(0),
+    });
+    datasets.push({
+      label: "Initiated Prev Period",
+      data: previnarr,
+      borderColor: Color.GetAlphaColor(1),
+    });
+    datasets.push({
+      label: "Done Prev Period",
+      data: prevdoarr,
+      borderColor: Color.GetAlphaColor(2),
     });
 
     const labels = [];
