@@ -66,4 +66,9 @@ export class MIS_DT
   {
     return dateFormat(new Date(mis_dt), "HH:MM");
   }
+
+  public static FormatMonth(mis_dt: number)
+  {
+    return dateFormat(new Date(mis_dt), "mm.yyyy");
+  }
 }

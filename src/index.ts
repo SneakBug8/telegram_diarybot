@@ -25,6 +25,7 @@ import { ProcessTodos, TodoCycle, TodoInit } from "./todo/Todo";
 import { PostsCycle, ProcessPostViews } from "./postviews/PostViews";
 import { EvergreenCycle, InitEverGreen, ProcessEvergreen } from "./evergreenposts/Evergreen";
 import { ProjectsStatsExporter } from "./projects/ProjectsStatsExporter";
+import { NetworkingWeb } from "./networking/NetworkingWeb";
 
 let waitingCallback: ((message: MessageWrapper) => any) | null = null;
 
@@ -78,7 +79,10 @@ class App
         InitBackup();
         InitCrypto();
         InitCryptoNotifications();
+
+        // Web modules
         ProjectsStatsExporter.Init();
+        NetworkingWeb.Init();
         InitEverGreen();
         TodoInit();
 

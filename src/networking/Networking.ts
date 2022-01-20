@@ -101,10 +101,10 @@ async function GetActiveContacts()
 
   for (const contact of applicableContacts) {
     if (contact.Initiated > 0) {
-      res += `Unfinished initiated contact with ${contact.Contact} (${new Date(contact.MIS_DT).toDateString()})\n`;
+      res += `Unfinished initiated contact with ${contact.Contact} (${new Date(contact.CREATED_DT).toDateString()})\n`;
     }
     else if (contact.Sent > 0) {
-      res += `Uninitiated contact with ${contact.Contact} (${new Date(contact.MIS_DT).toDateString()})\n`;
+      res += `Uninitiated contact with ${contact.Contact} (${new Date(contact.CREATED_DT).toDateString()})\n`;
     }
   }
 
@@ -125,7 +125,7 @@ async function MigrateNetworkingCommunications()
       comm.Sent = 1;
       comm.Initiated = 1;
       comm.Done = 1;
-      comm.MIS_DT = MIS_DT.GetDay() - MIS_DT.OneDay() * 25;
+      comm.CREATED_DT = MIS_DT.GetDay() - MIS_DT.OneDay() * 25;
 
       comms++;
 
@@ -135,7 +135,7 @@ async function MigrateNetworkingCommunications()
       const comm = new NetworkingCommunication(contact.name);
       comm.Sent = 1;
       comm.Initiated = 1;
-      comm.MIS_DT = MIS_DT.GetDay() - MIS_DT.OneDay() * 25;
+      comm.CREATED_DT = MIS_DT.GetDay() - MIS_DT.OneDay() * 25;
 
       comms++;
 
@@ -144,7 +144,7 @@ async function MigrateNetworkingCommunications()
     for (let i = 0; i < sent; i++) {
       const comm = new NetworkingCommunication(contact.name);
       comm.Sent = 1;
-      comm.MIS_DT = MIS_DT.GetDay() - MIS_DT.OneDay() * 25;
+      comm.CREATED_DT = MIS_DT.GetDay() - MIS_DT.OneDay() * 25;
 
       comms++;
 
@@ -328,6 +328,7 @@ async function RaiseDoneForStat(name: string)
         continue;
       }
       currcomm.Done = 1;
+      currcomm.DONE_DT = MIS_DT.GetExact();
       await NetworkingCommunication.Update(currcomm);
       break;
     }
@@ -362,6 +363,7 @@ async function RaiseInitForStat(name: string)
         continue;
       }
       currcomm.Initiated = 1;
+      currcomm.INITIATED_DT = MIS_DT.GetExact();
       await NetworkingCommunication.Update(currcomm);
       break;
     }
@@ -732,7 +734,9 @@ export async function ProcessNetworking(message: MessageWrapper)
     return;
   }
   if (message.checkRegex(/^\/networking/)) {
-    reply(message, `Networking module.\n` + ShortStatistics());
+    reply(message, `Networking module.\n` +
+    `Networking dashboard: ${await Config.url()}networkingchart.html\n`
+      + ShortStatistics());
     return;
   }
   return false;

@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Todos chart</title>
+    <title>Networking Cumulative chart</title>
     <meta name="description" content="A simple HTML5 Template for new projects.">
     <meta name="author" content="SitePoint">
 
@@ -20,17 +20,33 @@
 </head>
 
 <body>
-    <h1>Index</h2>
+    <a href="/">Home</a>
 
-    <ul>
-        <li><a href="/evergreen.html">Evergreen posts</a></li>
-        <li><a href="/noteschart.html">Notes chart</a></li>
-        <li><a href="/networkingchart.html">Networking chart</a></li>
-        <li><a href="/networkingchartcumulative.html">Networking cumulative chart</a></li>
-        <li><a href="/projectschart.html">All projects chart</a></li>
-        <li><a href="/projectchart.html">Charts per project</a></li>
-        <li><a href="/todoschart.html">Todos</a></li>
-    </ul>
+    <h2>Networking Cumulative Chart</h2>
+    <canvas id="myChart" width="400" height="200"></canvas>
+    <script>
+        axios.get('/networking/cumulative')
+            .then(drawChart)
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+
+        function drawChart(response) {
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'line',
+                data: response.data,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>
